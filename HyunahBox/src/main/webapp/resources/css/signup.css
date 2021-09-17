@@ -1,0 +1,52 @@
+@charset "UTF-8";
+
+
+*{margin: 0; padding: 0; list-style: none;}
+.container{
+    height : 100vh;
+    display : block;
+    border : 1px solid red;
+    background : url(../images/main1.jpg);
+}
+.logo {
+    display: block;
+}
+.logo h1 {
+    text-align: center;
+}
+
+.center {
+    display: flex ;
+    justify-content: center;
+    align-items: center;
+    border : 1px solid orange;
+    min-height: 100vh;
+
+}
+.form {
+    background: white;
+    display : block;
+    border : 1px solid #9354ED;
+    border-radius: 5%;
+    width : 350px;
+}
+.form .formList {
+    color: black;
+    font-weight: 600;
+    padding: 20px;
+}
+.form .formList .idCheck{
+	display: block;
+	 border : 1px solid #9354ED;
+}
+
+.form div label {
+    float: left;
+}
+.form div input {
+    float: right;
+}
+.btn {
+    display: block;
+    text-align: center;
+}

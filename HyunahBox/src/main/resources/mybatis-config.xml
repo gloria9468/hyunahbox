@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<settings>
+		<setting name="mapUnderscoreToCamelCase" value="true" />
+	</settings>
+
+	
+
+	<typeAliases>
+		<typeAlias type="com.hyunah.box.model.Member" alias="Member"/>
+		<typeAlias type="com.hyunah.box.model.Grade" alias="Grade"/>
+		<typeAlias type="com.hyunah.box.model.Movie" alias="Movie"/>
+		<typeAlias type="com.hyunah.box.model.Theater" alias="Theater"/>
+		<typeAlias type="com.hyunah.box.model.ScreenInfo" alias="ScreenInfo"/>
+		<typeAlias type="com.hyunah.box.model.Schedule" alias="Schedule"/>
+	</typeAliases>
+
+	
+
+	<mappers>
+		<mapper resource="mybatis/member.xml" />
+		<mapper resource="mybatis/grade.xml" />
+		<mapper resource="mybatis/movie.xml" />
+		<mapper resource="mybatis/theater.xml" />
+		<mapper resource="mybatis/screenInfo.xml" />
+		<mapper resource="mybatis/schedule.xml" />
+	</mappers>
+</configuration>

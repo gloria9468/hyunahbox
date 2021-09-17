@@ -1,0 +1,59 @@
+@charset "UTF-8";
+
+	*{margin: 0; padding: 0; list-style: none;}
+	.background{height : 100vh;}
+
+	.topbackground{margin:0 auto; background-color: rgb(12, 13, 46); height: calc(100vh-700px); width: 100%;}
+	.midbackground{margin:0 auto; background-color: paleturquoise; height: 700px ; width: 100%;}
+	.member a{color: rgb(204, 204, 204);}
+	.member a:hover{text-decoration: underline 2px white; text-underline-position: under;}
+	.member1{display: inline-block;}
+	.member1 a{text-decoration: none; padding:10px; padding-right: 5px; font-size: small;}
+	.member2{display: inline-block;	float: right;}
+	.member2 a{text-decoration: none; padding:10px; padding-left: 5px; font-size: small;}
+	
+	nav ul {text-align: center;}    
+	nav ul li {
+		display: inline-block;
+		padding-right: 20px;
+		
+	}
+
+	nav ul li a{
+		font-size: x-large;
+		color : white;
+		text-decoration: none;
+	}
+	.navi ul .movie a:hover{text-decoration: underline 2px white; text-underline-position: under;}
+	.navi div {
+	display : block;  
+	background: white;
+	width: 100%;
+    position: absolute;
+    left : 40px;
+    top : 70px;
+    height : 30px;
+    color : black;}
+
+	.boxoffice{ text-align: center; color: white; padding-bottom:10px; margin:10px; }
+	
+	.boxoffice a{float: right; text-decoration: none; color: rgb(204, 204, 204); padding-bottom:5px; }
+	.boxoffice a:hover{text-decoration: underline 2px white; text-underline-position: under;}
+
+	.rank{text-align: center; margin:10px; padding-top: 20px;}
+	.rank div{text-align: center; margin:0 auto; padding: 20px;  margin-right: 10px; height: 300px;  display: inline-block; width: 20%;}
+		.rank div:first-child{text-align: center; background-color: red;}
+		.rank div:nth-child(2){text-align: center; background-color: orange;}
+		.rank div:nth-child(3){text-align: center; background-color: yellow;}
+		.rank div:nth-child(4){text-align: center; background-color: green;}
+	
+	.search{padding : 50px; text-align: center;}
+	.search input{height: 20px; padding-right: 20px; margin-right: 20px; text-align: center;}
+	
+	@media all and (max-width:1024px){
+		.rank div{text-align: center; margin:0 auto; padding: 20px;  margin-right: 10px; height: 200px;  display: inline-block;}
+		.rank div:first-child{text-align: center; background-color: red;}
+		.rank div:nth-child(2){text-align: center; background-color: orange;}
+		.rank div:nth-child(3){text-align: center; background-color: yellow;}
+		.rank div:nth-child(4){text-align: center; background-color: green;}
+	}

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="schedule">
+
+ 	<select id="list" resultType="Schedule">
+	<!-- select schedule.schedule_code, movie.title, theater.theater, screenInfo.screen_code, schedule.screen_time from schedule
+			left Join movie on movie.movie_code = schedule.movie_code
+	        left join theater on theater.theater_code = schedule.theater_code
+	        left join screenInfo on screenInfo.theater_code = schedule.theater_code -->
+        
+       SELECT SCHEDULE_CODE, TITLE, THEATER, SCREEN_CODE, SCREEN_NUM, MOVIE_TIME, TIME_TABLE, TIME_TABLE + (MOVIE_TIME / 24 / 60) AS "END_TIME"
+		FROM SCHEDULE, MOVIE, THEATER, SCREENINFO
+		WHERE movie.movie_code = schedule.movie_code 
+		        AND theater.theater_code = schedule.theater_code
+		        AND screenInfo.theater_code = schedule.theater_code
+
+ 	</select>
+ 
+ 
+	<insert id="add">
+		INSERT INTO schedule 
+		VALUES (#{scheduleCode}, #{screenTime}, #{movieCode}, #{theaterCode})
+	</insert>
+	
+	
+	<delete id="delete">
+		DELETE 
+		FROM schedule
+		WHERE schedule_code = #{scheduleCode}
+	</delete>
+
+ </mapper>
