@@ -1,23 +1,29 @@
 package com.hyunah.box.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hyunah.box.model.Movie;
 import com.hyunah.box.model.Schedule;
+import com.hyunah.box.model.ScreenInfo;
 import com.hyunah.box.model.Theater;
+import com.hyunah.box.model.TimeTable;
 import com.hyunah.box.service.MovieService;
 import com.hyunah.box.service.ScheduleService;
 import com.hyunah.box.service.ScreenInfoService;
 import com.hyunah.box.service.TheaterService;
+import com.hyunah.box.service.TimeTableService;
 
 @Controller
 @RequestMapping("/schedule")
@@ -36,6 +42,8 @@ public class ScheduleController {
 	@Autowired
 	ScheduleService sService;
 	
+	@Autowired
+	TimeTableService timeService;
 	
 
 	@RequestMapping({"/", "/list"})
@@ -76,16 +84,30 @@ public class ScheduleController {
 	
 	@ResponseBody
 	@PostMapping("/add/{theaterCode}/screenList")
-	public List<Integer> screenList(@PathVariable int theaterCode) {
-		List<Integer> screenInfoList = screenService.screenList(theaterCode);
+	public HashMap<String, Object> screenList(@PathVariable int theaterCode, @RequestBody ScreenInfo screeninfo) {
+		HashMap<String, Object> map = new HashMap<String, Object>(); 
+		map.put("list", screenService.screenList(theaterCode) );
 		
-		return screenInfoList;
+		System.out.println(map);
+		
+		return map;
 	}
 	
+	@ResponseBody
+	@PostMapping("/add/{screenCode}/timeList")
+	public List<TimeTable> timeList(@PathVariable int screenCode) {
+		List<TimeTable> timeTable = timeService.timeList(screenCode);
+		
+		return timeTable;
+	} 
 	
+	
+	
+	@Transactional
 	@PostMapping("/add")
 	public String add(Schedule item) {
 		sService.add(item);
+		timeService.add( item.getTimeTableDate() , item.getScreenCode(), item.getScheduleCode() );
 		System.out.println(item);
 		
 		

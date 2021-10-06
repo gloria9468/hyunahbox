@@ -14,17 +14,23 @@
 	
 	nav ul {text-align: center;}    
 	nav ul li {
+		display : block;
 		display: inline-block;
 		padding-right: 20px;
+		margin : auto 0;
 		
 	}
 
 	nav ul li a{
+		text-align: center;
 		font-size: x-large;
 		color : white;
 		text-decoration: none;
+		float : left;
 	}
-	.navi ul .movie a:hover{text-decoration: underline 2px white; text-underline-position: under;}
+	
+	
+	.navi ul .movie a:hover, .navi ul .movie a:visited{text-decoration: underline 2px white; text-underline-position: under;}
 	.navi div {
 	display : block;  
 	background: white;

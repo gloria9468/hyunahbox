@@ -8,14 +8,19 @@
 <meta charset="UTF-8">
 <title>스케쥴 리스트</title>
 </head>
-<script src="/box/resources/JS/jquery-3.6.0.min.js"></script>
+<jsp:include page="../include/header.jsp"></jsp:include>
+<link href="/box/resources/css/form.css" rel="stylesheet">
 <script>
 
 	
 </script>
 <body>
-	<div>
-		<table border="1">
+<div class="container">
+		<div>
+			<h3 class="title">스케쥴 리스트</h3>
+		</div>
+		<div class="smBlock"></div>
+		<table class="text-center table table-sm table-light table-secondary table-hover" border="1">
 			<thead>
 			
 				<tr>
@@ -43,15 +48,20 @@
 						<td>${scheduleList.title}</td>
 						<td>${scheduleList.theater}</td>
 						<td>${scheduleList.screenNum}  상영관</td>
-						<td><fmt:formatDate value="${scheduleList.timeTable}" pattern="yyyy년 MM월 dd일 HH:mm"/></td>
+						<td><fmt:formatDate value="${scheduleList.timeTableDate}" pattern="yyyy년 MM월 dd일 HH:mm"/></td>
 					 	<td><fmt:formatDate value="${scheduleList.endTime}" pattern="yyyy년 MM월 dd일 HH:mm"/></td>							
-						<td><a href="update/${scheduleList.scheduleCode}">변경</a><a href="delete/${scheduleList.scheduleCode}">삭제</a></td>
+						<td><a href="update/${scheduleList.scheduleCode}" class="btn btn-sm btn-outline-secondary mx-1">변경</a>
+							<a href="delete/${scheduleList.scheduleCode}" class="btn btn-sm btn-outline-danger mx-1">삭제</a></td>
 					</tr>	
 				</c:forEach>
 				
 			</tbody>
 		</table>
-		<a href="add">스케쥴 등록</a>
+		<div class="smBlock"></div>
+		<div class="d-grid gap-2 col-6 mx-auto">
+			<a href="add" class="btn btn-sm btn-outline-success">스케쥴 등록</a>
+		</div>
+		
 		
 	</div>
 </body>

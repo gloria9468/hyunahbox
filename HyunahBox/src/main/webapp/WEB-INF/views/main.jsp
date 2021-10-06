@@ -18,17 +18,16 @@
 	}
 	
 	$(function(){
-		$('.movie_navi').hide();
-		$('.movie').hover(function(){
-			$('.movie_navi').show();
-		}, function(){
 			$('.movie_navi').hide();
-		})
-	})
+			$(".movie").hover(function(){
+				$('.movie_navi').show();
+			});
+	});
 </script>
 
 </head>
 <body>
+
 <div class="background">
 	<div class="topbackground">
 		<div class="member">
@@ -39,7 +38,7 @@
 			</div>
 			<div class="member2">
 				<c:if test="${sessionScope.member != null }">
-					<a href="member/mypage">마이페이지</a>
+					<a href="/box/member/mypage/">마이페이지</a>
 					<a href="logout">로그아웃</a>
 				</c:if>
 				<c:if test="${sessionScope.member == null }">
@@ -48,22 +47,27 @@
 				</c:if>
 				
 				<a href="quick_booking">빠른예매</a>
+				<c:if test="${sessionScope.member.getId() == 'admin' && sessionScope.member.getName() == '관리자' }">
+					<a href="/box/admin/admin-main/">관리자</a>
+				</c:if>
 			</div>
 		</div>
 		<nav class ="navi">
 			<ul>
-				<li class ="movie"><a href="movie/">영화</a></li>
-				<li class="schedule"><a href="schedule/">예매</a></li>
-				<li class="theater"><a href="theater/">극장</a></li>
-				<li><a href="logo">HYUNAH BOX</a></li>
-				<li class="event"><a href="event/">이벤트</a></li>
-				<li class="store"><a href="store/">스토어</a></li>
-				<li class="benefit"><a href="benefit/">혜택</a></li>
+				<li class ="movie"><a href="/box/movie/">영화</a></li>
+				<li class="schedule"><a href="/box/schedule/">예매</a></li>
+				<li class="theater"><a href="/box/theater/">극장</a></li>
+				<li><a href="/box/"><img src="/box/resources/images/logo1.png"></a></li>
+				<li class="event"><a href="/box/event/">이벤트</a></li>
+				<li class="store"><a href="/box/store/">스토어</a></li>
+				<li class="benefit"><a href="/box/benefit/">혜택</a></li>
 			</ul>
 			<div class="movie_navi">
 				<a href ="movie/list">전체 영화</a>
 			</div>
 		</nav>
+		
+		
 		
 		<div>
 			<div class="boxoffice">

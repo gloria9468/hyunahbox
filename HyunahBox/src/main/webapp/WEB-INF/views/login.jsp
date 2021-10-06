@@ -58,7 +58,7 @@
 				<button onclick="findPage()">ID/PW 찾기</button>
 			</div>
 			<div>
-				<a href="/box/main">처음화면으로</a>
+				<a href="/box/main/">처음화면으로</a>
 			</div>
 			
 		</div>

@@ -1,6 +1,9 @@
 package com.hyunah.box.model;
 
+import java.util.Date;
 import java.util.List;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 
 public class Schedule {
@@ -11,10 +14,19 @@ public class Schedule {
 	private int theaterCode;
 	private int screenCode;
 	private int screenNum;
+	private String title;
+	private String theater;
+	
+
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm")
+	private Date timeTableDate;
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm")
+	private Date endTime;
+	
+	
 	
 	List<Movie> movieList;	
 	List<Theater> theaterList;
-	
 	
 	
 	
@@ -60,6 +72,30 @@ public class Schedule {
 	}
 	public void setTheaterList(List<Theater> theaterList) {
 		this.theaterList = theaterList;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public String getTheater() {
+		return theater;
+	}
+	public void setTheater(String theater) {
+		this.theater = theater;
+	}
+	public Date getTimeTableDate() {
+		return timeTableDate;
+	}
+	public void setTimeTableDate(Date timeTableDate) {
+		this.timeTableDate = timeTableDate;
+	}
+	public Date getEndTime() {
+		return endTime;
+	}
+	public void setEndTime(Date endTime) {
+		this.endTime = endTime;
 	}
 
 	

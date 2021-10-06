@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.hyunah.box.model.ScreenInfo;
+import com.hyunah.box.model.TimeTable;
 import com.hyunah.box.service.ScreenInfoService;
+import com.hyunah.box.service.TimeTableService;
 
 @Controller
 @RequestMapping("/theater/{theaterCode}/screenInfo")
@@ -21,7 +23,9 @@ public class ScreenInfoController {
 
 	@Autowired
 	ScreenInfoService sService;
-
+	
+	@Autowired
+	TimeTableService tService;
 	
 	@RequestMapping({"","/", "/list"})
 	public String screenInfoList(@PathVariable int theaterCode, Model model) {
@@ -61,6 +65,14 @@ public class ScreenInfoController {
 		return "redirect:../list";
 	}
 	
+	
+	@GetMapping("/{screenCode}/timeTable")
+	public String addTime(@PathVariable int screenCode, Model model) {
+		List<TimeTable> timeTable = tService.timeList(screenCode);
+		model.addAttribute("timeTable", timeTable);
+		
+
+		return sPath + "timeTable";
+	}
 }
 
-// TODO timetable 추가 해줘야함.

@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입 페이지</title>
-<script src="/box/resources/JS/jquery-3.6.0.min.js"></script>
+<jsp:include page="include/header.jsp"></jsp:include>
 <link href="/box/resources/css/signup.css" rel="stylesheet">
 
 <script> 
@@ -123,7 +123,6 @@
 		if(form.email_select.value == 'etc'){
 			form.backEmail.removeAttribute("readonly");
 			form.backEmail.value=""; //초기화
-			//TODO 이게 왜 안뜰까?
 			form.backEmail.focus();
 			back=document.getElementById("backEmail").value;
 		} else {

@@ -1,7 +1,10 @@
 package com.hyunah.box.dao;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import com.hyunah.box.model.Schedule;
 import com.hyunah.box.model.ScreenInfo;
 
 public interface ScreenInfoDao {
@@ -18,6 +21,6 @@ public interface ScreenInfoDao {
 
 	int getScreenInfo(String theaterCode);
 
-	List<Integer> screenList(int theaterCode);
+	List<Schedule> screenList(int theaterCode);
 
 }

@@ -62,7 +62,7 @@ public class RootController {
 			if(id.equals(item.getId()) && pw.equals(item.getPw()) ) {
 				session.setAttribute("member", member);
 				// db 에서 읽어온 member 라는 객체를 -  session에 member라고 저장해놓는 것. 객체를 넣어놓은 것.
-				return "redirect:main";
+				return "redirect:/main";
 			}
 			reAtt.addFlashAttribute("msg","wrongPw");
 			return "redirect:login"; //로그인 실패. -> 비밀번호가 틀림

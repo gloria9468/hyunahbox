@@ -11,20 +11,22 @@
 	        left join theater on theater.theater_code = schedule.theater_code
 	        left join screenInfo on screenInfo.theater_code = schedule.theater_code -->
         
-       SELECT SCHEDULE_CODE, TITLE, THEATER, SCREEN_CODE, SCREEN_NUM, MOVIE_TIME, TIME_TABLE, TIME_TABLE + (MOVIE_TIME / 24 / 60) AS "END_TIME"
-		FROM SCHEDULE, MOVIE, THEATER, SCREENINFO
+       SELECT timetable.SCHEDULE_CODE, TITLE, THEATER, screenInfo.SCREEN_CODE, SCREEN_NUM, MOVIE_TIME, TIME_TABLE_DATE, TIME_TABLE_DATE + (MOVIE_TIME / 24 / 60) AS "END_TIME"
+		FROM SCHEDULE, MOVIE, THEATER, SCREENINFO, TIMETABLE
 		WHERE movie.movie_code = schedule.movie_code 
 		        AND theater.theater_code = schedule.theater_code
 		        AND screenInfo.theater_code = schedule.theater_code
+                AND timetable.schedule_code = schedule.schedule_code
+                AND timetable.screen_code = screenInfo.screen_code
 
  	</select>
  
  
 	<insert id="add">
 		INSERT INTO schedule 
-		VALUES (#{scheduleCode}, #{screenTime}, #{movieCode}, #{theaterCode})
+		VALUES (#{scheduleCode}, #{movieCode}, #{theaterCode})
 	</insert>
-	
+
 	
 	<delete id="delete">
 		DELETE 

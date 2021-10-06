@@ -1,12 +1,15 @@
 package com.hyunah.box.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.hyunah.box.model.Schedule;
 import com.hyunah.box.model.ScreenInfo;
 
 @Repository
@@ -57,7 +60,7 @@ public class ScreenInfoDaoImpl implements ScreenInfoDao{
 
 
 	@Override
-	public List<Integer> screenList(int theaterCode) {
+	public List<Schedule> screenList(int theaterCode) {
 		return sql.selectList("screenInfo.screenList", theaterCode);
 	}
 

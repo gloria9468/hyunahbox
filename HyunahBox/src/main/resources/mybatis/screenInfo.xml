@@ -27,8 +27,8 @@
 		DELETE FROM screenInfo WHERE theater_code=#{theaterCode} AND screen_code=#{screenCode}
 	</delete>
 	
-	<select id="screenList" resultType="Integer">
-		SELECT screen_code FROM screenInfo WHERE theater_code=#{theaterCode}
+	<select id="screenList" resultType="ScreenInfo">
+		SELECT screen_code, screen_num FROM screenInfo WHERE theater_code=#{theaterCode}
 	</select>
  	
  </mapper>

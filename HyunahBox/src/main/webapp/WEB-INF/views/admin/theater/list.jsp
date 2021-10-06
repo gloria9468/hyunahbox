@@ -8,13 +8,24 @@
 <meta charset="UTF-8">
 <title>전체 영화관</title>
 </head>
-<script src="/box/resources/JS/jquery-3.6.0.min.js"></script>
+<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
+<link href="/box/resources/css/form.css" rel="stylesheet">
 <script>
 
 </script>
+
+<style>
+
+</style>
 <body>
-	<div>
-		<table border="1">
+	<div class="container">
+		<div>
+			<h3 class="title">영화관 리스트</h3>
+		</div>
+		<div class="smBlock"></div>
+		
+		
+		<table class="text-center table table-sm table-light table-secondary table-hover" border="1">
 			<thead>
 			
 				<tr>
@@ -39,14 +50,17 @@
 						<td>${item.theaterCode}</td>
 						<td>${item.theater}</td>
 						<td>-----</td>
-						<td><a href="update/${item.theaterCode}">영화관 변경</a><a href="delete/${item.theaterCode}">영화관 삭제</a></td>
-						<td><a href="${item.theaterCode}/screenInfo/">상영관 관리</a></td>
+						<td><a href="update/${item.theaterCode}" class="btn btn-sm btn-outline-secondary mx-2">영화관 변경</a><a href="delete/${item.theaterCode}" class="btn btn-sm btn-outline-danger mx-2">영화관 삭제</a></td>
+						<td><a href="${item.theaterCode}/screenInfo/" class="btn btn-sm btn-outline-primary">상영관 관리</a></td>
 					</tr>	
 				</c:forEach>
 				
 			</tbody>
 		</table>
-		<a href="add">영화관 등록</a>
+		<div class="smBlock"></div>
+		<div class="d-grid gap-2 col-6 mx-auto">
+			<a href="add" class="btn btn-sm btn-outline-success">영화관 등록</a>
+		</div>
 		
 	</div>
 </body>

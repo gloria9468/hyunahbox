@@ -18,6 +18,8 @@
 		<typeAlias type="com.hyunah.box.model.Theater" alias="Theater"/>
 		<typeAlias type="com.hyunah.box.model.ScreenInfo" alias="ScreenInfo"/>
 		<typeAlias type="com.hyunah.box.model.Schedule" alias="Schedule"/>
+		<typeAlias type="com.hyunah.box.model.TimeTable" alias="TimeTable"/>
+		<typeAlias type="com.hyunah.box.model.Heart" alias="Heart"/>
 	</typeAliases>
 
 	
@@ -29,5 +31,7 @@
 		<mapper resource="mybatis/theater.xml" />
 		<mapper resource="mybatis/screenInfo.xml" />
 		<mapper resource="mybatis/schedule.xml" />
+		<mapper resource="mybatis/timeTable.xml" />
+		<mapper resource="mybatis/heart.xml" />
 	</mappers>
 </configuration>
