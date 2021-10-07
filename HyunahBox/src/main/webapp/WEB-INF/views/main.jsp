@@ -57,7 +57,7 @@
 				<li class ="movie"><a href="/box/movie/">영화</a></li>
 				<li class="schedule"><a href="/box/schedule/">예매</a></li>
 				<li class="theater"><a href="/box/theater/">극장</a></li>
-				<li><a href="/box/"><img src="/box/resources/images/logo1.png"></a></li>
+				<li><a href="/box/"><img src="/box/resources/images/logo.png" height="60px"></a></li>
 				<li class="event"><a href="/box/event/">이벤트</a></li>
 				<li class="store"><a href="/box/store/">스토어</a></li>
 				<li class="benefit"><a href="/box/benefit/">혜택</a></li>

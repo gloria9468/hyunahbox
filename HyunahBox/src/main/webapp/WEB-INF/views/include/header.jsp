@@ -44,7 +44,7 @@
 					<a href="/box/signup/">회원가입</a>
 				</c:if>
 				
-				<a href="/box/quick_booking/">빠른예매</a>
+				<a href="/box/booking/">빠른예매</a>
 				<c:if test="${sessionScope.member.getId() == 'admin' && sessionScope.member.getName() == '관리자' }">
 					<a href="/box/admin/admin-main/">관리자</a>
 				</c:if>
@@ -53,9 +53,9 @@
 		<nav class ="navi">
 			<ul class="endLine">
 				<li class ="movie"><div><a href="/box/movie/">영화</a></div></li>
-				<li class="schedule"><div><a href="/box/schedule/">예매</a></div></li>
+				<li class="schedule"><div><a href="/box/booking/">예매</a></div></li>
 				<li class="theater"><div><a href="/box/theater/">극장</a></div></li>
-				<li><div><a href="/box/"><img src="/box/resources/images/logo1.png"></a></div></li>
+				<li><div><a href="/box/"><img src="/box/resources/images/logo.png" height="60px" width="60px"></a></div></li>
 				<li class="event"><div><a href="/box/event/">이벤트</a></div></li>
 				<li class="store"><div><a href="/box/store/">스토어</a></div></li>
 				<li class="benefit"><div><a href="/box/benefit/">혜택</a></div></li>

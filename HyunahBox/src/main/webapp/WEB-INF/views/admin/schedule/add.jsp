@@ -219,7 +219,7 @@ $(function(){
 					<option value="${movieList.movieCode}">${movieList.title}</option>
 				</c:forEach>
 			</select>
-		</div>
+			</div>
 		</div>
 
 		<div>

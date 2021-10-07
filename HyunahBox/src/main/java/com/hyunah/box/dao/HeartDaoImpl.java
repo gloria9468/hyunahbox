@@ -12,15 +12,36 @@ public class HeartDaoImpl implements HeartDao{
 	@Autowired
 	SqlSession sql;
 
-
 	@Override
 	public int heartMovieCheck(int movieCode, String id) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("movieCode", movieCode);
 		map.put("id", id);
 		
-		return sql.selectOne("getHeartMovie", map);
+		return sql.selectOne("heart.heartMovieCheck", map);
 	}
+
+	@Override
+	public void plusHeartMovie(int movieCode, String id) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("movieCode", movieCode);
+		map.put("id", id);
+		
+		sql.insert("heart.plusHeartMovie", map);
+	}
+
+	@Override
+	public void minusHeartMovie(int movieCode, String id) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("movieCode", movieCode);
+		map.put("id", id);
+		
+		sql.insert("heart.minusHeartMovie", map);
+		
+	}
+
+
+
 	
 	
 }

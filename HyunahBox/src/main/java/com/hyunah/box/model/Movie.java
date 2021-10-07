@@ -13,6 +13,7 @@ public class Movie {
 	private int heart;
 	private int movieTime;
 	
+	private String id;
 	
 	public int getMovieCode() {
 		return movieCode;
@@ -46,6 +47,12 @@ public class Movie {
 	}
 	public void setMovieTime(int movieTime) {
 		this.movieTime = movieTime;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
 	}
 	
 	

@@ -4,9 +4,15 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="heart">
-	<select id="getHeartMovie" resultType="Heart">
+	<select id="heartMovieCheck" resultType="Integer">
 		select count(*) from HEARTMOVIE WHERE id=#{id} AND movie_code=#{movieCode}
 	</select>
 
- 	
+	<insert id="plusHeartMovie">
+		INSERT INTO HEARTMOVIE VALUES(HEART_MOVIE_CODE_SEQ.nextval, #{id}, #{movieCode})
+	</insert>
+	
+	<delete id="minusHeartMovie">
+		DELETE FROM HEARTMOVIE WHERE id=#{id} AND movie_code=#{movieCode}
+	</delete>
  </mapper>

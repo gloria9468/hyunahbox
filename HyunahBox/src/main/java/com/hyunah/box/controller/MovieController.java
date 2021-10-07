@@ -19,32 +19,46 @@ import com.hyunah.box.service.MovieService;
 @RequestMapping("/movie")
 public class MovieController {
 	private final String path = "movie/";
-	
+
 	@Autowired
 	MovieService movieService;
-	
+
 	@Autowired
 	HeartService heartService;
-	
-	@RequestMapping({"/","/list"})
+
+	@RequestMapping({ "/", "/list" })
 	public String list(Model model) {
 		List<Movie> list = movieService.list();
 		model.addAttribute("list", list);
 		return path + "list";
 	}
-	
-	
-	// TODO 하트 숫자 올리기 
-	//(ajax에서 아이디 받아와서 아이디 중복 검사하듯이 -> 있으면 하트 숫자 빼고, 없으면 하트 숫자 더하기) 
+
+	// TODO 하트 숫자 올리기
+	// (ajax에서 아이디 받아와서 아이디 중복 검사하듯이 -> 있으면 하트 숫자 빼고, 없으면 하트 숫자 더하기)
 	@ResponseBody
-	@GetMapping("/{movieCode}/{id}")
+	@RequestMapping("/{movieCode}/{id}")
 	public String heartMovieCheck(@PathVariable int movieCode, @PathVariable String id) {
-		if( heartService.heartMovieCheck(movieCode, id) ) { // 조회했는데 찜한 영화로 있다
-			return "MINUS";
-		}else { // 찜한 영화에 없다.
-			return "PLUS";
-		}
 		
+		  if( heartService.heartMovieCheck(movieCode, id) ) { // 조회했는데 찜한 영화로 없다
+			  	return "PLUS"; 
+			  }else { // 찜한 영화에 있다
+				  return "MINUS"; 
+			  }
+		  }
+	
+	//PLUS HEART MOVIE
+	@ResponseBody
+	@RequestMapping("/PLUS/{movieCode}/{id}")
+	public String plusHeartMovie(@PathVariable int movieCode, @PathVariable String id) {
+		heartService.plusHeartMovie(movieCode, id);
+		return "PLUS";
+	}
+	
+	//MINUS HEART MOVIE
+	@ResponseBody
+	@RequestMapping("/MINUS/{movieCode}/{id}")
+	public String minusHeartMovie(@PathVariable int movieCode, @PathVariable String id) {
+		heartService.minusHeartMovie(movieCode, id);
+		return "MINUS";
 	}
 }
-

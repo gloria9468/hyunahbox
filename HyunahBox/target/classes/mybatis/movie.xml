@@ -5,7 +5,10 @@
   
 <mapper namespace="movie">
 	<select id="list" resultType="Movie">
-		SELECT * FROM movie
+		SELECT MOVIE.MOVIE_CODE, TITLE, HEART, MOVIE_TIME, MEMBER.ID
+		FROM HEARTMOVIE, MOVIE, MEMBER
+		WHERE movie.movie_code = HEARTMOVIE.MOVIE_CODE(+)
+		    AND MEMBER.ID=HEARTMOVIE.ID
 	</select>
 	
 	<insert id="add">
