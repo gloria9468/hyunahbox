@@ -1,6 +1,8 @@
 package com.hyunah.box.controller;
 
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.hyunah.box.model.Booking;
 import com.hyunah.box.model.Member;
 import com.hyunah.box.service.MemberService;
 
@@ -25,6 +28,7 @@ public class MemberController {
 
 	@Autowired
 	MemberService mService;
+	
 
 
 	@RequestMapping(value="/mypage", method=RequestMethod.GET)
@@ -40,7 +44,7 @@ public class MemberController {
 		item.setId(member.getId());
 		mService.mypage(item);
 
-		return "redirect:../main";
+		return "redirect:../../main";
 	}
 
 	@GetMapping("/findPage")
@@ -138,6 +142,14 @@ public class MemberController {
 		}
 	}
 
+	@GetMapping("/bookingList")
+	public String bookingList(@SessionAttribute Member member, Model model) {
+		List<Booking> item = mService.bookingList(member.getId());
+		
+		model.addAttribute("item", item);
+		
+		return path + "bookingList";
+	}
 
 
 }

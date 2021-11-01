@@ -10,7 +10,6 @@ public interface ScreenInfoService {
 
 	List<ScreenInfo> list(int theaterCode);
 
-
 	void add(ScreenInfo screen);
 
 
@@ -24,6 +23,11 @@ public interface ScreenInfoService {
 
 
 	List<Schedule> screenList(int theaterCode);
+
+
+
+
+	
 
 
 }

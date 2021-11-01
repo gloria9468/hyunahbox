@@ -1,6 +1,7 @@
 package com.hyunah.box.dao;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.hyunah.box.model.Booking;
 import com.hyunah.box.model.Member;
 
 @Repository("/MemberDaoImpl")
@@ -74,6 +76,11 @@ public class MemberDaoImpl implements MemberDao {
 	@Override
 	public void withdraw(String id) {
 		sql.delete("member.withdraw",id);
+	}
+
+	@Override
+	public List<Booking> bookingList(String id) {
+		return sql.selectList("member.bookingList", id);
 	}
 
 

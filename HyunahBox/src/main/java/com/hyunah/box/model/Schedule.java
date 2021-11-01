@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 
 public class Schedule {
 
@@ -16,19 +18,21 @@ public class Schedule {
 	private int screenNum;
 	private String title;
 	private String theater;
+	private int emptySits;
+	private int sitTotal;
 	
 
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm")
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm", timezone = "Asia/Seoul")
 	private Date timeTableDate;
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm")
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm",  timezone = "Asia/Seoul")
 	private Date endTime;
 	
 	
 	
 	List<Movie> movieList;	
 	List<Theater> theaterList;
-	
-	
 	
 	
 	public String getScheduleCode() {
@@ -61,18 +65,6 @@ public class Schedule {
 	public void setScreenNum(int screenNum) {
 		this.screenNum = screenNum;
 	}
-	public List<Movie> getMovieList() {
-		return movieList;
-	}
-	public void setMovieList(List<Movie> movieList) {
-		this.movieList = movieList;
-	}
-	public List<Theater> getTheaterList() {
-		return theaterList;
-	}
-	public void setTheaterList(List<Theater> theaterList) {
-		this.theaterList = theaterList;
-	}
 	public String getTitle() {
 		return title;
 	}
@@ -85,6 +77,19 @@ public class Schedule {
 	public void setTheater(String theater) {
 		this.theater = theater;
 	}
+	public int getEmptySits() {
+		return emptySits;
+	}
+	public void setEmptySits(int emptySits) {
+		this.emptySits = emptySits;
+	}
+	
+	public int getSitTotal() {
+		return sitTotal;
+	}
+	public void setSitTotal(int sitTotal) {
+		this.sitTotal = sitTotal;
+	}
 	public Date getTimeTableDate() {
 		return timeTableDate;
 	}
@@ -96,6 +101,18 @@ public class Schedule {
 	}
 	public void setEndTime(Date endTime) {
 		this.endTime = endTime;
+	}
+	public List<Movie> getMovieList() {
+		return movieList;
+	}
+	public void setMovieList(List<Movie> movieList) {
+		this.movieList = movieList;
+	}
+	public List<Theater> getTheaterList() {
+		return theaterList;
+	}
+	public void setTheaterList(List<Theater> theaterList) {
+		this.theaterList = theaterList;
 	}
 
 	

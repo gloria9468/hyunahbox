@@ -5,8 +5,6 @@
 .container{
     height : 100vh;
     display : block;
-    border : 1px solid red;
-    background : url(../images/main1.jpg);
 }
 .logo {
     display: block;
@@ -19,7 +17,6 @@
     display: flex ;
     justify-content: center;
     align-items: center;
-    border : 1px solid orange;
     min-height: 100vh;
 
 }
@@ -37,7 +34,6 @@
 }
 .form .formList .idCheck{
 	display: block;
-	 border : 1px solid #9354ED;
 }
 
 .form div label {
@@ -47,6 +43,6 @@
     float: right;
 }
 .btn {
-    display: block;
     text-align: center;
+    margin-left: 30px;
 }

@@ -24,19 +24,54 @@
 <link href="/box/resources/css/form.css" rel="stylesheet">
 <script>
 $(function(){
+	//miniNavi 부분 넣음.
+	const adminLoc = "/box/admin/admin-main/";
+	const loc = location.href;
+	
+	
+	let miniNavi = "<div>✔  >  <a href='";
+		miniNavi += adminLoc;
+		miniNavi += "'>관리자</a>  >  <a href='";
+		miniNavi += loc;
+		miniNavi += "'>스케쥴 등록</a></div>";
+	
+	$(document.getElementById("miniNavi")).append( $(miniNavi) );
+	
+});	
+
+$(function(){
+	
 	toggleScreen(0);
-	//document.getElementById("screenList").addClass("row mb-3 mx-auto");
 	
-	var date = document.querySelector('input[type="date"]').value;
-	console.log(date);
-	var time = document.querySelector('input[type="time"]').value;
-	console.log(time);
-	var timeTableDate = document.querySelector('input[type="hidden"]').value;
+	var date = document.getElementById("date").value;
+	var time = document.getElementById("time").value;
+	var timeTableDate = document.getElementById("timeTableDate").value;
 	var dateAndTime = date + " " + time;
-	timeTableDate = dateAndTime.toString();
-	console.log(timeTableDate);
 	
+	console.log(dateAndTime);
+	
+	DateAndTime(dateAndTime);
+
+
+	$("#date").on("change", function(){
+		date = document.getElementById("date").value;
+		dateAndTime = date + " " + time;
+		DateAndTime(dateAndTime);
+	});
+	
+
+	$("#time").on("change", function(){
+		time = document.getElementById("time").value;
+		dateAndTime = date + " " + time;
+		DateAndTime(dateAndTime);
+	});
 });
+
+	
+	function DateAndTime(dateAndTime){
+		document.getElementById("timeTableDate").value = dateAndTime;
+		console.log(dateAndTime);
+	}
 
 	function selectMovie(){
 		var movieCode = $('#selectedMovie option:selected').val();
@@ -71,6 +106,7 @@ $(function(){
 					for(let i=0; i<leng ; i++) {
 						let screenCode = data.list[i].screenCode;
 						let screenNum = data.list[i].screenNum;
+						
 						let html = "<option value=";
 						html +=	screenCode;
 						html += ">";
@@ -175,19 +211,8 @@ $(function(){
 			
 		});		
 	}
-
-	function selectDate(){
-		date = document.querySelector('input[type="date"]').value;
-		document.getElementById("date").value = date;
-		console.log(date);
-	}
-	function selectTime(){
-		time = document.querySelector('input[type="time"]').value;
-		document.getElementById("time").value = time;
-		console.log(time);
-		console.log(document.getElementById("timeTableDate").value);
-	}
 	
+
 	
 	
 </script>
@@ -257,8 +282,8 @@ $(function(){
 			<c:set var="now" value="<%=new java.util.Date()%>" />
 			<input type="hidden" name="timeTableDate" id="timeTableDate">
 			
-			<input type="date" id="date" onchange="selectDate()" value="<fmt:formatDate value="${now}" pattern="yyyy-MM-dd"/>" >
-			<input type="time" id="time" onchange="selectTime()" value="<fmt:formatDate value="${now}" pattern="HH:mm"/>" >
+			<input type="date" id="date" value="<fmt:formatDate value="${now}" pattern="yyyy-MM-dd"/>" >
+			<input type="time" id="time" value="<fmt:formatDate value="${now}" pattern="HH:mm"/>" >
 		</div>
 		</div>
 		</div>
@@ -269,7 +294,7 @@ $(function(){
 		</div>
 		<div class="smBlock"></div>
 		<div class="d-grid gap-2 col-6 mx-auto">
-			<button class="blank btn btn-success" type="button">등록</button>
+			<button class="blank btn btn-success" type="submit">등록</button>
 		</div>
 		
 		</div>

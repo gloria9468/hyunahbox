@@ -42,6 +42,11 @@ public class ScheduleServiceImpl implements ScheduleService{
 		sDao.delete(scheduleCode);
 	}
 
-	
+
+	@Override
+	public List<Schedule> getTimeTable(String clickDay, int pickTheater1, List<Integer> theaters, List<Integer> movies) {
+		return sDao.getTimeTable(clickDay, pickTheater1, theaters, movies);
+	}
+
 
 }

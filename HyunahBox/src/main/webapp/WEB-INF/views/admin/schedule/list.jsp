@@ -11,7 +11,21 @@
 <jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 <link href="/box/resources/css/form.css" rel="stylesheet">
 <script>
-
+$(function(){
+	//miniNavi 부분 넣음.
+	const adminLoc = "/box/admin/admin-main/";
+	const loc = location.href;
+	
+	
+	let miniNavi = "<div>✔  >  <a href='";
+		miniNavi += adminLoc;
+		miniNavi += "'>관리자</a>  >  <a href='";
+		miniNavi += loc;
+		miniNavi += "'>스케쥴 리스트</a></div>";
+	
+	$(document.getElementById("miniNavi")).append( $(miniNavi) );
+	
+});	
 	
 </script>
 <body>

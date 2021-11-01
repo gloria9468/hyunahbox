@@ -6,7 +6,7 @@ import com.hyunah.box.model.Movie;
 
 public interface MovieService {
 
-	List<Movie> list();
+	List<Movie> list(String memId);
 
 	void add(Movie item);
 
@@ -15,5 +15,7 @@ public interface MovieService {
 	void update(Movie item);
 
 	void delete(int movieCode);
+
+	List<Movie> list(String memId, String string);
 
 }

@@ -15,9 +15,15 @@ public class MovieServiceImpl implements MovieService {
 	MovieDao dao;
 
 	@Override
-	public List<Movie> list() {
-		return dao.list();
+	public List<Movie> list(String memId) {
+		return dao.list(memId);
 	}
+	
+	@Override
+	public List<Movie> list(String memId, String string) {
+		return dao.list(memId, "main");
+	}
+
 
 	@Override
 	public void add(Movie item) {
@@ -38,5 +44,8 @@ public class MovieServiceImpl implements MovieService {
 	public void delete(int movieCode) {
 		dao.delete(movieCode);
 	}
+
+
+	
 
 }

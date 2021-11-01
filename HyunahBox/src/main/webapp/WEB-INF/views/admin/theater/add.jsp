@@ -11,20 +11,33 @@
 <jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 <link href="/box/resources/css/form.css" rel="stylesheet">
 <script type="text/javascript">
-
+$(function(){
+	//miniNavi 부분 넣음.
+	const loc = location.href;
+	const adminLoc = "/box/admin/admin-main/";
+	
+	let miniNavi = "<div>✔  >  <a href='";
+		miniNavi += adminLoc;
+		miniNavi += "'>관리자</a>  >  <a href='";
+		miniNavi += loc;
+		miniNavi += "'>극장 등록</a></div>";
+	
+	$(document.getElementById("miniNavi")).append( $(miniNavi) );
+	
+});	
 </script>
 <body>
 	<div class="container">
 
 		<div class="form-line">
-			<h3 class="title">영화 등록 페이지</h3>
+			<h3 class="title">극장 등록 페이지</h3>
 			<div>
 				<form method="post">
 					<div class="d-grid gap-2 col-6 mx-auto">
 						<div class="form-group">
 							<div class="bigBlock"></div>
 							<div class="row mb-3 mx-auto">
-								<label class="col-sm-2 col-form-label mx-auto">영화관</label>
+								<label class="col-sm-2 col-form-label mx-auto">극장</label>
 								<div class="col-sm-10">
 								<input class="form-control" type="text" name="theater">
 								</div>

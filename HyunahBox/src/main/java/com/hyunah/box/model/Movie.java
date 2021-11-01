@@ -4,16 +4,22 @@ import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class Movie {
 	private int movieCode;
 	private String title;
 	
 	@DateTimeFormat(pattern="yyyy-MM-dd")
+	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date openDate;
 	private int heart;
+	private int heartCnt;
 	private int movieTime;
 	
 	private String id;
+	
+	
 	
 	public int getMovieCode() {
 		return movieCode;
@@ -41,6 +47,14 @@ public class Movie {
 	}
 	public void setHeart(int heart) {
 		this.heart = heart;
+	}
+	
+	
+	public int getHeartCnt() {
+		return heartCnt;
+	}
+	public void setHeartCnt(int heartCnt) {
+		this.heartCnt = heartCnt;
 	}
 	public int getMovieTime() {
 		return movieTime;

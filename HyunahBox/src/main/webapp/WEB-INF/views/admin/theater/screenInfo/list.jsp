@@ -10,8 +10,20 @@
 </head>
 <jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 <link href="/box/resources/css/form.css" rel="stylesheet">
-<script>
-
+<script type="text/javascript">
+$(function(){
+	//miniNavi 부분 넣음.
+	const loc = location.href;
+	const adminLoc = "/box/admin/admin-main/";
+	let miniNavi = "<div>✔  >  <a href='";
+		miniNavi += adminLoc;
+		miniNavi += "'>관리자</a>  >  <a href='";
+		miniNavi += loc;
+		miniNavi += "'>상영관 리스트</a></div>";
+	
+	$(document.getElementById("miniNavi")).append( $(miniNavi) );
+	
+});	
 </script>
 <body>
 	<div>
@@ -26,12 +38,11 @@
 				<thead>
 
 					<tr>
-						<th>영화관 코드</th>
+						<th>극장 코드</th>
+						<th>극장 명</th>
 						<th>상영관 코드</th>
 						<th>몇 상영관</th>
 						<th>총 좌석 수</th>
-						<th>행 수</th>
-						<th>열 수</th>
 						<th>관리</th>
 					</tr>
 				</thead>
@@ -41,18 +52,17 @@
 
 					<c:if test="${screenInfoList.size() < 1}">
 						<tr>
-							<td colspan="7">등록된 상영관이 없다.</td>
+							<td colspan="6">등록된 상영관이 없다.</td>
 						</tr>
 					</c:if>
 					<c:forEach var="screenInfoList" items="${screenInfoList}">
 						<c:set var="theaterCode" value="${screenInfoList.theaterCode}"></c:set>
 						<tr>
 							<td>${screenInfoList.theaterCode}</td>
+							<td>${screenInfoList.theater}</td>
 							<td>${screenInfoList.screenCode}</td>
 							<td>${screenInfoList.screenNum}상영관</td>
 							<td>${screenInfoList.sitTotal} 좌석</td>
-							<td>${screenInfoList.sitRow}</td>
-							<td>${screenInfoList.sitCol}</td>
 							<td><a href="${screenInfoList.screenCode}/timeTable" class="btn btn-sm btn-outline-primary mx-1">시간표 리스트</a> 
 								<a href="update/${screenInfoList.screenCode}" class="btn btn-sm btn-outline-secondary mx-1">상영관 변경</a> 
 								<a href="delete/${screenInfoList.screenCode}" class="btn btn-sm btn-outline-danger mx-1">상영관 삭제</a></td>

@@ -9,6 +9,24 @@
 </head>
 <jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 <link href="/box/resources/css/form.css" rel="stylesheet">
+<script type="text/javascript">
+$(function(){
+	//miniNavi 부분 넣음.
+	const loc = location.href;
+	const adminLoc = "/box/admin/admin-main/";
+	let miniNavi = "<div>✔  >  <a href='";
+		miniNavi += adminLoc;
+		miniNavi += "'>관리자</a>  >  <a href='";
+		miniNavi += loc;
+		miniNavi += "'>영화 수정</a></div>";
+	
+	$(document.getElementById("miniNavi")).append( $(miniNavi) );
+	
+});	
+</script>
+
+
+
 <body>
 <div class="container">
 	<div class="form-line">
@@ -48,7 +66,7 @@
 				<div class="row mb-3 mx-auto">
 					<label class="col-sm-2 col-form-label">하트</label>
 					<div class="col-sm-9">
-						<input class="form-control" type="number" name="heart" value="${item.heart}">
+						<input class="form-control" type="number" name="heartCnt" value="${item.heartCnt}" readonly="readonly">
 					</div>
 				</div>
 				</div>

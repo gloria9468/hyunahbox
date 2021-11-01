@@ -1,6 +1,9 @@
 package com.hyunah.box.service;
 
 
+import java.util.List;
+
+import com.hyunah.box.model.Booking;
 import com.hyunah.box.model.Member;
 
 public interface MemberService {
@@ -24,6 +27,8 @@ public interface MemberService {
 	void updatePw(String id, String pw);
 	
 	void withdraw(String id);
+
+	List<Booking> bookingList(String id);
 
 	
 

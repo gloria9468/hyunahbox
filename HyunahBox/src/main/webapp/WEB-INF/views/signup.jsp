@@ -167,6 +167,9 @@
 				<div class="formList">
 					<label>아이디</label>
 					<input name="id" type="text" onchange="changeId()" onKeyup="this.value=this.value.replace(/[^a-z0-9]/g,'')"> 
+					
+				</div>
+				<div class="formList">
 					<div class="idCheck">
 						<p onclick="idCheck()" id="idCheck">중복검사</p>
 						<p id="idCheck_OK">사용가능</p><p id="idCheck_FAIL">중복된 아이디</p>
@@ -206,8 +209,8 @@
 				
 			</form>
 				<div class ="btn">
-					<button onclick="signup()">회원가입</button>
-					<button onclick="goBack()">취소</button>
+					<button class="btn btn-success" onclick="signup()">회원가입</button>
+					<button class="btn btn-danger" onclick="goBack()">취소</button>
 				</div>
 		</div>
 		

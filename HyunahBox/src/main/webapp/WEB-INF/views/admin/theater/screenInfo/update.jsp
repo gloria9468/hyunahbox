@@ -11,12 +11,25 @@
 <jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 <link href="/box/resources/css/form.css" rel="stylesheet">
 <script type="text/javascript">
-
+$(function(){
+	//miniNavi 부분 넣음.
+	const loc = location.href;
+	const adminLoc = "/box/admin/admin-main/";
+	
+	let miniNavi = "<div>✔  >  <a href='";
+		miniNavi += adminLoc;
+		miniNavi += "'>관리자</a>  >  <a href='";
+		miniNavi += loc;
+		miniNavi += "'>상영관 수정</a></div>";
+	
+	$(document.getElementById("miniNavi")).append( $(miniNavi) );
+	
+});	
 </script>
 <body>
 	<div class="container">
 		<div class="form-line">
-			<h3 class="title">상영관 변경 페이지</h3>
+			<h3 class="title">상영관 수정 페이지</h3>
 
 			<form method="post">
 			<div class="d-grid gap-2 col-6 mx-auto">

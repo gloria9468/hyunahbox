@@ -11,8 +11,20 @@
 <jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 <link href="/box/resources/css/form.css" rel="stylesheet">
 
-<script>
-
+<script type="text/javascript">
+$(function(){
+	//miniNavi 부분 넣음.
+	const loc = location.href;
+	const adminLoc = "/box/admin/admin-main/";
+	let miniNavi = "<div>✔  >  <a href='";
+		miniNavi += adminLoc;
+		miniNavi += "'>관리자</a>  >  <a href='";
+		miniNavi += loc;
+		miniNavi += "'>영화 리스트</a></div>";
+	
+	$(document.getElementById("miniNavi")).append( $(miniNavi) );
+	
+});	
 </script>
 <body>
 	<div class="container">
@@ -47,7 +59,7 @@
 						<td>${item.title}</td>
 						<td><fmt:formatDate value="${item.openDate}" pattern="yyyy년 MM월 dd일"/></td>
 						<td>${item.movieTime} 분</td>
-						<td>♡ ${item.heart} ♥</td>
+						<td>♡ ${item.heartCnt} ♥</td>
 						<td><a href="update/${item.movieCode}" class="btn btn-sm btn-outline-secondary mx-1">변경</a>
 						<a href="delete/${item.movieCode}" class="btn btn-sm btn-outline-danger mx-1">삭제</a></td>
 					</tr>	

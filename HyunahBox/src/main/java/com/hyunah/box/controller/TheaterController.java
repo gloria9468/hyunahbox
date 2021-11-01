@@ -30,39 +30,6 @@ public class TheaterController {
 		return path + "list";
 	}
 	
-	@GetMapping("/add")
-	public String add() {
-		
-		return path + "add";
-	}
-	
-	@PostMapping("/add")
-	public String add(Theater theater) {
-		tService.add(theater);
-		return "redirect:list";
-	}
-	
-	@GetMapping("/update/{theaterCode}")
-	public String update(@PathVariable int theaterCode, Model model) {
-		Theater item = tService.getItem(theaterCode);
-		model.addAttribute("item", item);
-
-		return path + "update";
-	}
-	@PostMapping("/update/{theaterCode}")
-	public String update(@PathVariable int theaterCode, Theater theater) {
-		theater.setTheaterCode(theaterCode);
-		tService.update(theater);
-		
-		return "redirect:../list";
-	}
-	
-	@RequestMapping("/delete/{theaterCode}")
-	public String delete(@PathVariable int theaterCode) {
-		tService.delete(theaterCode);
-		return "redirect:../list";
-	}
-	
 
 	
 }

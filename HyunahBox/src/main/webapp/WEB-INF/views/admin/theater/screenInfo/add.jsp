@@ -11,7 +11,21 @@
 <jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 <link href="/box/resources/css/form.css" rel="stylesheet">
 <script type="text/javascript">
-
+$(function(){
+	//miniNavi 부분 넣음.
+	const adminLoc = "/box/admin/admin-main/";
+	const loc = location.href;
+	
+	
+	let miniNavi = "<div>✔  >  <a href='";
+		miniNavi += adminLoc;
+		miniNavi += "'>관리자</a>  >  <a href='";
+		miniNavi += loc;
+		miniNavi += "'>상영관 등록</a></div>";
+	
+	$(document.getElementById("miniNavi")).append( $(miniNavi) );
+	
+});	
 </script>
 <body>
 	<div class="container">
@@ -38,20 +52,7 @@
 								<input class="form-control" type="number" name="sitTotal">
 							</div>
 						</div>
-						<div class="row mb-3 mx-auto">
-							<label class="col-sm-2 col-form-label mx-auto">좌석 행 수</label>
-
-							<div class="col-sm-10">
-								<input class="form-control" type="text" name="sitRow">
-							</div>
-						</div>
-						<div class="row mb-3 mx-auto">
-							<label class="col-sm-2 col-form-label mx-auto">좌석 열 수</label>
-
-							<div class="col-sm-10">
-								<input class="form-control" type="number" name="sitCol">
-							</div>
-						</div>
+						
 						<div class="smBlock"></div>
 						<div class="d-grid gap-2 col-6 mx-auto">
 							<button class="blank btn btn-success" type="submit">상영관

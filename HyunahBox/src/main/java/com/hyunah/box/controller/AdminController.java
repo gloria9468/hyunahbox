@@ -22,6 +22,7 @@ import com.hyunah.box.model.TimeTable;
 import com.hyunah.box.service.MovieService;
 import com.hyunah.box.service.ScheduleService;
 import com.hyunah.box.service.ScreenInfoService;
+import com.hyunah.box.service.SitsInfoServie;
 import com.hyunah.box.service.TheaterService;
 import com.hyunah.box.service.TimeTableService;
 
@@ -58,6 +59,11 @@ public class AdminController {
 	@Autowired
 	TimeTableService timeTableService;
 	
+	@Autowired
+	ScreenInfoService sService;
+	
+	@Autowired
+	SitsInfoServie sitsService;
 	
 	@RequestMapping({"","/", "admin-main"})
 	public String adminMain(){
@@ -68,9 +74,9 @@ public class AdminController {
 	
 	
 	//영화
-	@RequestMapping({movieRM + "",movieRM + "/list"})
+	@RequestMapping({movieRM + "", movieRM + "/list"})
 	public String movieList(Model model) {
-		List<Movie> list = movieService.list();
+		List<Movie> list = movieService.list("noMem");
 		model.addAttribute("list", list);
 		return moviePath + "list";
 	}
@@ -160,10 +166,14 @@ public class AdminController {
 	public String screenInfoAdd() {
 		return screenInfoPath + "add";
 	}
+	
+	@Transactional
 	@PostMapping(screenInfoRM + "/add")
 	public String screenInfoAdd(@PathVariable int theaterCode , ScreenInfo screen){
 		screen.setTheaterCode(theaterCode);
-		screenInfoService.add(screen);
+		sService.add(screen);
+		sitsService.add(screen.getSitTotal(), screen.getScreenCode());
+		
 		return "redirect:list";
 	}
 	@GetMapping(screenInfoRM + "/update/{screenCode}")
@@ -180,8 +190,10 @@ public class AdminController {
 		return "redirect:../list";
 	}
 	
+	@Transactional
 	@RequestMapping(screenInfoRM + "/delete/{screenCode}")
 	public String screenInfoDelete(@PathVariable int theaterCode, @PathVariable int screenCode) {
+		sitsService.delete(screenCode);
 		screenInfoService.delete(theaterCode, screenCode);
 		
 		return "redirect:../list";
@@ -208,7 +220,7 @@ public class AdminController {
 	}
 	@GetMapping(scheduleRM + "/add")
 	public String add(Model movieModel, Model theaterModel) { //어느 영화관에서, 어떤 영화를, 몇시에.
-		List<Movie> movieList = movieService.list();
+		List<Movie> movieList = movieService.list("noMem");
 		movieModel.addAttribute("movieList", movieList);
 		
 		List<Theater> theaterList = theaterService.list();
@@ -256,5 +268,6 @@ public class AdminController {
 		return "redirect:../list";
 	}
 	
+	// TODO 스케쥴 업데이트 페이지 만들기
 	
 }

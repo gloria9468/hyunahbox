@@ -1,11 +1,14 @@
 package com.hyunah.box.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.hyunah.box.dao.GradeDao;
 import com.hyunah.box.dao.MemberDao;
+import com.hyunah.box.model.Booking;
 import com.hyunah.box.model.Member;
 
 @Service
@@ -72,6 +75,11 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void withdraw(String id) {
 		mDao.withdraw(id);
+	}
+
+	@Override
+	public List<Booking> bookingList(String id) {
+		return mDao.bookingList(id);
 	}
 
 	

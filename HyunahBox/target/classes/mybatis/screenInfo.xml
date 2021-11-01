@@ -6,11 +6,16 @@
 <mapper namespace="screenInfo">
 
 	<select id="list" resultType="ScreenInfo">
-		SELECT * FROM screenInfo WHERE theater_code=#{theaterCode}
+		SELECT * FROM screenInfo 
+		JOIN theater ON screenInfo.theater_code=theater.theater_code AND screenInfo.theater_code=#{theaterCode}
 	</select>
 	
 	<insert id="add">
-		INSERT INTO screenInfo VALUES(SCREEN_CODE_SEQ.nextval, #{theaterCode}, #{screenNum}, #{sitTotal}, #{sitRow}, #{sitCol})
+		INSERT INTO screenInfo VALUES(SCREEN_CODE_SEQ.nextval, #{theaterCode}, #{screenNum}, #{sitTotal})
+		
+		<selectKey keyColumn="screen_code" keyProperty="screenCode" order="AFTER" resultType="Integer">
+			SELECT SCREEN_CODE_SEQ.currval screen_code FROM DUAL
+		</selectKey>
 	</insert>
 	
 	<select id="getItem" resultType="ScreenInfo">
@@ -19,7 +24,7 @@
 	
 	<update id="update">
 		UPDATE screenInfo
-		SET sit_total=#{sitTotal}, sit_row=#{sitRow}, sit_col=#{sitCol}, screen_num=#{screenNum}
+		SET sit_total=#{sitTotal}, screen_num=#{screenNum}
 		WHERE screen_code=#{screenCode}
 	</update>
 	

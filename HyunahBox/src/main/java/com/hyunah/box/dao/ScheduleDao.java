@@ -14,5 +14,10 @@ public interface ScheduleDao {
 	void delete(String scheduleCode);
 
 
+	List<Schedule> getTimeTable(String clickDay, int pickTheater1, List<Integer> theaters, List<Integer> movies);
+
+	
+
+
 
 }

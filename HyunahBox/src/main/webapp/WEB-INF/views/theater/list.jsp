@@ -11,7 +11,17 @@
 <jsp:include page="../include/header.jsp"></jsp:include>
 <link href="/box/resources/css/form.css" rel="stylesheet">
 <script>
-
+$(function(){
+	//miniNavi 부분 넣음.
+	const loc = location.href;
+	let miniNavi = "<div>✔  >  <a href='";
+		miniNavi += loc;
+		miniNavi += "'>극장</a>  >  <a href='";
+		miniNavi += loc;
+		miniNavi += "'>전체 극장</a></div>";
+	
+	$(document.getElementById("miniNavi")).append( $(miniNavi) );
+});
 </script>
 
 <style>

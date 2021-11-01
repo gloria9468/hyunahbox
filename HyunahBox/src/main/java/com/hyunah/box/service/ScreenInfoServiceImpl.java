@@ -1,11 +1,10 @@
 package com.hyunah.box.service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.hyunah.box.dao.ScreenInfoDao;
 import com.hyunah.box.model.Schedule;
@@ -22,8 +21,7 @@ public class ScreenInfoServiceImpl implements ScreenInfoService{
 	public List<ScreenInfo> list(int theaterCode) {
 		return dao.list(theaterCode);
 	}
-
-
+	
 	@Override
 	public void add(ScreenInfo screen) {
 		dao.add(screen);

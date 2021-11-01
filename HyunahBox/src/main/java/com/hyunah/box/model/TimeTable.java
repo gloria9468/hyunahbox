@@ -10,11 +10,11 @@ public class TimeTable {
 	private int timeTableCode;
 
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm")
-	@JsonFormat(pattern="yyyy-MM-dd HH:mm")
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm",  timezone = "Asia/Seoul")
 	private Date timeTableDate;
 	
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm")
-	@JsonFormat(pattern="yyyy-MM-dd HH:mm")
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm", timezone = "Asia/Seoul")
 	private Date endTime;
 	
 	

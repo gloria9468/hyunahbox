@@ -1,5 +1,6 @@
 package com.hyunah.box.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -15,8 +16,16 @@ public class MovieDaoImpl implements MovieDao {
 	SqlSession sql;
 	
 	@Override
-	public List<Movie> list() {
-		return sql.selectList("movie.list");
+	public List<Movie> list(String memId) {
+		return sql.selectList("movie.list", memId);
+	}
+	@Override
+	public List<Movie> list(String memId, String string) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("memId", memId);
+		map.put("main", "main");
+		
+		return sql.selectList("movie.list", map);
 	}
 
 	@Override
@@ -38,5 +47,7 @@ public class MovieDaoImpl implements MovieDao {
 	public void delete(int movieCode) {
 		sql.delete("movie.delete", movieCode);
 	}
+
+
 
 }

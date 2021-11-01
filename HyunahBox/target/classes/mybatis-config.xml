@@ -20,6 +20,8 @@
 		<typeAlias type="com.hyunah.box.model.Schedule" alias="Schedule"/>
 		<typeAlias type="com.hyunah.box.model.TimeTable" alias="TimeTable"/>
 		<typeAlias type="com.hyunah.box.model.Heart" alias="Heart"/>
+		<typeAlias type="com.hyunah.box.model.SitsInfo" alias="SitsInfo"/>
+		<typeAlias type="com.hyunah.box.model.BookingList" alias="BookingList"/>
 	</typeAliases>
 
 	
@@ -33,5 +35,6 @@
 		<mapper resource="mybatis/schedule.xml" />
 		<mapper resource="mybatis/timeTable.xml" />
 		<mapper resource="mybatis/heart.xml" />
+		<mapper resource="mybatis/sitsInfo.xml" />
 	</mappers>
 </configuration>
