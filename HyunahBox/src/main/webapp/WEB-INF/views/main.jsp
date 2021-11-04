@@ -179,7 +179,7 @@
 					<a href="signup">회원가입</a>
 				</c:if>
 				
-				<a href="quick_booking">빠른예매</a>
+				<a href="booking/">빠른예매</a>
 				<c:if test="${sessionScope.member.getId() == 'admin' && sessionScope.member.getName() == '관리자' }">
 					<a href="/box/admin/admin-main/">관리자</a>
 				</c:if>
