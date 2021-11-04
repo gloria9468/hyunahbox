@@ -5,7 +5,7 @@
 
 
 		
-	<!-- mariadb -->	
+	<!--이제 mariadb -->	
 	<beans profile="mariadb">
 		<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
 		<property name="driverClassName" value="org.mariadb.jdbc.Driver"></property>
