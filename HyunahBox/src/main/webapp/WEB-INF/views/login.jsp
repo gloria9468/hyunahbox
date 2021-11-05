@@ -8,7 +8,7 @@
 
 <title>로그인 화면</title>
 <jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
-<link href="/box/resources/css/form.css" rel="stylesheet">
+<link href="/resources/css/form.css" rel="stylesheet">
 <script>
 	var result = '${msg}';
 	var id = '${id}';
@@ -25,10 +25,10 @@
 	}
 
 	function findPage(){
-		location.href = '/box/member/findPage';
+		location.href = '/member/findPage';
 	}
 	function signup(){
-		location.href = '/box/signup';
+		location.href = '/signup';
 	}
 	
 	

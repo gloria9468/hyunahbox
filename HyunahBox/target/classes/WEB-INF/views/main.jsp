@@ -6,12 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <title>♥현아박스에 오신 걸 환영합니다^^♥</title>
-<script src="/box/resources/JS/jquery-3.6.0.min.js"></script>
-<script src="/box/resources/JS/indigo.min.js"></script>
+<script src="/resources/JS/jquery-3.6.0.min.js"></script>
+<script src="/resources/JS/indigo.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-<link href="/box/resources/css/main.css" rel="stylesheet">
-<link href="/box/resources/css/form.css" rel="stylesheet">
+<link href="/resources/css/main.css" rel="stylesheet">
+<link href="/resources/css/form.css" rel="stylesheet">
 
 
 <script>
@@ -21,8 +21,7 @@
 	}
 	
 	$(function(){
-		var ajaxLoc = "/box/movie/"
-		$(".movieCode").hide();
+		var ajaxLoc = "/movie/"
 		
 			$('.movie_navi').hide();
 			$(".movie").hover(function(){
@@ -36,7 +35,7 @@
 				sessionStorage.setItem("mCode", movieCode);
 				sessionStorage.setItem("mName", movieName);
 				
-				location.href = "/box/booking/";
+				location.href = "/booking/";
 				
 			});
 			
@@ -51,7 +50,7 @@
 
 				if(member == null || member == ""){
 					if(confirm("하트는 로그인 후에 사용하실 수 있습니다.\n로그인 하시겠습니까?")){
-						location.href = "/box/login";				
+						location.href = "/login";				
 					}
 				}else{
 				
@@ -142,6 +141,9 @@
 		margin : 0px 20px;
 		width : 250px;
 	}	
+	.movieCode{
+		color: white;
+	}
 	.moviebtns{
 		margin : 0px 20px 20px 20px;
 	}
@@ -171,7 +173,7 @@
 			</div>
 			<div class="member2">
 				<c:if test="${sessionScope.member != null }">
-					<a href="/box/member/mypage/">마이페이지</a>
+					<a href="/member/mypage/">마이페이지</a>
 					<a href="logout">로그아웃</a>
 				</c:if>
 				<c:if test="${sessionScope.member == null }">
@@ -179,25 +181,25 @@
 					<a href="signup">회원가입</a>
 				</c:if>
 				
-				<a href="booking/">빠른예매</a>
+				<a href="/booking/">빠른예매</a>
 				<c:if test="${sessionScope.member.getId() == 'admin' && sessionScope.member.getName() == '관리자' }">
-					<a href="/box/admin/admin-main/">관리자</a>
+					<a href="/admin/admin-main/">관리자</a>
 				</c:if>
 			</div>
 		</div>
 		<nav class ="navi">
 			<ul class="endLine">
-				<li class ="fstNavi"><a href="/box/movie/">영화</a>
+				<li class ="fstNavi"><a href="/movie/">영화</a>
 					<ul>
-						<li id="hov"><a href ="/box/movie/list/">전체 영화</a></li>
+						<li id="hov"><a href ="/movie/list/">전체 영화</a></li>
 					</ul>
 				</li>
-				<li class="fstNavi"><a href="/box/booking/">예매</a></li>
-				<li class="fstNavi"><a href="/box/theater/">극장</a></li>
-				<li><a href="/box/"><img src="/box/resources/images/logo.png" height="60px" width="60px"></a></li>
-				<li class="fstNavi"><a href="/box/event/">이벤트</a></li>
-				<li class="fstNavi"><a href="/box/store/">스토어</a></li>
-				<li class="fstNavi"><a href="/box/benefit/">혜택</a></li>
+				<li class="fstNavi"><a href="/booking/">예매</a></li>
+				<li class="fstNavi"><a href="/theater/">극장</a></li>
+				<li><a href="/"><img src="/resources/images/logo.png" height="60px" width="60px"></a></li>
+				<li class="fstNavi"><a href="/event/">이벤트</a></li>
+				<li class="fstNavi"><a href="/store/">스토어</a></li>
+				<li class="fstNavi"><a href="/benefit/">혜택</a></li>
 			</ul>
 		</nav>
 		
@@ -206,16 +208,17 @@
 		<div>
 			<div class="boxoffice">
 				<h4>박스오피스</h4>
-				<a href="movie/">더 많은 영화보기 +</a>
+				<a href="/movie/">더 많은 영화보기 +</a>
 			</div>
 			
 			<div class="rank">
-				<!-- <div><img src="/box/resources/poster/이터널스.jpg">1위</div><div><img src="/box/resources/poster/듄.jpg">2위</div><div><img src="/box/resources/poster/고장난 론.jpg">3위</div><div><img src="/box/resources/poster/그래비티.jpg">4위</div> -->
+				<!-- <div><img src="/resources/poster/이터널스.jpg">1위</div><div><img src="/resources/poster/듄.jpg">2위</div><div><img src="/resources/poster/고장난 론.jpg">3위</div><div><img src="/resources/poster/그래비티.jpg">4위</div> -->
 				
 			<c:forEach var="item" items="${list}">
 			<div class="movie">
+				<ul>
 					<li>
-						<div><img src="/box/resources/images/bear.png"></div>
+						<div><img src="/resources/images/인질.jpg"></div>
 						<div class="movieCode" data-moviecode="${item.movieCode}">${item.title}</div>
 						<div class="moviebtns">
 							
@@ -232,7 +235,7 @@
 							<div><button type="button" class="clickBooking btn btn-outline-primary mx-2">예매</button></div>
 						</div>
 					</li>
-					
+				</ul>	
 				
 			</div>
 		</c:forEach>
@@ -253,7 +256,7 @@
 	</div>
 	<div class="midbackground">
 		<div class = "innerMidbackground">
-			<img src="/box/resources/images/ad.png"><br/>광고문의 010 8602 8648
+			<img src="/resources/images/ad.png"><br/>광고문의 010 8602 8648
 		</div>
 	</div>
 	</div>

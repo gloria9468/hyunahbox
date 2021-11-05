@@ -9,11 +9,11 @@
 <title>스케쥴 리스트</title>
 </head>
 <jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
-<link href="/box/resources/css/form.css" rel="stylesheet">
+<link href="/resources/css/form.css" rel="stylesheet">
 <script>
 $(function(){
 	//miniNavi 부분 넣음.
-	const adminLoc = "/box/admin/admin-main/";
+	const adminLoc = "/admin/admin-main/";
 	const loc = location.href;
 	
 	

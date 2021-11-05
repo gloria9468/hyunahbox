@@ -9,7 +9,7 @@
 <title>전체 영화관</title>
 </head>
 <jsp:include page="../include/header.jsp"></jsp:include>
-<link href="/box/resources/css/form.css" rel="stylesheet">
+<link href="/resources/css/form.css" rel="stylesheet">
 <script>
 $(function(){
 	//miniNavi 부분 넣음.

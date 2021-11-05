@@ -7,7 +7,7 @@
 <title>찾기 페이지</title>
 
 <jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
-<link href="/box/resources/css/form.css" rel="stylesheet">
+<link href="/resources/css/form.css" rel="stylesheet">
 
 <style type="text/css">
 	.cardP{
@@ -34,7 +34,7 @@
 $(function(){
 	//miniNavi 부분 넣음.
 	const loc = location.href;
-	let miniNavi = "<div>✔  >  <a href='/box/login/";
+	let miniNavi = "<div>✔  >  <a href='/login/";
 		miniNavi += "'>로그인</a>  >  <a href='";
 		miniNavi += loc;
 		miniNavi += "'>ID/PW찾기</a></div>";
@@ -44,10 +44,10 @@ $(function(){
 });	
 
 function findId(){
-	location.href = '/box/member/findId';
+	location.href = '/member/findId';
 }
 function findPw(){
-	location.href = '/box/member/findPw';
+	location.href = '/member/findPw';
 }
 </script>
 
@@ -59,13 +59,13 @@ function findPw(){
 	<div class="smBlock"></div>
 	<div class="cardP">
 		<div class="card" style="width: 18rem;">
-			<img src="/box/resources/images/id.png" class="card-img-top" >
+			<img src="/resources/images/id.png" class="card-img-top" >
 			<div class="card-body"><button class="btn btn-outline-primary" onclick="findId()">아이디 찾기</button></div>
 			
 		</div>
 		
 		<div class="card" style="width: 18rem;">
-		 	<img src="/box/resources/images/pw.png" class="card-img-top" >
+		 	<img src="/resources/images/pw.png" class="card-img-top" >
 			<div class="card-body"><button class="btn btn-outline-primary" onclick="findPw()">비밀번호 찾기</button></div>
 		</div>
 		

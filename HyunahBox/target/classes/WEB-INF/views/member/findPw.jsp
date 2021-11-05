@@ -31,11 +31,11 @@
 	}
 	
 	function findId(){
-		location.href = '/box/member/findId';
+		location.href = '/member/findId';
 	}
 	
 	function goBacktoLogin(){
-		location.href = '/box/login';
+		location.href = '/login';
 	}
 	
 	

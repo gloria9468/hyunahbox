@@ -10,7 +10,7 @@
 <title>빠른 예약</title>
 </head>
 <jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
-<link href="/box/resources/css/form.css" rel="stylesheet">
+<link href="/resources/css/form.css" rel="stylesheet">
 
 
 
@@ -702,7 +702,7 @@ function pickYourSit(pickInfo){
 	
 	$.ajax({
 		type:"POST",
-		url : "/box/booking/getSitsInfo",
+		url : "/booking/getSitsInfo",
 		contentType: "application/JSON",
 		datatype : JSON,
 		data: JSON.stringify({
@@ -812,7 +812,7 @@ $(document).on('click', '#nextStage', function(){
 		
 		$.ajax({
 			type:"POST",
-			url : "/box/booking/payment",
+			url : "/booking/payment",
 			contentType: "application/json",
 			datatype : JSON,
 			data: JSON.stringify({
@@ -832,7 +832,7 @@ $(document).on('click', '#nextStage', function(){
 				})
 				.then((willDelete) => {
 					  if (willDelete) {
-					    location.href = "/box/";
+					    location.href = "/";
 					  }
 				});
 				
@@ -946,7 +946,7 @@ function getTimeTable(){
 	
 	$.ajax({
 		type:"POST",
-		url : "/box/booking/getTimeTable",
+		url : "/booking/getTimeTable",
 		contentType: "application/json",
 		datatype : JSON,
 		data: JSON.stringify(js),
@@ -1132,7 +1132,7 @@ function getTimeTable(){
 				</div>
 				<div class="pickTM">
 					<div class="selectTimeTable" id="selectTimeTable" data-role="selectBox">
-						<div class='plzPickTM'><img src="/box/resources/images/movie.png" style="width:50px; height: 50px;" /> <br/><br/>영화와 극장을 선택하시면 <br/> 상영시간표를 비교하여 볼 수 있습니다.</div>
+						<div class='plzPickTM'><img src="/resources/images/movie.png" style="width:50px; height: 50px;" /> <br/><br/>영화와 극장을 선택하시면 <br/> 상영시간표를 비교하여 볼 수 있습니다.</div>
 					</div>
 				</div>
 			</div>

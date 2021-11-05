@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>비밀번호 찾기 페이지</title>
 
-<script src="/box/resources/JS/jquery-3.6.0.min.js"></script>
+<script src="/resources/JS/jquery-3.6.0.min.js"></script>
 <script>
 	function newPw(){
 		const form = document.newPwForm;
@@ -32,7 +32,7 @@
 	}
 	
 	function goBacktoLogin(){
-		location.href = '/box/login';
+		location.href = '/login';
 	}
 	
 	var result = '${msg}';

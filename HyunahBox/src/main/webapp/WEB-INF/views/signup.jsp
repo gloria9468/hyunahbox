@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>회원가입 페이지</title>
 <jsp:include page="include/header.jsp"></jsp:include>
-<link href="/box/resources/css/signup.css" rel="stylesheet">
+<link href="/resources/css/signup.css" rel="stylesheet">
 
 <script> 
 	let check_id = false;

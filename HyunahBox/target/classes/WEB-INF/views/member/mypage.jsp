@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>마이페이지</title>
 <jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
-<link href="/box/resources/css/form.css" rel="stylesheet">
+<link href="/resources/css/form.css" rel="stylesheet">
 <script>
 $(function(){
 	
@@ -26,11 +26,11 @@ $(function(){
 
 
 function withdraw(){
-	location.href = '/box/member/withdraw';
+	location.href = '/member/withdraw';
 }
 
 function bookingList(){
-	location.href = '/box/member/bookingList';
+	location.href = '/member/bookingList';
 }
 
 </script>

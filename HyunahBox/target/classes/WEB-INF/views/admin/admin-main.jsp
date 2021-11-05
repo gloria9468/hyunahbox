@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>관리자 페이지</title>
 <jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
-<link href="/box/resources/css/form.css" rel="stylesheet">
+<link href="/resources/css/form.css" rel="stylesheet">
 
 <style type="text/css">
 	.cardP{
@@ -51,19 +51,19 @@ $(function(){
 	<div class="smBlock"></div>
 	<div class="cardP">
 		<div class="card" style="width: 18rem;">
-		 <a href="../movie/"><img src="/box/resources/images/movie.png" class="card-img-top" >
+		 <a href="../movie/"><img src="/resources/images/movie.png" class="card-img-top" >
 			<div class="card-body">영화</div>
 		</a>
 		</div>
 		
 		<div class="card" style="width: 18rem;">
 		 
-		 <a href="../theater/"><img src="/box/resources/images/theater.png" class="card-img-top" >
+		 <a href="../theater/"><img src="/resources/images/theater.png" class="card-img-top" >
 			<div class="card-body">극장</div>
 		</a>
 		</div>
 		<div class="card" style="width: 18rem;">
-		 <a href="../schedule/"><img src="/box/resources/images/schedule.png" class="card-img-top" >
+		 <a href="../schedule/"><img src="/resources/images/schedule.png" class="card-img-top" >
 			<div class="card-body">예매(스케쥴)</div>
 		</a>
 		</div>

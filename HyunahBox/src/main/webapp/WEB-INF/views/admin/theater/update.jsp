@@ -8,12 +8,12 @@
 <title>극장 변경 페이지</title>
 </head>
 <jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
-<link href="/box/resources/css/form.css" rel="stylesheet">
+<link href="/resources/css/form.css" rel="stylesheet">
 <script type="text/javascript">
 $(function(){
 	//miniNavi 부분 넣음.
 	const loc = location.href;
-	const adminLoc = "/box/admin/admin-main/";
+	const adminLoc = "/admin/admin-main/";
 	
 	let miniNavi = "<div>✔  >  <a href='";
 		miniNavi += adminLoc;

@@ -54,11 +54,11 @@ public class RootController {
 	@PostMapping("/signup")
 	public String signup(Member item){
 		mService.siginup(item);
-		return "redirect:../";
+		return "redirect:/";
 	}
 
 	@ResponseBody
-	@RequestMapping("/signup/idCheck")
+	@RequestMapping("/idCheck")
 	public String idCheck(String id) {
 		if(mService.idCheck(id))
 			return "OK";

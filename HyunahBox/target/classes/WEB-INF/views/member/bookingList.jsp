@@ -9,7 +9,7 @@
 <title>예매 내역 페이지</title>
 
 <jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
-<link href="/box/resources/css/form.css" rel="stylesheet">
+<link href="/resources/css/form.css" rel="stylesheet">
 
 
 <script>

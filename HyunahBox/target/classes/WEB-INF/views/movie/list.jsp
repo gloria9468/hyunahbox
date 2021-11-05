@@ -37,7 +37,7 @@
 
 </head>
 <jsp:include page="../include/header.jsp"></jsp:include>
-<link href="/box/resources/css/form.css" rel="stylesheet">
+<link href="/resources/css/form.css" rel="stylesheet">
 
 
 <body>
@@ -48,10 +48,26 @@
 		<div class="smBlock"></div>
 		
 		<div class="movie">
+			<c:if test="${list.size() < 1}">
+			<table class="text-center table table-sm table-light table-secondary table-hover" border="1">
+				<thead>
+				
+					<tr>
+						<th>영화관</th>
+					</tr>
+				</thead>
+			
+				<tbody>
+					<tr>
+						<td colspan="1">등록된 영화가 없다.</td>
+					</tr>
+				</tbody>
+			</table>
+			</c:if>
 			<c:forEach var="item" items="${list}">
 				
 				<li>
-					<div><img src="/box/resources/images/bear.png"></div>
+					<div><img src="/resources/images/bear.png"></div>
 					<div class="movieCode" data-moviecode="${item.movieCode}">${item.title}</div>
 					<div>개봉일 <fmt:formatDate value="${item.openDate}" pattern="yyyy.MM.dd" /></div>
 					
@@ -99,7 +115,7 @@ $(function(){
 		sessionStorage.setItem("mCode", movieCode);
 		sessionStorage.setItem("mName", movieName);
 		
-		location.href = "/box/booking/";
+		location.href = "/booking/";
 		
 	});
 	
@@ -114,7 +130,7 @@ $(function(){
 
 		if(member == null || member == ""){
 			if(confirm("하트는 로그인 후에 사용하실 수 있습니다.\n로그인 하시겠습니까?")){
-				location.href = "/box/login";				
+				location.href = "/login";				
 			}
 		}else{
 		
