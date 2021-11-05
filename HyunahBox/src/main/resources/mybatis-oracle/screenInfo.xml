@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="screenInfo">
+
+	<select id="list" resultType="ScreenInfo">
+		SELECT * FROM screenInfo 
+		JOIN theater ON screenInfo.theater_code=theater.theater_code AND screenInfo.theater_code=#{theaterCode}
+	</select>
+	
+	<insert id="add">
+		INSERT INTO screenInfo VALUES(SCREEN_CODE_SEQ.nextval, #{theaterCode}, #{screenNum}, #{sitTotal})
+		
+		<selectKey keyColumn="screen_code" keyProperty="screenCode" order="AFTER" resultType="Integer">
+			SELECT SCREEN_CODE_SEQ.currval screen_code FROM DUAL
+		</selectKey>
+	</insert>
+	
+	<select id="getItem" resultType="ScreenInfo">
+		SELECT * FROM screenInfo WHERE theater_code=#{theaterCode} AND screen_code=#{screenCode}
+	</select>
+	
+	<update id="update">
+		UPDATE screenInfo
+		SET sit_total=#{sitTotal}, screen_num=#{screenNum}
+		WHERE screen_code=#{screenCode}
+	</update>
+	
+	<delete id="delete">
+		DELETE FROM screenInfo WHERE theater_code=#{theaterCode} AND screen_code=#{screenCode}
+	</delete>
+	
+	<select id="screenList" resultType="ScreenInfo">
+		SELECT screen_code, screen_num FROM screenInfo WHERE theater_code=#{theaterCode}
+	</select>
+ 	
+ </mapper>

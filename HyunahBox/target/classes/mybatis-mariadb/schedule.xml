@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="schedule">
+
+ 	<select id="list" resultType="Schedule">
+	<!-- select schedule.schedule_code, movie.title, theater.theater, screenInfo.screen_code, schedule.screen_time from schedule
+			left Join movie on movie.movie_code = schedule.movie_code
+	        left join theater on theater.theater_code = schedule.theater_code
+	        left join screenInfo on screenInfo.theater_code = schedule.theater_code -->
+        
+       SELECT timetable.SCHEDULE_CODE, TITLE, THEATER, screenInfo.SCREEN_CODE, SCREEN_NUM, MOVIE_TIME, TIME_TABLE_DATE, TIME_TABLE_DATE + (MOVIE_TIME / 24 / 60) AS "END_TIME"
+		FROM SCHEDULE, MOVIE, THEATER, SCREENINFO, TIMETABLE
+		WHERE movie.movie_code = schedule.movie_code 
+		        AND theater.theater_code = schedule.theater_code
+		        AND screenInfo.theater_code = schedule.theater_code
+                AND timetable.schedule_code = schedule.schedule_code
+                AND timetable.screen_code = screenInfo.screen_code
+
+ 	</select>
+ 
+ 
+	<insert id="add">
+		INSERT INTO schedule 
+		VALUES (#{scheduleCode}, #{movieCode}, #{theaterCode})
+	</insert>
+
+	
+	<delete id="delete">
+		DELETE 
+		FROM schedule
+		WHERE schedule_code = #{scheduleCode}
+	</delete>
+	
+	
+	<select id="selectedTheaterCodeList" resultType="Schedule">
+		SELECT MOVIE.TITLE, THEATER.THEATER, SCREENINFO.SCREEN_NUM ,TIMETABLE.TIME_TABLE_DATE, TIMETABLE.TIME_TABLE_DATE + (MOVIE_TIME / 24 / 60) AS "END_TIME"
+		FROM SCHEDULE JOIN THEATER ON SCHEDULE.THEATER_CODE = THEATER.THEATER_CODE
+		    JOIN MOVIE ON SCHEDULE.MOVIE_CODE = MOVIE.MOVIE_CODE
+		    JOIN SCREENINFO ON THEATER.THEATER_CODE = SCREENINFO.THEATER_CODE 
+		    JOIN TIMETABLE ON TIMETABLE.SCHEDULE_CODE = SCHEDULE.SCHEDULE_CODE AND TIMETABLE.SCREEN_CODE = SCREENINFO.SCREEN_CODE
+		
+		
+		WHERE THEATER.THEATER_CODE IN(#{selectedTheaterCode})
+		ORDER BY TIMETABLE.TIME_TABLE_DATE
+		
+	</select>
+	
+	<select id="getTimeTable" resultType="Schedule">
+		
+	SELECT TB.*, (TB.SIT_TOTAL - TB.BOOKED_SITS) AS "EMPTY_SITS"
+	 FROM 
+	 	(SELECT DISTINCT SCHEDULE.SCHEDULE_CODE, MOVIE.TITLE, THEATER.THEATER, SCREENINFO.SCREEN_CODE, SCREENINFO.SCREEN_NUM ,TIMETABLE.TIME_TABLE_DATE, TIMETABLE.TIME_TABLE_DATE + (MOVIE_TIME / 24 / 60) AS "END_TIME"
+		     , (SELECT COUNT(*) FROM BOOKING WHERE BOOKING.SCHEDULE_CODE = SCHEDULE.SCHEDULE_CODE AND BOOKING.SCREEN_CODE=SCREENINFO.SCREEN_CODE) AS "BOOKED_SITS"
+		     , SCREENINFO.SIT_TOTAL
+		   
+		    FROM SCHEDULE JOIN THEATER ON SCHEDULE.THEATER_CODE = THEATER.THEATER_CODE
+		         JOIN MOVIE ON SCHEDULE.MOVIE_CODE = MOVIE.MOVIE_CODE
+		         JOIN SCREENINFO ON THEATER.THEATER_CODE = SCREENINFO.THEATER_CODE 
+		        JOIN TIMETABLE ON TIMETABLE.SCHEDULE_CODE = SCHEDULE.SCHEDULE_CODE AND TIMETABLE.SCREEN_CODE = SCREENINFO.SCREEN_CODE
+		        LEFT JOIN BOOKING ON SCHEDULE.SCHEDULE_CODE = BOOKING.SCHEDULE_CODE
+		        LEFT JOIN SITSINFO ON SITSINFO.SCREEN_CODE=SCREENINFO.SCREEN_CODE 
+			
+		
+			WHERE THEATER.THEATER_CODE IN(#{pickTheater1}, #{pickTheater2}, #{pickTheater3})
+				<if test="pickMovie1 != 0">
+				AND MOVIE.MOVIE_CODE IN(#{pickMovie1}, #{pickMovie2}, #{pickMovie3})
+				</if>
+			
+				 <![CDATA[
+				AND TIMETABLE.TIME_TABLE_DATE >= TO_DATE(CONCAT(#{clickDay}, ' 00:00'), 'YYYY-MM-DD HH24:MI')
+	            AND TIMETABLE.TIME_TABLE_DATE <= TO_DATE(CONCAT(#{clickDay}, ' 23:59'), 'YYYY-MM-DD HH24:MI')
+	            ]]>
+			 
+		GROUP BY SCHEDULE.SCHEDULE_CODE, BOOKING.BOOKING_CODE, SCREENINFO.SCREEN_CODE, MOVIE.TITLE, THEATER.THEATER, SCREENINFO.SCREEN_CODE ,SCREENINFO.SCREEN_NUM ,TIMETABLE.TIME_TABLE_DATE, TIMETABLE.TIME_TABLE_DATE + (MOVIE.MOVIE_TIME / 24 / 60), SCREENINFO.SIT_TOTAL
+			ORDER BY TIMETABLE.TIME_TABLE_DATE) TB
+		
+		
+	</select>
+
+ </mapper>

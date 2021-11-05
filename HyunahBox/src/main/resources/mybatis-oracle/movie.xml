@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="movie">
+	<select id="list" resultType="Movie">
+		<if test="main == 'main'">
+			SELECT * FROM(
+		</if>
+		
+		SELECT movie.movie_code, title, (select count(*) from heartmovie where movie_code=movie.movie_code) as "heart_cnt", OPEN_DATE ,MOVIE_TIME, heartmovie.id 
+		FROM movie LEFT JOIN heartmovie ON movie.movie_code=heartmovie.movie_code
+		<if test= "memId == 'noMem'">
+			AND heartmovie.id is null
+		</if>
+		
+		<if test= "memId != 'noMem'">
+			AND heartmovie.id=#{memId}
+		</if>
+		
+		<if test="main == 'main'">
+			<![CDATA[
+				) WHERE ROWNUM < 5
+			]]> 
+		</if>
+		
+		
+	</select>
+	
+	<insert id="add">
+		INSERT INTO movie VALUES(MOVIE_CODE_SEQ.nextval, #{title}, #{openDate}, #{movieTime})
+	</insert>
+	
+	<select id="getItem" resultType="Movie">
+		SELECT movie.movie_code, title, (select count(*) from heartmovie where movie_code=movie.movie_code) as "heart_cnt", OPEN_DATE ,MOVIE_TIME
+    	from movie where movie.movie_code = #{movieCode}
+	</select>
+	
+	<update id="update">
+		UPDATE movie
+		SET title=#{title}, open_date=#{openDate}, movie_time=#{movieTime}
+		WHERE movie_code=#{movieCode}
+	</update>
+ 	
+ 	<delete id="delete">
+ 		DELETE FROM movie WHERE movie_code=#{movieCode} 
+ 	</delete>
+</mapper>
