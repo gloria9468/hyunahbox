@@ -7,7 +7,7 @@
 	<name>HyunahBox</name>
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
-	
+	<url>http://maven.apache.org</url>
 	
 	
 	
