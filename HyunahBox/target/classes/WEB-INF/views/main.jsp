@@ -218,7 +218,7 @@
 			<div class="movie">
 				<ul>
 					<li>
-						<div><img src="/resources/images/인질.jpg"></div>
+						<div><img src="/resources/images/인질.png"></div>
 						<div class="movieCode" data-moviecode="${item.movieCode}">${item.title}</div>
 						<div class="moviebtns">
 							
