@@ -7,6 +7,12 @@
 	<name>HyunahBox</name>
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
+	
+	
+	
+	
+	
+	
 	<properties>
 		<java-version>1.8</java-version>
 		<org.springframework-version>4.3.5.RELEASE</org.springframework-version>
@@ -123,7 +129,7 @@
 		
 		
 		
-			<!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>
@@ -168,7 +174,7 @@
 	</dependency>				
 						
 						
-						
+					
 		
 	
 				
@@ -178,6 +184,7 @@
 		     
 	</dependencies>
     <build>
+    <finalName>hyunahbox</finalName>
         <plugins>
             <plugin>
                 <artifactId>maven-eclipse-plugin</artifactId>
@@ -198,13 +205,43 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>2.5.1</version>
                 <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                     <compilerArgument>-Xlint:all</compilerArgument>
                     <showWarnings>true</showWarnings>
                     <showDeprecation>true</showDeprecation>
                 </configuration>
             </plugin>
+
+
+
+			<plugin>
+		         <groupId>org.apache.maven.plugins</groupId>
+		         <artifactId>maven-dependency-plugin</artifactId>
+		         <executions>
+		             <execution>
+		                 <phase>package</phase>
+		                 <goals><goal>copy</goal></goals>
+		                 <configuration>
+		                     <artifactItems>
+		                         <artifactItem>
+		                             <groupId>com.github.jsimone</groupId>
+		                             <artifactId>webapp-runner</artifactId>
+		                             <version>8.0.30.2</version>
+		                             <destFileName>webapp-runner.jar</destFileName>
+		                         </artifactItem>
+		                     </artifactItems>
+		                 </configuration>
+		             </execution>
+		         </executions>
+		     </plugin>
+            
+            
+            
+            
+            
+            
+            
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>

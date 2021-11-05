@@ -32,7 +32,7 @@ public class RootController {
 	MovieService movieService;
 
 
-	@RequestMapping({ "/", "/main" })
+	@RequestMapping({ "/", "/main","" })
 	public String main(Model model, @SessionAttribute(name="member", required =false) Member member) {
 		//Member member = (Member) session.getAttribute("member");
 		String memId="";
