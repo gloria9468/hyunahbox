@@ -172,6 +172,13 @@
 	    <artifactId>mariadb-java-client</artifactId>
 	    <version>2.7.4</version>
 	</dependency>				
+	
+	<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+	<dependency>
+	    <groupId>mysql</groupId>
+	    <artifactId>mysql-connector-java</artifactId>
+	    <version>8.0.27</version>
+	</dependency>
 						
 						
 	<!-- https://mvnrepository.com/artifact/com.heroku.sdk/heroku-deploy -->
@@ -181,14 +188,7 @@
 	    <version>3.0.4</version>
 	</dependency>
 						
-	<!-- https://mvnrepository.com/artifact/com.heroku.api/heroku-api -->
-	<dependency>
-	    <groupId>com.heroku.api</groupId>
-	    <artifactId>heroku-api</artifactId>
-	    <version>0.45</version>
-	</dependency>
-		
-	
+
 				
 				
 				
