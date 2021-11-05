@@ -174,7 +174,19 @@
 	</dependency>				
 						
 						
-					
+	<!-- https://mvnrepository.com/artifact/com.heroku.sdk/heroku-deploy -->
+	<dependency>
+	    <groupId>com.heroku.sdk</groupId>
+	    <artifactId>heroku-deploy</artifactId>
+	    <version>3.0.4</version>
+	</dependency>
+						
+	<!-- https://mvnrepository.com/artifact/com.heroku.api/heroku-api -->
+	<dependency>
+	    <groupId>com.heroku.api</groupId>
+	    <artifactId>heroku-api</artifactId>
+	    <version>0.45</version>
+	</dependency>
 		
 	
 				
