@@ -14,7 +14,21 @@
 <link href="/resources/css/main.css" rel="stylesheet">
 <link href="/resources/css/form.css" rel="stylesheet">
 
-
+<style type="text/css">
+	.rank div img{width:220px; height:280px;};	
+	
+	.btn-default{
+		background-color : #6B66FF;
+		border-color: #6B66FF;
+		color : white;
+	}
+	.btn-default:hover{
+		background-color : #B5B2FF;
+		border-color: #B5B2FF;
+		color : white;
+	}
+	
+</style>
 <script>
 	var result = '${msg}';
 	if(result == "withdraw_success"){

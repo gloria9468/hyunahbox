@@ -139,12 +139,12 @@
 
 	
 
-	
+	.rank div img{width:220px; height:280px;};	
 	
 	@media all and (max-width:1024px){
 		.rank div{text-align: center; margin: 20px; padding: 0;  margin-right: 10px;  display: inline-block;  vertical-align: -webkit-baseline-middle;}
 	
-		.rank div img{width:100%; height:100%};	
+		
 	}
 	
 
