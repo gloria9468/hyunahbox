@@ -83,8 +83,6 @@ public class RootController {
 				// db 에서 읽어온 member 라는 객체를 -  session에 member라고 저장해놓는 것. 객체를 넣어놓은 것.
 				
 				
-				// TODO : 자바의 sessionStorage 와 자바스크립트의 sessionStorage 의 차이 
-				// + 개발자모드에서 안 뜨는 이유. + 서버에 저장되는 session 과 웹에 저장되는 session의 차이가 뭔지
 				//세션 생성
 				req.getSession().setAttribute("id", id);
 				//세션 값 반환

@@ -8,6 +8,7 @@
 <title>♥현아박스에 오신 걸 환영합니다^^♥</title>
 <script src="/resources/JS/jquery-3.6.0.min.js"></script>
 <script src="/resources/JS/indigo.min.js"></script>
+<script src="/resources/JS/sweetalert.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 <link href="/resources/css/main.css" rel="stylesheet">
@@ -49,9 +50,20 @@
 				const heartCnt = parseInt($(this).data("heartcnt"));
 
 				if(member == null || member == ""){
-					if(confirm("하트는 로그인 후에 사용하실 수 있습니다.\n로그인 하시겠습니까?")){
-						location.href = "/login";				
-					}
+						
+						swal({
+							  icon: "warning",
+							  text: "하트는 로그인 후에 사용하실 수 있습니다.\n로그인 하시겠습니까?",
+							  closeOnClickOutside: false,
+							  closeOnEsc: false,
+							  buttons: ["취소", "확인"],
+						})
+						.then((willDelete) => {
+							  if (willDelete) {
+								  location.href = "/login";
+							  }
+						});
+						
 				}else{
 				
 					$.ajax({
@@ -128,37 +140,24 @@
 				})
 			}
 	});
+	
+	
+	function searchMovie(){
+		
+		
+	}
+	
+	function timetable(){
+		location.href="/booking/";
+	}
+	function boxoffice(){
+		location.href="/movie/";
+	}
+	function booking(){
+		location.href="/booking/";
+	}
 </script>
 
-<style type="text/css">
-	.movie {
-		justify-content : center;
-		text-aline : center;
-	}
-	.movie li {
-		display : inline-block;
-		text-aline : center;
-		margin : 0px 20px;
-		width : 250px;
-	}	
-	.movieCode{
-		color: white;
-	}
-	.moviebtns{
-		margin : 0px 20px 20px 20px;
-	}
-	.moviebtns div{
-		display : inline-block;
-	}	
-	
-	div li .title{
-		text-aline : center;
-	}
-	div li button{
-		text-aline : center;
-	}
-	
-</style>
 
 </head>
 <body>
@@ -212,13 +211,12 @@
 			</div>
 			
 			<div class="rank">
-				<!-- <div><img src="/resources/poster/이터널스.jpg">1위</div><div><img src="/resources/poster/듄.jpg">2위</div><div><img src="/resources/poster/고장난 론.jpg">3위</div><div><img src="/resources/poster/그래비티.jpg">4위</div> -->
 				
 			<c:forEach var="item" items="${list}">
 			<div class="movie">
 				<ul>
 					<li>
-						<div><img src="/resources/images/peo.png"></div>
+						<div><img src="/resources/poster/${item.title}.png"></div>
 						<div class="movieCode" data-moviecode="${item.movieCode}">${item.title}</div>
 						<div class="moviebtns">
 							
@@ -242,18 +240,18 @@
 			</div>
 			
 			<div class="smBlock"></div>
-			<form class="search">
-				<input type="text" onfocus="this.value='';" value="영화제목을 입력하세요">
-				<input type="text" onfocus="this.value='';" value="상영시간표">
-				<input type="text" onfocus="this.value='';" value="박스오피스">
-				<input type="text" onfocus="this.value='';" value="빠른예매">
-			</form>
-
-			
-
+			<div class="search">
+				<div>
+					<button onclick="searchMovie()" type="button" class="innerSearch btn btn-default mx-2">영화검색</button>
+					<button onclick="timetable()" type="button" class="innerSearch btn btn-default mx-2">상영시간표</button>
+					<button onclick="boxoffice()" type="button" class="innerSearch btn btn-default mx-2">박스오피스</button>
+					<button onclick="booking()" type="button" class="innerSearch btn btn-default mx-2">빠른예매</button>
+				</div>
+			</div>
 		</div>
-
 	</div>
+	
+	
 	<div class="midbackground">
 		<div class = "innerMidbackground">
 			<img src="/resources/images/ad.png"><br/>광고문의 010 8602 8648

@@ -76,9 +76,69 @@
 
 	.rank div img{width:100%; height:100%};
 	
-	.search{padding : 50px; text-align: center;}
-	.search input{height: 20px; padding-right: 20px; margin-right: 20px; text-align: center;}
+	.search{padding : 50px; }
+	.search div{
+		text-align: center;	
+	}
+	.search .innerSearch{
+		width : 110px;
+	}
+	.search .innerSearch_input{
+		width : 110px;
+		height : 38px;
+		background-color: #6B66FF;
+		color: white;
+		border: 1px solid transparent;
+		text-align : center;
+		margin: 0px 8px;
+		vertical-align: bottom;
+		border-radius: .25rem;
+	}
 	
+	
+	.btn-default{
+		background-color : #6B66FF;
+		border-color: #6B66FF;
+		color : white;
+	}
+	.btn-default:hover{
+		background-color : #B5B2FF;
+		border-color: #B5B2FF;
+		color : white;
+	}
+	
+
+	.movie {
+		justify-content : center;
+		text-align : center;
+	}
+	.movie li {
+		display : inline-block;
+		text-align : center;
+		margin : 0px 20px;
+		width : 250px;
+	}	
+	.movieCode{
+		color: white;
+	}
+	.moviebtns{
+		margin : 0px 20px 20px 20px;
+	}
+	.moviebtns div{
+		display : inline-block;
+	}	
+	
+	div li .title{
+		text-align : center;
+	}
+	div li button{
+		text-align : center;
+	}
+	
+
+
+	
+
 	
 	
 	@media all and (max-width:1024px){
@@ -91,6 +151,9 @@
 	form.search {
     	text-align: center;
 	}
+	
+	
+	
 	
 
 	.midbackground .innerMidbackground{

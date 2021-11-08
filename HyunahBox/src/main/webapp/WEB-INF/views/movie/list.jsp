@@ -18,7 +18,11 @@
 		text-aline : center;
 		margin : 0px 20px;
 		width : 250px;
-	}	
+	}
+	.movie li img{
+		width : 220px;
+		height : 280px;
+	}
 	
 	.moviebtns div{
 		display : inline-block;

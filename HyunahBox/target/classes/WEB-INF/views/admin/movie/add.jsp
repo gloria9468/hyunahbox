@@ -39,7 +39,7 @@ $(function(){
 							<label class="col-sm-2 col-form-label mx-auto">영화명</label>
 
 							<div class="col-sm-10">
-								<input class="form-control" type="text" name="title">
+								<input class="form-control" type="text" name="title"  placeholder="영화명" aria-label="영화명">
 							</div>
 						</div>
 
@@ -57,7 +57,7 @@ $(function(){
 						<div class="row mb-3 mx-auto">
 							<label class="col-sm-2 col-form-label">상영시간</label>
 							<div class="col-sm-10">
-								<input class="form-control" type="number" name="movieTime">
+								<input class="form-control" type="number" name="movieTime" placeholder="분(minute)" aria-label="분(minute)">
 							</div>
 						</div>
 						<div class="smBlock"></div>

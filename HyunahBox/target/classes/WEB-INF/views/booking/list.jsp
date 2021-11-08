@@ -661,36 +661,35 @@ function pickYourSit(pickInfo){
 	let row = Math.floor( pickInfo[6] / 10 ) + 1; 
 	let restColum = pickInfo[6] % 10;
 	let colum = 10;
-
+	
+	
 	const div = $("<div>");	
+	
 
 	for(let i = 1 ; i <= row ; i++){ //행
 	
-		// TODO : let html 부분 중복 되는 데 -> 중복 없애는 거 모르겟음... ㅠㅠ (함수로 만들어서 넣나?)
 		if(i == row) { // 마지막 행일 때는 나머지로 해야되서
 			for(let j = 1; j <= restColum ; j++){ //열
 				let html = "<p data-sitscode='";
-					html += (i-1)*10 + j;
-					html += "'>";
-				 	html += i;
-				 	html += "행 " 
-				 	html += j;
-				 	html += "열</p>";
-				 
-				 $( div ).append ( $(html) );
+				html += (i-1)*10 + j;
+				html += "'>";
+			 	html += i;
+			 	html += "행 " 
+			 	html += j;
+			 	html += "열</p>";
+			 $( div ).append ( $(html) );
 			}
 		}
 		else{
 			for(let j = 1; j <= colum ; j++){ //열
 				let html = "<p data-sitscode='";
-					html += (i-1)*10 + j;
-					html += "'>";
-				 	html += i;
-				 	html += "행 " 
-				 	html += j;
-				 	html += "열 </p>";
-				 
-				$( div ).append ( $(html) );
+				html += (i-1)*10 + j;
+				html += "'>";
+			 	html += i;
+			 	html += "행 " 
+			 	html += j;
+			 	html += "열</p>";
+			 $( div ).append ( $(html) );
 			}
 		}
 	
@@ -767,18 +766,17 @@ $(document).on('click', '#preStage', function(){
 	
 });
 
-
-// TODO : *****  제이쿼리에서 session 값 가져오는 다른 방법.
-// sessionId 에 다가 꼭 "null" 로 넣어야하나?? null 로는 안되던데... 안되는 이유. + 로그인 안했는데도 sessionId가 있는 경우 있었음.
+<%--  TODO : var sessionId = "<%=session.getAttribute("id") %>" --%>
 $(document).on('click', '#nextStage', function(){
 	var sessionId = "<%=session.getAttribute("id") %>";
+	console.log("el로 가져온 session값 있는지" + sessionId);
 	
 	var stage = $(this).data("stage");
 	var scheduleCode = $("#pickScheduleInfo").attr('data-schedulecode');
 	var screenCode = $("#pickScheduleInfo").attr('data-screenCode');
 	
 	
-	if(stage == "secondStage" && sessionId != "null"){ // 2단계에서 누르는 "다음" 버튼 && 세션 아이디 있음.
+	if( stage == "secondStage" && sessionId != "null" && sessionId != "" ){ // 2단계에서 누르는 "다음" 버튼 && 세션 아이디 있음.
 		var pickScheduleInfo = document.getElementById("pickScheduleInfo");
 	
 		//만약 선택한 좌석이 없다면 좌석을 선택하라고 알림창.
@@ -843,8 +841,9 @@ $(document).on('click', '#nextStage', function(){
 			
 		});
 	
-	}else{ //세션 아이디가 없음
+	}else{ //세션 아이디가 없음 
 		swal("로그인을 해주세요.", {icon : "warning", button : "확인" ,});
+		// TODO : 제이쿼리 인터셉터 만들기
 	}
 	
 });
