@@ -71,7 +71,7 @@
 			<c:forEach var="item" items="${list}">
 				
 				<li>
-					<div><img src="/resources/images/peo.png"></div>
+					<div><img src="/resources/poster/${item.movieCode}.png"></div>
 					<div class="movieCode" data-moviecode="${item.movieCode}">${item.title}</div>
 					<div>개봉일 <fmt:formatDate value="${item.openDate}" pattern="yyyy.MM.dd" /></div>
 					
