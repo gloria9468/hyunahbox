@@ -11,11 +11,106 @@
 <script src="/resources/JS/sweetalert.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-<link href="/resources/css/main.css" rel="stylesheet">
+<!-- <link href="/resources/css/main.css" rel="stylesheet"> -->
 <link href="/resources/css/form.css" rel="stylesheet">
 
-<style type="text/css">
-	.rank div img{width:220px; height:280px;};	
+<style>
+
+	*{margin: 0; padding: 0; list-style: none;}
+	.background{height : 100vh;}
+
+	.topbackground{margin:0 auto; background-color: rgb(12, 13, 46); height: calc(100vh-700px); width: 100%;}
+	.midbackground{margin:0 auto; background-color: paleturquoise; height: 700px ; width: 100%;}
+	.member a{color: rgb(204, 204, 204);}
+	.member a:hover{text-decoration: underline 2px white; text-underline-position: under;}
+	.member1{display: inline-block;}
+	.member1 a{text-decoration: none; padding:10px; padding-right: 5px; font-size: small;}
+	.member2{display: inline-block;	float: right;}
+	.member2 a{text-decoration: none; padding:10px; padding-left: 5px; font-size: small;}
+
+
+	.boxoffice h4{
+	    margin-top: 40px;
+	}
+	
+	.navi .endLine {
+		text-align: center;
+		padding:0;
+		
+	}    
+
+	.navi .endLine li {
+		display: inline-block;
+		padding: 20px 20px 0px 20px;
+		align-items:center;
+		
+	}
+		
+	.navi .endLine .fstNavi a{
+		line-height: 50px;
+		font-size: x-large;
+		color : white;
+		text-decoration: none;
+		text-align: center;
+	}
+	.navi .endLine .fstNavi a:hover{
+		text-decoration: underline 2px white; 
+		text-underline-position: under;
+	}
+	.navi .endLine .fstNavi ul {
+		padding:0;
+	}
+	.navi .endLine .fstNavi ul li{
+		display : none;
+		position: absolute;
+		margin : 0;
+		padding : 0;
+		width : 100%;
+		background: rgb(0, 0, 160);
+		left : 0px;
+	    top : 135px;
+	    height : 40px;
+	    
+	}
+	.navi .endLine .fstNavi ul li a {
+		color : white;
+		font-size : 20px;
+	}
+
+	.navi .endLine .fstNavi:hover #hov{
+		display : block;
+	}
+
+
+	.boxoffice{ text-align: center; color: white; padding-bottom:10px; margin:10px; }
+	
+	.boxoffice a{float: right; text-decoration: none; color: rgb(204, 204, 204); padding-bottom:5px; }
+	.boxoffice a:hover{text-decoration: underline 2px white; text-underline-position: under;}
+
+	.rank{text-align: center; margin:10px; padding-top: 20px;}
+	.rank div{text-align: center; margin: 20px; padding: 0;  margin-right: 10px;  display: inline-block; vertical-align: -webkit-baseline-middle;}
+
+	.rank div img{width:100%; height:100%};
+	
+	.search{padding : 50px; }
+	.search div{
+		text-align: center;	
+	}
+	.search .innerSearch{
+		width : 110px;
+	}
+	.search .innerSearch_input{
+		width : 110px;
+		height : 38px;
+		background-color: #6B66FF;
+		color: white;
+		border: 1px solid transparent;
+		text-align : center;
+		margin: 0px 8px;
+		vertical-align: bottom;
+		border-radius: .25rem;
+	}
+	
 	
 	.btn-default{
 		background-color : #6B66FF;
@@ -27,6 +122,74 @@
 		border-color: #B5B2FF;
 		color : white;
 	}
+	
+
+	.movie {
+		justify-content : center;
+		text-align : center;
+	}
+	.movie li {
+		display : inline-block;
+		text-align : center;
+		margin : 0px 20px;
+		width : 250px;
+	}	
+	.movieCode{
+		color: white;
+	}
+	.moviebtns{
+		margin : 0px 20px 20px 20px;
+	}
+	.moviebtns div{
+		display : inline-block;
+	}	
+	
+	div li .title{
+		text-align : center;
+	}
+	div li button{
+		text-align : center;
+	}
+	
+
+
+	
+
+	.rank div img{width:220px; height:280px;};	
+	
+	@media all and (max-width:1024px){
+		.rank div{text-align: center; margin: 20px; padding: 0;  margin-right: 10px;  display: inline-block;  vertical-align: -webkit-baseline-middle;}
+	
+		
+	}
+	
+
+	form.search {
+    	text-align: center;
+	}
+	
+	
+	
+	
+
+	.midbackground .innerMidbackground{
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 500px;
+		position: relative;
+		top: 50%;
+		transform: translateY(-50%);
+		font-size: 30px;
+	}
+	.midbackground .innerMidbackground img{
+		width: 50px; 
+		height: 50px;
+	}
+	
+	
+	
+	
 	
 </style>
 <script>
