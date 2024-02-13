@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c" %>
 
 
-<script src="/resources/JS/jquery-3.6.0.min.js"></script>
+<script src="<c:url value='/resources/JS/jquery-3.6.0.min.js'/>"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
   
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" 
@@ -17,8 +17,10 @@ rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5
 
 
 
-<link href="/resources/css/otherMain.css" rel="stylesheet">
-<script src="/resources/JS/sweetalert.min.js"></script>
+<link href="<c:url value='/resources/css/otherMain.css'/>" rel="stylesheet">
+<script src="<c:url value='/resources/JS/sweetalert.min.js'/>"></script>
+
+<link href="<c:url value='/resources/css/form.css'/>" rel="stylesheet">
 <script>
 
 	
@@ -45,33 +47,33 @@ rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5
 			</div>
 			<div class="member2">
 				<c:if test="${sessionScope.member != null }">
-					<a href="/member/mypage">마이페이지</a>
-					<a href="/logout">로그아웃</a>
+					<a href="<c:url value='/member/mypage'/>">마이페이지</a>
+					<a href="<c:url value='/logout'/>">로그아웃</a>
 				</c:if>
 				<c:if test="${sessionScope.member == null }">
-					<a href="/login/">로그인</a>
-					<a href="/signup/">회원가입</a>
+					<a href="<c:url value='/login/'/>">로그인</a>
+					<a href="<c:url value='/signup/'/>">회원가입</a>
 				</c:if>
 				
-				<a href="/booking/">빠른예매</a>
+				<a href="<c:url value='/booking/'/>">빠른예매</a>
 				<c:if test="${sessionScope.member.getId() == 'admin' && sessionScope.member.getName() == '관리자' }">
-					<a href="/admin/admin-main/">관리자</a>
+					<a href="<c:url value='/admin/admin-main/'/>">관리자</a>
 				</c:if>
 			</div>
 		</div>
 		<nav class ="navi">
 			<ul class="endLine">
-				<li class ="fstNavi"><a href="/movie/">영화</a>
+				<li class ="fstNavi"><a href="<c:url value='/movie/'/>">영화</a>
 					<ul>
-						<li id="hov"><a href ="/movie/list/">전체 영화</a></li>
+						<li id="hov"><a href ="<c:url value='/movie/list/'/>">전체 영화</a></li>
 					</ul>
 				</li>
-				<li class="fstNavi"><a href="/booking/">예매</a></li>
-				<li class="fstNavi"><a href="/theater/">극장</a></li>
-				<li><a href="/"><img src="/resources/images/logo.png" height="60px" width="60px"></a></li>
-				<li class="fstNavi"><a href="/event/">이벤트</a></li>
-				<li class="fstNavi"><a href="/store/">스토어</a></li>
-				<li class="fstNavi"><a href="/benefit/">혜택</a></li>
+				<li class="fstNavi"><a href="<c:url value='/booking/'/>">예매</a></li>
+				<li class="fstNavi"><a href="<c:url value='/theater/'/>">극장</a></li>
+				<li><a href="<c:url value='/'/>"><img src="<c:url value='/resources/images/logo.png'/>" height="60px" width="60px"></a></li>
+				<li class="fstNavi"><a href="<c:url value='/event/'/>">이벤트</a></li>
+				<li class="fstNavi"><a href="<c:url value='/store/'/>">스토어</a></li>
+				<li class="fstNavi"><a href="<c:url value='/benefit/'/>">혜택</a></li>
 			</ul>
 		</nav>
 		

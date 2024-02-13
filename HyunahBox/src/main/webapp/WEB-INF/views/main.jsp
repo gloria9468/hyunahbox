@@ -1,18 +1,17 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>♥현아박스에 오신 걸 환영합니다^^♥</title>
-<script src="/resources/JS/jquery-3.6.0.min.js"></script>
-<script src="/resources/JS/indigo.min.js"></script>
-<script src="/resources/JS/sweetalert.min.js"></script>
+<script src="<c:url value='/resources/JS/jquery-3.6.0.min.js'/>"></script>
+<script src="<c:url value='/resources/JS/indigo.min.js'/>"></script>
+<script src="<c:url value='/resources/JS/sweetalert.min.js'/>"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-<!-- <link href="/resources/css/main.css" rel="stylesheet"> -->
-<link href="/resources/css/form.css" rel="stylesheet">
+<!-- <link href="<c:url value='/resources/css/main.css'/>" rel="stylesheet"> -->
+<link href="<c:url value='/resources/css/form.css'/>" rel="stylesheet">
 
 <style>
 
@@ -349,7 +348,7 @@
 			</div>
 			<div class="member2">
 				<c:if test="${sessionScope.member != null }">
-					<a href="/member/mypage/">마이페이지</a>
+					<a href="<c:url value='/member/mypage/'/>">마이페이지</a>
 					<a href="logout">로그아웃</a>
 				</c:if>
 				<c:if test="${sessionScope.member == null }">
@@ -357,25 +356,25 @@
 					<a href="signup">회원가입</a>
 				</c:if>
 				
-				<a href="/booking/">빠른예매</a>
+				<a href="<c:url value='/booking/'/>">빠른예매</a>
 				<c:if test="${sessionScope.member.getId() == 'admin' && sessionScope.member.getName() == '관리자' }">
-					<a href="/admin/admin-main/">관리자</a>
+					<a href="<c:url value='/admin/admin-main/'/>">관리자</a>
 				</c:if>
 			</div>
 		</div>
 		<nav class ="navi">
 			<ul class="endLine">
-				<li class ="fstNavi"><a href="/movie/">영화</a>
+				<li class ="fstNavi"><a href="<c:url value='/movie/'/>">영화</a>
 					<ul>
-						<li id="hov"><a href ="/movie/list/">전체 영화</a></li>
+						<li id="hov"><a href ="<c:url value='/movie/list/'/>">전체 영화</a></li>
 					</ul>
 				</li>
-				<li class="fstNavi"><a href="/booking/">예매</a></li>
-				<li class="fstNavi"><a href="/theater/">극장</a></li>
-				<li><a href="/"><img src="/resources/images/logo.png" height="60px" width="60px"></a></li>
-				<li class="fstNavi"><a href="/event/">이벤트</a></li>
-				<li class="fstNavi"><a href="/store/">스토어</a></li>
-				<li class="fstNavi"><a href="/benefit/">혜택</a></li>
+				<li class="fstNavi"><a href="<c:url value='/booking/'/>">예매</a></li>
+				<li class="fstNavi"><a href="<c:url value='/theater/'/>">극장</a></li>
+				<li><a href="<c:url value='/'/>"><img src="<c:url value='/resources/images/logo.png'/>" height="60px" width="60px"></a></li>
+				<li class="fstNavi"><a href="<c:url value='/event/'/>">이벤트</a></li>
+				<li class="fstNavi"><a href="<c:url value='/store/'/>">스토어</a></li>
+				<li class="fstNavi"><a href="<c:url value='/benefit/'/>">혜택</a></li>
 			</ul>
 		</nav>
 		
@@ -384,7 +383,7 @@
 		<div>
 			<div class="boxoffice">
 				<h4>박스오피스</h4>
-				<a href="/movie/">더 많은 영화보기 +</a>
+				<a href="<c:url value='/movie/'/>">더 많은 영화보기 +</a>
 			</div>
 			
 			<div class="rank">
@@ -393,7 +392,7 @@
 			<div class="movie">
 				<ul>
 					<li>
-						<div><img src="/resources/poster/${item.movieCode}.png"></div>
+						<div><img src="<c:url value='/resources/poster/${item.movieCode}.png'/>"></div>
 						<div class="movieCode" data-moviecode="${item.movieCode}">${item.title}</div>
 						<div class="moviebtns">
 							
@@ -431,7 +430,7 @@
 	
 	<div class="midbackground">
 		<div class = "innerMidbackground">
-			<img src="/resources/images/ad.png"><br/>광고문의 010 8602 8648
+			<img src="<c:url value='/resources/images/ad.png'/>"><br/>광고문의 010 8602 8648
 		</div>
 	</div>
 	</div>
