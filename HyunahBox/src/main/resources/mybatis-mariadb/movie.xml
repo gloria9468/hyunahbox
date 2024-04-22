@@ -9,9 +9,7 @@
 			SELECT * FROM(
 		</if> -->
 		
-		SELECT MOVIE.MOVIE_CODE, TITLE
-				, (SELECT COUNT(*) FROM HEARTMOVIE WHERE MOVIE_CODE=movie.movie_code) as "heart_cnt"
-				, OPEN_DATE ,MOVIE_TIME, HEARTMOVIE.ID 
+		SELECT movie.movie_code, title, (select count(*) from heartmovie where movie_code=movie.movie_code) as "heart_cnt", OPEN_DATE ,MOVIE_TIME, heartmovie.id 
 		FROM movie LEFT JOIN heartmovie ON movie.movie_code=heartmovie.movie_code
 		<if test= "memId == 'noMem'">
 			AND heartmovie.id is null
@@ -35,7 +33,7 @@
 	</insert>
 	
 	<select id="getItem" resultType="Movie">
-		SELECT movie.movie_code, title, (select count(*) from heartmovie where movie_code=movie.movie_code) as "heart_cnt", OPEN_DATE, MOVIE_TIME
+		SELECT movie.movie_code, title, (select count(*) from heartmovie where movie_code=movie.movie_code) as "heart_cnt", OPEN_DATE ,MOVIE_TIME
     	from movie where movie.movie_code = #{movieCode}
 	</select>
 	
@@ -48,23 +46,4 @@
  	<delete id="delete">
  		DELETE FROM movie WHERE movie_code=#{movieCode} 
  	</delete>
- 	
- 	
-	<insert id="addMovieApiData" parameterType="java.util.List">	
-	    INSERT INTO MOVIE_API (MOVIE_CD_KOBIS, MOVIE_CD_KMDB, TITLE, OPEN_DATE, MOVIE_TIME, POSTER_URL)
-	    VALUES
-	    <foreach collection="list" item="movie" separator=" , ">
-	     (#{movie.movieCdKobis}, #{movie.movieCdKmdb}, #{movie.title}, #{movie.openDate}, #{movie.movieTime}, #{movie.posterUrl})
-	    </foreach>
-	</insert>
-	
-	<insert id="addMovieApiMinusData">
-		INSERT INTO movie(title, open_date, movie_time, movie_cd_kobis, movie_cd_kmdb, poster_url)
-		SELECT DISTINCT a.title, a.open_date, a.movie_time, a.movie_cd_kobis, a.movie_cd_kmdb, a.poster_url
-		FROM movie_api a
-		WHERE a.movie_cd_kobis IS NOT NULL AND a.movie_cd_kmdb IS NOT NULL
-		AND (a.movie_cd_kobis, a.movie_cd_kmdb) NOT IN ( SELECT movie_cd_kobis, movie_cd_kmdb FROM movie )
-	</insert>
-	
-	
 </mapper>

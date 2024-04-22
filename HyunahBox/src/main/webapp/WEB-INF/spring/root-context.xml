@@ -3,12 +3,8 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:task="http://www.springframework.org/schema/task"
-	xmlns:aop="http://www.springframework.org/schema/aop"
-	xsi:schemaLocation="http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.3.xsd
-		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
-		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 	
 		<!-- Root Context: defines shared resources visible to all other web components -->
@@ -27,28 +23,9 @@
 		<context:component-scan base-package="com.hyunah.box.service" />
 		<context:component-scan base-package="com.hyunah.box.model" />
 	
+		
+		
 		<import resource="datasource.xml"/>
-		
-		
-		<!-- 스케쥴러 파일이 존재하는 패키지 -->
-		<context:component-scan base-package="com.hyunah.box.scheduler"/>
-		<!-- 크론탭 설정에 -->
-		<task:scheduler id="jobScheduler" pool-size="10"/>
-		<task:annotation-driven scheduler="jobScheduler"/>		
-		
-		
-		<!-- Aspect 빈 등록 -->
-	    <bean id="logAspect" class="com.hyunah.box.aspect.LogAspect"/>
 	
-	    <!-- AOP 설정 -->
-	    <aop:config>
-	        <!-- 포인트컷 설정 -->
-	        <aop:aspect ref="logAspect">
-	            <aop:pointcut id="loggingPointcut" expression="execution(* com.hyunah.box..*(..))"/>
-	            
-	            <!-- Advice 설정 -->
-	            <aop:after method="logMethodCall" pointcut-ref="loggingPointcut"/>
-	        </aop:aspect>
-	    </aop:config>
 </beans>
 

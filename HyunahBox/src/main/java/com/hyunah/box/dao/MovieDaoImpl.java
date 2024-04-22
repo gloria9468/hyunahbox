@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.hyunah.box.model.Movie;
-import com.hyunah.box.model.MovieApi;
 
 @Repository
 public class MovieDaoImpl implements MovieDao {
@@ -47,23 +46,6 @@ public class MovieDaoImpl implements MovieDao {
 	@Override
 	public void delete(int movieCode) {
 		sql.delete("movie.delete", movieCode);
-	}
-	
-	@Override
-	public void addMoviApiKobis(List<MovieApi> movieList) {
-		sql.insert("movie.addMovieApiLoad", movieList);
-	}
-	
-	@Override
-	public int addMovieApiData(List<MovieApi> movieApiList) {
-		int addCnt = sql.insert("movie.addMovieApiData", movieApiList);
-		return addCnt;
-	}
-	
-	@Override
-	public int addMovieApiMinusData() {
-		int addCnt = sql.insert("movie.addMovieApiMinusData");
-		return addCnt;
 	}
 
 

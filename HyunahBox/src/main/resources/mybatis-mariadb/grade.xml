@@ -6,11 +6,11 @@
 <mapper namespace="grade">
 
 	<select id="getGrade" resultType="Grade">
-		SELECT * FROM GRADE WHERE ID=#{id}
+		SELECT * FROM grade WHERE id=#{id}
 	</select>
 	
 	<insert id ="addGrade">
- 		INSERT INTO GRADE VALUES (#{id}, '새싹', 10)
+ 		INSERT INTO grade VALUES (#{id}, '새싹', 10)
  	</insert>
  	
  </mapper>

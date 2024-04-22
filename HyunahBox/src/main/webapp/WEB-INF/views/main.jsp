@@ -342,7 +342,9 @@
 	<div class="topbackground">
 		<div class="member">
 			<div class="member1">
-				<a href="/info/">소개말</a>
+				<a href="viplounge">VIP LOUNGE</a>
+				<a href="membership">멤버십</a>
+				<a href="cs">고객센터</a>
 			</div>
 			<div class="member2">
 				<c:if test="${sessionScope.member != null }">
@@ -367,10 +369,12 @@
 						<li id="hov"><a href ="<c:url value='/movie/list/'/>">전체 영화</a></li>
 					</ul>
 				</li>
+				<li class="fstNavi"><a href="<c:url value='/booking/'/>">예매</a></li>
 				<li class="fstNavi"><a href="<c:url value='/theater/'/>">극장</a></li>
 				<li><a href="<c:url value='/'/>"><img src="<c:url value='/resources/images/logo.png'/>" height="60px" width="60px"></a></li>
-				<li class="fstNavi"><a href="<c:url value='/booking/'/>">예매</a></li>
-				<li class="fstNavi"><a href="<c:url value='/event/'/>">예정</a></li>
+				<li class="fstNavi"><a href="<c:url value='/event/'/>">이벤트</a></li>
+				<li class="fstNavi"><a href="<c:url value='/store/'/>">스토어</a></li>
+				<li class="fstNavi"><a href="<c:url value='/benefit/'/>">혜택</a></li>
 			</ul>
 		</nav>
 		
