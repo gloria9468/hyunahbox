@@ -25,7 +25,7 @@ public class LogAspect {
         String methodName = joinPoint.getSignature().getName();
         String className = joinPoint.getTarget().getClass().getName();
         logger.info("'{}'----- Method '{}' was called. -----", formattedDateTime, methodName);
-        
+         
         
     }
 }
