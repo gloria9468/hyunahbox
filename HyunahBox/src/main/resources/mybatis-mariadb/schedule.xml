@@ -11,28 +11,31 @@
 	        left join theater on theater.theater_code = schedule.theater_code
 	        left join screenInfo on screenInfo.theater_code = schedule.theater_code -->
         
-       SELECT timetable.SCHEDULE_CODE, TITLE, THEATER, screenInfo.SCREEN_CODE, SCREEN_NUM, MOVIE_TIME, TIME_TABLE_DATE
-       	, DATE_ADD(TIMETABLE.TIME_TABLE_DATE, INTERVAL MOVIE_TIME DAY_MINUTE) AS "END_TIME"
-		FROM SCHEDULE, MOVIE, THEATER, SCREENINFO, TIMETABLE
-		WHERE movie.movie_code = schedule.movie_code 
-		        AND theater.theater_code = schedule.theater_code
-		        AND screenInfo.theater_code = schedule.theater_code
-                AND timetable.schedule_code = schedule.schedule_code
-                AND timetable.screen_code = screenInfo.screen_code
+       SELECT T.SCHEDULE_CODE
+				, TITLE, THEATER
+		        , SCRI.SCREEN_CODE, SCREEN_NUM
+		        , MOVIE_TIME, TIME_TABLE_DATE         
+		        , DATE_ADD(T.TIME_TABLE_DATE, INTERVAL MOVIE_TIME DAY_MINUTE) AS "END_TIME"   
+		FROM SCHEDULE S, MOVIE M, THEATER TH, SCREENINFO SCRI, TIMETABLE T  
+		WHERE M.MOVIE_CODE = S.MOVIE_CODE
+		AND TH.THEATER_CODE = S.THEATER_CODE           
+		AND SCRI.THEATER_CODE = S.THEATER_CODE
+		AND T.SCHEDULE_CODE = S.SCHEDULE_CODE
+		AND T.SCREEN_CODE = SCRI.SCREEN_CODE
 
  	</select>
  
  
 	<insert id="add">
-		INSERT INTO schedule 
+		INSERT INTO SCHEDULE 
 		VALUES (#{scheduleCode}, #{movieCode}, #{theaterCode})
 	</insert>
 
 	
 	<delete id="delete">
 		DELETE 
-		FROM schedule
-		WHERE schedule_code = #{scheduleCode}
+		FROM SCHEDULE
+		WHERE SCHEDULE_CODE = #{scheduleCode}
 	</delete>
 	
 	

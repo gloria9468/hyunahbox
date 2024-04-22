@@ -5,7 +5,7 @@
   
 <mapper namespace="heart">
 	<select id="heartMovieCheck" resultType="Integer">
-		select count(*) from HEARTMOVIE WHERE id=#{id} AND movie_code=#{movieCode}
+		SELECT COUNT(*) FROM HEARTMOVIE WHERE ID=#{id} AND MOVIE_CODE=#{movieCode}
 	</select>
 
 	<insert id="plusHeartMovie">
@@ -13,6 +13,6 @@
 	</insert>
 	
 	<delete id="minusHeartMovie">
-		DELETE FROM HEARTMOVIE WHERE id=#{id} AND movie_code=#{movieCode}
+		DELETE FROM HEARTMOVIE WHERE ID=#{id} AND MOVIE_CODE=#{movieCode}
 	</delete>
  </mapper>
