@@ -86,8 +86,8 @@ public class RootController {
 				//세션 생성
 				req.getSession().setAttribute("id", id);
 				//세션 값 반환
-				String aa = (String) req.getSession().getAttribute("id");
-				System.out.println("세션스토리지로 아이디 값이 들어오게 해주세요." + aa);
+				String sessionId = (String) req.getSession().getAttribute("id");
+				System.out.println("세션스토리지로 아이디 값이 들어오게 해주세요." + sessionId);
 				
 				return "redirect:/main";
 			}
