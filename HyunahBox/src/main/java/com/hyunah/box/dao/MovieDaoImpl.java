@@ -65,6 +65,12 @@ public class MovieDaoImpl implements MovieDao {
 		int addCnt = sql.insert("movie.addMovieApiMinusData");
 		return addCnt;
 	}
+	
+	@Override
+	public int clearMovieApi() {
+		int clearCnt = sql.delete("movie.clearMovieApi");
+		return clearCnt;
+	}
 
 
 

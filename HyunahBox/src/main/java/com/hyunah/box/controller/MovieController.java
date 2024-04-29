@@ -1,27 +1,8 @@
 package com.hyunah.box.controller;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
+
 import java.util.List;
-import java.util.Locale;
-import java.util.Map;
 
-import javax.net.ssl.HttpsURLConnection;
-import javax.servlet.http.HttpSession;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
-import org.json.XML;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,8 +15,6 @@ import org.springframework.web.context.request.SessionScope;
 
 import com.hyunah.box.model.Member;
 import com.hyunah.box.model.Movie;
-import com.hyunah.box.model.MovieApi;
-import com.hyunah.box.scheduler.SchedulerUtil;
 import com.hyunah.box.service.HeartService;
 import com.hyunah.box.service.MovieService;
 
@@ -99,11 +78,7 @@ public class MovieController {
 	
 	
 	
-	@GetMapping("/api/load/kobis")
-	public void getJsonDataFromKobis() throws Exception{
-		int addMovieApiMinusDataCnt = movieService.getApiData();
-		
-	}
+	
 	
 	
 	

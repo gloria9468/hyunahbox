@@ -11,7 +11,7 @@ public class MovieScheduler {
 	@Autowired
 	private MovieService movieService;
 	
-	@Scheduled(cron = "0 34 16 * * *")
+	@Scheduled(cron = "0 0 3 * * *")
 	public void getJsonDataFromKobis() throws Exception{
 		movieService.getApiData();
 	}

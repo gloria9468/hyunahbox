@@ -114,6 +114,7 @@ public class SchedulerUtil {
 		    String movieCd = movie.getString("movieCd");
 		    
 		    MovieApi movieApi = new MovieApi();
+		    movieApi.setTodayRank(rank);
 		    movieApi.setMovieCdKobis(movieCd);
 		    movieApi.setTitle(movieNm);
 		    movieApi.setOpenDate(openDt);

@@ -23,15 +23,19 @@
 		</bean>
 		
 		
+		<context:component-scan base-package="com.hyunah.box..*" />
+		<!-- 
 		<context:component-scan base-package="com.hyunah.box.dao" />
 		<context:component-scan base-package="com.hyunah.box.service" />
 		<context:component-scan base-package="com.hyunah.box.model" />
-	
+		<!- - 스케쥴러 파일이 존재하는 패키지 - - >
+		<context:component-scan base-package="com.hyunah.box.scheduler"/>
+		-->
+		 
 		<import resource="datasource.xml"/>
 		
 		
-		<!-- 스케쥴러 파일이 존재하는 패키지 -->
-		<context:component-scan base-package="com.hyunah.box.scheduler"/>
+		
 		<!-- 크론탭 설정에 -->
 		<task:scheduler id="jobScheduler" pool-size="10"/>
 		<task:annotation-driven scheduler="jobScheduler"/>		

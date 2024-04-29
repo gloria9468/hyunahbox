@@ -57,7 +57,8 @@ $(function(){
 				<div class="row mb-3 mx-auto">
 					<label class="col-sm-2 col-form-label">개봉일</label>
 					<div class="col-sm-9">
-						<input class="form-control" type="date" name="openDate" value="<fmt:formatDate value="${item.openDate}" pattern="yyyy-MM-dd"/>">
+						<fmt:parseDate value="${item.openDate}" var="parsedDate" pattern="yyyyMMdd" />
+						<input class="form-control" type="date" name="openDate" value="<fmt:formatDate value="${parsedDate}" pattern="yyyy-MM-dd" />">
 					</div>
 				</div>
 				</div>

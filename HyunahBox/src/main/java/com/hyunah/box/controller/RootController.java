@@ -43,6 +43,8 @@ public class RootController {
 		}
 		List<Movie> list = movieService.list(memId, "main");
 		model.addAttribute("list", list);
+		
+		
 		return "main";
 	}
 

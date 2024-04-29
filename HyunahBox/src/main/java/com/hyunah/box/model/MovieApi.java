@@ -22,6 +22,7 @@ public class MovieApi {
 	private String movieCdKobis;
 	private String movieCdKmdb;
 	private String posterUrl;
+	private String todayRank;
 	
 	
 	
@@ -67,8 +68,14 @@ public class MovieApi {
 	public void setPosterUrl(String posterUrl) {
 		this.posterUrl = posterUrl;
 	}
+	public String getTodayRank() {
+		return todayRank;
+	}
+	public void setTodayRank(String todayRank) {
+		this.todayRank = todayRank;
+	}
 	
-
+	
 
 
 }

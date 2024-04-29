@@ -25,60 +25,33 @@ rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5
 
 	
 	$(function(){
+		setHtml("/menu/list", "#menu_list");
+		
 		$('.movie_navi').hide();
 		$('.movie').hover(function(){
 			$('.movie_navi').show();
 		});
+		
+		
 	});
+	
+	
+	function setHtml(url_, setDiv){
+        $.ajax({
+            url : url_,
+            type : 'post',
+            success: function(data) {
+                $(setDiv).html(data);
+            },
+                error: function() {
+                $(setDiv).text('페이지 점검중 입니다.');
+            }
+        });
+    }
 </script>
 
+<div id="menu_list"></div>
 
-
-
-
-
-
-	<div class="topBlock">
-		<div class="member">
-			<div class="member1">
-				<a href="viplounge">VIP LOUNGE</a>
-				<a href="membership">멤버십</a>
-				<a href="cs">고객센터</a>
-			</div>
-			<div class="member2">
-				<c:if test="${sessionScope.member != null }">
-					<a href="<c:url value='/member/mypage'/>">마이페이지</a>
-					<a href="<c:url value='/logout'/>">로그아웃</a>
-				</c:if>
-				<c:if test="${sessionScope.member == null }">
-					<a href="<c:url value='/login/'/>">로그인</a>
-					<a href="<c:url value='/signup/'/>">회원가입</a>
-				</c:if>
-				
-				<a href="<c:url value='/booking/'/>">빠른예매</a>
-				<c:if test="${sessionScope.member.getId() == 'admin' && sessionScope.member.getName() == '관리자' }">
-					<a href="<c:url value='/admin/admin-main/'/>">관리자</a>
-				</c:if>
-			</div>
-		</div>
-		<nav class ="navi">
-			<ul class="endLine">
-				<li class ="fstNavi"><a href="<c:url value='/movie/'/>">영화</a>
-					<ul>
-						<li id="hov"><a href ="<c:url value='/movie/list/'/>">전체 영화</a></li>
-					</ul>
-				</li>
-				<li class="fstNavi"><a href="<c:url value='/booking/'/>">예매</a></li>
-				<li class="fstNavi"><a href="<c:url value='/theater/'/>">극장</a></li>
-				<li><a href="<c:url value='/'/>"><img src="<c:url value='/resources/images/logo.png'/>" height="60px" width="60px"></a></li>
-				<li class="fstNavi"><a href="<c:url value='/event/'/>">이벤트</a></li>
-				<li class="fstNavi"><a href="<c:url value='/store/'/>">스토어</a></li>
-				<li class="fstNavi"><a href="<c:url value='/benefit/'/>">혜택</a></li>
-			</ul>
-		</nav>
-		
-		
-</div>	
 <div class="secNavi">
 	<div id="miniNavi"></div>
 </div>	

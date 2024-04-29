@@ -3,11 +3,16 @@ package com.hyunah.box.aspect;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 @Aspect
 public class LogAspect {
@@ -25,7 +30,8 @@ public class LogAspect {
         String methodName = joinPoint.getSignature().getName();
         String className = joinPoint.getTarget().getClass().getName();
         logger.info("'{}'----- Method '{}' was called. -----", formattedDateTime, methodName);
-         
-        
     }
+    
+    
+    
 }

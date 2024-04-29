@@ -388,7 +388,7 @@
 			<div class="movie">
 				<ul>
 					<li>
-						<div><img src="<c:url value='/resources/poster/${item.movieCode}.png'/>"></div>
+						<div><img src="${item.posterUrl}"></div>
 						<div class="movieCode" data-moviecode="${item.movieCode}">${item.title}</div>
 						<div class="moviebtns">
 							

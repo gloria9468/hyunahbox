@@ -64,6 +64,8 @@ public class MovieServiceImpl implements MovieService {
 		return dao.addMovieApiMinusData();
 	}
 
+	
+	
 	@Override
 	public int getApiData() throws Exception {
 		int addMovieApiMinusDataCnt = 0;
@@ -71,13 +73,21 @@ public class MovieServiceImpl implements MovieService {
 		if(0 < movieApiList.size()) {
 			List<MovieApi> addKmdbDataList = sUtil.addKmdbData(movieApiList);
 			int addMovieApiDataCnt = 0;
-			if(0 < addKmdbDataList.size()) addMovieApiDataCnt = addMovieApiData(movieApiList);
+			if(0 < addKmdbDataList.size()) {
+				int clearMovieApiCnt= clearMovieApi(); // MOVIE_API 테이블에 데이터 넣기 전에, clear 함.
+				addMovieApiDataCnt = addMovieApiData(movieApiList);
+			}
 			
 			if(0 < addMovieApiDataCnt) addMovieApiMinusDataCnt = addMovieApiMinusData();
 			
-			System.out.println("addMovieApiMinusDataCnt----"+ addMovieApiMinusDataCnt);
+			//System.out.println("addMovieApiMinusDataCnt----"+ addMovieApiMinusDataCnt);
 		}
 		return addMovieApiMinusDataCnt;
+	}
+
+	@Override
+	public int clearMovieApi() {
+		return dao.clearMovieApi();
 	}
 
 

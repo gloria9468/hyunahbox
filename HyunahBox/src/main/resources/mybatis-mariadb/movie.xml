@@ -5,33 +5,28 @@
   
 <mapper namespace="movie">
 	<select id="list" resultType="Movie">
-		<!-- <if test="main == 'main'">
-			SELECT * FROM(
-		</if> -->
-		
-		SELECT MOVIE.MOVIE_CODE, TITLE
-				, (SELECT COUNT(*) FROM HEARTMOVIE WHERE MOVIE_CODE=movie.movie_code) as "heart_cnt"
-				, OPEN_DATE ,MOVIE_TIME, HEARTMOVIE.ID 
-		FROM movie LEFT JOIN heartmovie ON movie.movie_code=heartmovie.movie_code
-		<if test= "memId == 'noMem'">
-			AND heartmovie.id is null
-		</if>
-		
-		<if test= "memId != 'noMem'">
-			AND heartmovie.id=#{memId}
-		</if>
-		
-		<!-- <if test="main == 'main'">
-			
-		) WHERE LIMIT 5
-			 
-		</if> -->
-		
+		SELECT A.* 
+		FROM (	
+				SELECT	
+				<!--  ROW_NUMBER() OVER (ORDER BY today_rank, open_date desc) AS today_rank -->
+						MOVIE.MOVIE_CODE, TITLE
+						, (SELECT COUNT(*) FROM HEARTMOVIE WHERE MOVIE_CODE=movie.movie_code) as "heart_cnt"
+						, OPEN_DATE ,MOVIE_TIME, POSTER_URL, HEARTMOVIE.ID 
+				FROM movie LEFT JOIN heartmovie ON movie.movie_code=heartmovie.movie_code
+				<if test= "memId == 'noMem'">
+					AND heartmovie.id is null
+				</if>
+				
+				<if test= "memId != 'noMem'">
+					AND heartmovie.id=#{memId}
+				</if>
+		) A 
+		<!-- WHERE today_rank LIMIT 0,3 -->
 		
 	</select>
 	
 	<insert id="add">
-		INSERT INTO movie VALUES(NULL, #{title}, #{openDate}, #{movieTime})
+		INSERT INTO movie(title, open_date, movie_time) VALUES(#{title}, REGEXP_REPLACE(#{openDate}, '[^0-9]', ''), #{movieTime})
 	</insert>
 	
 	<select id="getItem" resultType="Movie">
@@ -41,7 +36,7 @@
 	
 	<update id="update">
 		UPDATE movie
-		SET title=#{title}, open_date=#{openDate}, movie_time=#{movieTime}
+		SET title=#{title}, open_date=REGEXP_REPLACE(#{openDate}, '[^0-9]', ''), movie_time=#{movieTime}
 		WHERE movie_code=#{movieCode}
 	</update>
  	
@@ -50,11 +45,15 @@
  	</delete>
  	
  	
+ 	<delete id="clearMovieApi">
+ 		DELETE FROM movie_api WHERE movie_cd_kmdb IS NOT NULL AND movie_cd_kobis IS NOT NULL
+ 	</delete>
+ 	
 	<insert id="addMovieApiData" parameterType="java.util.List">	
-	    INSERT INTO MOVIE_API (MOVIE_CD_KOBIS, MOVIE_CD_KMDB, TITLE, OPEN_DATE, MOVIE_TIME, POSTER_URL)
+	    INSERT INTO MOVIE_API (TODAY_RANK, MOVIE_CD_KOBIS, MOVIE_CD_KMDB, TITLE, OPEN_DATE, MOVIE_TIME, POSTER_URL)
 	    VALUES
 	    <foreach collection="list" item="movie" separator=" , ">
-	     (#{movie.movieCdKobis}, #{movie.movieCdKmdb}, #{movie.title}, #{movie.openDate}, #{movie.movieTime}, #{movie.posterUrl})
+	     (#{movie.todayRank}, #{movie.movieCdKobis}, #{movie.movieCdKmdb}, #{movie.title}, #{movie.openDate}, #{movie.movieTime}, #{movie.posterUrl})
 	    </foreach>
 	</insert>
 	

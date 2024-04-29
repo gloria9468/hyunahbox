@@ -1,13 +1,18 @@
 package com.hyunah.box.controller;
-//안올라갓자나 ㅠㅠ
+import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -64,6 +69,28 @@ public class AdminController {
 	
 	@Autowired
 	SitsInfoServie sitsService;
+	
+	
+	 
+    @ModelAttribute("adminMiniNav")
+    public List<Map<String, String>> adminMiniNav(HttpServletRequest req) {
+    	String uri = req.getRequestURI();
+    	
+    	System.out.println("getRequestURI----" + uri);
+        
+        List<Map<String, String>> adminMiniNavList = new ArrayList<Map<String,String>> ();
+        Map<String, String> map = new HashMap<String, String> ();
+        map.put("menuName", "관리자");
+        map.put("menuSrc", adminPath);
+        
+        adminMiniNavList.add(map);
+        
+        return adminMiniNavList;
+    }
+    
+    
+    
+    
 	
 	@RequestMapping({"","/", "admin-main"})
 	public String adminMain(){
@@ -269,5 +296,21 @@ public class AdminController {
 	}
 	
 	// TODO 스케쥴 업데이트 페이지 만들기
+	
+	
+	@GetMapping("/menu")
+	public String adminMenu() {
+		
+		return "";
+	}
+	
+	// api 데이터 수동 실행
+	@GetMapping("/getMovieApiData")
+	public String getApiData() throws Exception{
+		int addMovieApiMinusDataCnt = movieService.getApiData();
+		
+		return "/admin/movie/apiDataResult";
+	}
+	
 	
 }

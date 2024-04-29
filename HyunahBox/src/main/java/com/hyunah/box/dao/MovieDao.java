@@ -25,4 +25,6 @@ public interface MovieDao {
 
 	int addMovieApiMinusData();
 
+	int clearMovieApi();
+
 }

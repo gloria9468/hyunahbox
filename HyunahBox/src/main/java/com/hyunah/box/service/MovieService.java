@@ -26,5 +26,7 @@ public interface MovieService {
 	int addMovieApiMinusData();
 
 	int getApiData() throws Exception;
+	
+	int clearMovieApi();
 
 }
