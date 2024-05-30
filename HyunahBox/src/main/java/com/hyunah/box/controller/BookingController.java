@@ -53,7 +53,7 @@ public class BookingController {
 		} else {
 			memId = member.getId();
 		}
-		List<Movie> movieList = movieService.list(memId);
+		List<Movie> movieList = movieService.list(memId, "main");
 		movieModel.addAttribute("movieList", movieList);
 
 		List<Theater> theaterList = theaterService.list();

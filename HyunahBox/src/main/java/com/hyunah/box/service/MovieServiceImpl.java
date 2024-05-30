@@ -24,8 +24,8 @@ public class MovieServiceImpl implements MovieService {
 	}
 	
 	@Override
-	public List<Movie> list(String memId, String string) {
-		return dao.list(memId, "main");
+	public List<Movie> list(String memId, String listType) {
+		return dao.list(memId, listType);
 	}
 
 
@@ -74,14 +74,14 @@ public class MovieServiceImpl implements MovieService {
 			List<MovieApi> addKmdbDataList = sUtil.addKmdbData(movieApiList);
 			int addMovieApiDataCnt = 0;
 			if(0 < addKmdbDataList.size()) {
-				int clearMovieApiCnt= clearMovieApi(); // MOVIE_API 테이블에 데이터 넣기 전에, clear 함.
 				addMovieApiDataCnt = addMovieApiData(movieApiList);
 			}
 			
 			if(0 < addMovieApiDataCnt) addMovieApiMinusDataCnt = addMovieApiMinusData();
 			
-			//System.out.println("addMovieApiMinusDataCnt----"+ addMovieApiMinusDataCnt);
+			System.out.println("addMovieApiMinusDataCnt----"+ addMovieApiMinusDataCnt);
 		}
+		int clearMovieApiCnt= clearMovieApi(); // MOVIE_API 테이블에 가장 최근 데이터 빼고, clear 함.
 		return addMovieApiMinusDataCnt;
 	}
 

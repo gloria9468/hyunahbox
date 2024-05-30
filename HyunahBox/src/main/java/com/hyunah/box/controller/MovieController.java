@@ -42,7 +42,7 @@ public class MovieController {
 		}else {
 			memId=member.getId();
 		}
-		List<Movie> list = movieService.list(memId);
+		List<Movie> list = movieService.list(memId, "list");
 		model.addAttribute("list", list);
 		return path + "list";
 	}

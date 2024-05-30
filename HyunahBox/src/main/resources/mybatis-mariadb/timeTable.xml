@@ -5,15 +5,16 @@
   
   <mapper namespace="timeTable">
   		<select id="timeList" resultType="TimeTable">
-		    SELECT TIMETABLE.TIME_TABLE_CODE, TIMETABLE.TIME_TABLE_DATE, MOVIE.TITLE, TIME_TABLE_DATE + (MOVIE_TIME / 24 / 60) AS "END_TIME"
+		    SELECT TIMETABLE.TIME_TABLE_CODE, TIMETABLE.TIME_TABLE_DATE, MOVIE.TITLE
+		    		, DATE_ADD(TIMETABLE.TIME_TABLE_DATE, INTERVAL MOVIE.MOVIE_TIME MINUTE) AS "END_TIME"
 			FROM TIMETABLE, SCHEDULE, MOVIE
-			    WHERE SCREEN_CODE = #{screenCode}
-			    and TIMETABLE.SCHEDULE_CODE = SCHEDULE.SCHEDULE_CODE
-			    and SCHEDULE.MOVIE_CODE = MOVIE.MOVIE_CODE
-			    order by timetable.time_table_date
+		    WHERE SCREEN_CODE = #{screenCode}
+		    and TIMETABLE.SCHEDULE_CODE = SCHEDULE.SCHEDULE_CODE
+		    and SCHEDULE.MOVIE_CODE = MOVIE.MOVIE_CODE
+		    order by timetable.time_table_date
   		</select>
 		
 		<insert id="tAdd">
 			INSERT INTO timeTable VALUES (NULL, #{timeTableDate}, #{screenCode} , #{scheduleCode})
-		</insert>  	
+		</insert>
   </mapper>

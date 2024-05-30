@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.hyunah.box.comm.service.CommService;
 import com.hyunah.box.model.Movie;
 import com.hyunah.box.model.Schedule;
 import com.hyunah.box.model.ScreenInfo;
@@ -70,7 +71,8 @@ public class AdminController {
 	@Autowired
 	SitsInfoServie sitsService;
 	
-	
+	@Autowired
+	CommService commService;
 	 
     @ModelAttribute("adminMiniNav")
     public List<Map<String, String>> adminMiniNav(HttpServletRequest req) {
@@ -103,7 +105,7 @@ public class AdminController {
 	//영화
 	@RequestMapping({movieRM + "", movieRM + "/list"})
 	public String movieList(Model model) {
-		List<Movie> list = movieService.list("noMem");
+		List<Movie> list = movieService.list("noMem", "list");
 		model.addAttribute("list", list);
 		return moviePath + "list";
 	}
@@ -247,7 +249,7 @@ public class AdminController {
 	}
 	@GetMapping(scheduleRM + "/add")
 	public String add(Model movieModel, Model theaterModel) { //어느 영화관에서, 어떤 영화를, 몇시에.
-		List<Movie> movieList = movieService.list("noMem");
+		List<Movie> movieList = movieService.list("noMem", "list");
 		movieModel.addAttribute("movieList", movieList);
 		
 		List<Theater> theaterList = theaterService.list();
@@ -280,6 +282,9 @@ public class AdminController {
 	@Transactional
 	@PostMapping(scheduleRM + "/add")
 	public String add(Schedule item) {
+		String scheduleCodeSeq = Integer.toString( commService.getNextval("schedule_code_seq") );
+		item.setScheduleCode( scheduleCodeSeq );
+		
 		scheduleService.add(item);
 		timeTableService.add( item.getTimeTableDate() , item.getScreenCode(), item.getScheduleCode() );
 		System.out.println(item);

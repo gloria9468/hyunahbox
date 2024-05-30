@@ -227,12 +227,14 @@ $(function(){
 		<div class="form-group">
 			<div class="bigBlock"></div>
 			
+		<!--  
 		<div class="row mb-3 mx-auto">
 			<label class="col-sm-3 col-form-label mx-auto">스케쥴 코드</label>
 			<div class="col-sm-8">
 				<input class="form-control" type="text" name="scheduleCode">
 			</div>
 		</div>
+		-->	
 		
 		<div class="row mb-3 mx-auto">
 			<label class="col-sm-3 col-form-label mx-auto">영화 명</label>

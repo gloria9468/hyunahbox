@@ -21,10 +21,10 @@ public class MovieDaoImpl implements MovieDao {
 		return sql.selectList("movie.list", memId);
 	}
 	@Override
-	public List<Movie> list(String memId, String string) {
+	public List<Movie> list(String memId, String listType) {
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("memId", memId);
-		map.put("main", "main");
+		map.put("listType", listType);
 		
 		return sql.selectList("movie.list", map);
 	}

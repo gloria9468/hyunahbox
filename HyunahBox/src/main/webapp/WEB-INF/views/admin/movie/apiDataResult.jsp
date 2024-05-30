@@ -57,14 +57,12 @@ $(function(){
 					<tr>
 						<td>${item.movieCode}</td>
 						<td>${item.title}</td>
-						<td><fmt:parseDate value="${item.openDate}" var="parsedDate" pattern="yyyyMMdd" />
-							<fmt:formatDate value="${parsedDate}" pattern="yyyy년 MM월 dd일" />
-						</td>
+						<td><fmt:formatDate value="${item.openDate}" pattern="yyyy년 MM월 dd일"/></td>
 						<td>${item.movieTime} 분</td>
 						<td>♡ ${item.heartCnt} ♥</td>
 						<td><a href="update/${item.movieCode}" class="btn btn-sm btn-outline-secondary mx-1">변경</a>
 						<a href="delete/${item.movieCode}" class="btn btn-sm btn-outline-danger mx-1">삭제</a></td>
-					</tr>
+					</tr>	
 				</c:forEach>
 				
 			</tbody>

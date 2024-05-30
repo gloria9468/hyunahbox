@@ -15,6 +15,8 @@ public class Movie extends MovieApi{
 	private int heartCnt;
 	
 	private String id;
+	
+	private String movieStatus;
 
 	public int getMovieCode() {
 		return movieCode;
@@ -46,6 +48,14 @@ public class Movie extends MovieApi{
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public String getMovieStatus() {
+		return movieStatus;
+	}
+
+	public void setMovieStatus(String movieStatus) {
+		this.movieStatus = movieStatus;
 	}
 	
 	

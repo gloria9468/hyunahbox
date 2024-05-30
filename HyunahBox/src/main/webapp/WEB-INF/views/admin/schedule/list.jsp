@@ -64,8 +64,8 @@ $(function(){
 						<td>${scheduleList.screenNum}  상영관</td>
 						<td><fmt:formatDate value="${scheduleList.timeTableDate}" pattern="yyyy년 MM월 dd일 HH:mm"/></td>
 					 	<td><fmt:formatDate value="${scheduleList.endTime}" pattern="yyyy년 MM월 dd일 HH:mm"/></td>							
-						<td><a href="update/${scheduleList.scheduleCode}" class="btn btn-sm btn-outline-secondary mx-1">변경</a>
-							<a href="delete/${scheduleList.scheduleCode}" class="btn btn-sm btn-outline-danger mx-1">삭제</a></td>
+						<td><a href="./update/${scheduleList.scheduleCode}" class="btn btn-sm btn-outline-secondary mx-1">변경</a>
+							<a href="./delete/${scheduleList.scheduleCode}" class="btn btn-sm btn-outline-danger mx-1">삭제</a></td>
 					</tr>	
 				</c:forEach>
 				

@@ -5,13 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>♥현아박스에 오신 걸 환영합니다^^♥</title>
-<script src="<c:url value='/resources/JS/jquery-3.6.0.min.js'/>"></script>
-<script src="<c:url value='/resources/JS/indigo.min.js'/>"></script>
-<script src="<c:url value='/resources/JS/sweetalert.min.js'/>"></script>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-<!-- <link href="<c:url value='/resources/css/main.css'/>" rel="stylesheet"> -->
-<link href="<c:url value='/resources/css/form.css'/>" rel="stylesheet">
 
 <style>
 
@@ -188,7 +181,9 @@
 	
 	
 	
-	
+	#menu_list *{color:white;}
+	#menu_list .topBlock, #miniNavi{background-color:rgb(12, 13, 46) !important;}
+	.secNavi{height:35px !important; margin: -2px 0px;}
 	
 </style>
 <script>
@@ -336,6 +331,9 @@
 
 
 </head>
+
+<jsp:include page="./include/header.jsp"/>
+
 <body>
 
 <div class="background">
@@ -360,6 +358,8 @@
 				</c:if>
 			</div>
 		</div>
+		
+		<!-- 
 		<nav class ="navi">
 			<ul class="endLine">
 				<li class ="fstNavi"><a href="<c:url value='/movie/'/>">영화</a>
@@ -373,6 +373,7 @@
 				<li class="fstNavi"><a href="<c:url value='/event/'/>">예정</a></li>
 			</ul>
 		</nav>
+		-->
 		
 		
 		

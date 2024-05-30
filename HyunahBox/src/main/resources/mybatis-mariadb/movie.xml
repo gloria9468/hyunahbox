@@ -5,25 +5,57 @@
   
 <mapper namespace="movie">
 	<select id="list" resultType="Movie">
-		SELECT A.* 
-		FROM (	
-				SELECT	
-				<!--  ROW_NUMBER() OVER (ORDER BY today_rank, open_date desc) AS today_rank -->
-						MOVIE.MOVIE_CODE, TITLE
-						, (SELECT COUNT(*) FROM HEARTMOVIE WHERE MOVIE_CODE=movie.movie_code) as "heart_cnt"
-						, OPEN_DATE ,MOVIE_TIME, POSTER_URL, HEARTMOVIE.ID 
-				FROM movie LEFT JOIN heartmovie ON movie.movie_code=heartmovie.movie_code
-				<if test= "memId == 'noMem'">
-					AND heartmovie.id is null
-				</if>
-				
-				<if test= "memId != 'noMem'">
-					AND heartmovie.id=#{memId}
-				</if>
-		) A 
-		<!-- WHERE today_rank LIMIT 0,3 -->
+		WITH rank_data AS
+		(		
+			<if test="listType == 'main'">
+				select aa.*
+			    from (
+				select api.movie_cd_kmdb, api.movie_cd_kobis
+						, ROW_NUMBER() OVER (ORDER BY CAST(api.today_rank AS UNSIGNED)) as t_rank
+				from movie_api api
+				WHERE api.reg_date = ( select max(reg_date) from movie_api )
+			    AND api.today_rank is not null
+			    ) aa
+			    where t_rank LIMIT 0,3
+		    </if>
+		    
+			<if test="listType == 'list'">
+				select aa.*
+			    from (
+						select mv.movie_cd_kmdb, mv.movie_cd_kobis
+							   , ROW_NUMBER() OVER (ORDER BY ma.today_rank IS NULL ASC, CAST(ma.today_rank AS UNSIGNED), mv.open_date DESC) as t_rank
+						from movie mv 
+						left outer join (
+											select distinct api.movie_cd_kmdb, api.movie_cd_kobis, api.today_rank 
+				 							from movie_api api 
+				 							where api.reg_date = ( select max(reg_date) from movie_api )
+										) ma
+						on ( mv.movie_cd_kmdb = ma.movie_cd_kmdb and mv.movie_cd_kobis = ma.movie_cd_kobis )
+				) aa
+			    WHERE aa.t_rank LIMIT 0,10
+			</if>
+		)
+		
+		SELECT	m.MOVIE_CODE, m.TITLE
+				, (SELECT COUNT(*) FROM HEARTMOVIE WHERE MOVIE_CODE=m.movie_code) as "heart_cnt"
+				, OPEN_DATE ,MOVIE_TIME, POSTER_URL, h.ID
+                , r.t_rank
+		FROM movie m 
+        LEFT JOIN heartmovie h ON m.movie_code = h.movie_code
+        <choose>
+        	<when test= "memId != null and !memId.equals('')">
+				AND h.id=#{memId}
+			</when>
+			<otherwise>
+				AND h.id is null
+			</otherwise>
+		</choose>
+        LEFT JOIN rank_data r ON (r.movie_cd_kmdb = m.movie_cd_kmdb AND r.movie_cd_kobis = m.movie_cd_kobis)
+        WHERE r.t_rank IS NOT NULL
+		ORDER BY r.t_rank
 		
 	</select>
+	
 	
 	<insert id="add">
 		INSERT INTO movie(title, open_date, movie_time) VALUES(#{title}, REGEXP_REPLACE(#{openDate}, '[^0-9]', ''), #{movieTime})
@@ -46,7 +78,12 @@
  	
  	
  	<delete id="clearMovieApi">
- 		DELETE FROM movie_api WHERE movie_cd_kmdb IS NOT NULL AND movie_cd_kobis IS NOT NULL
+ 		with del as
+		(
+			select max(b.reg_date) as r_date from movie_api b
+		)
+		delete from movie_api a
+		where a.reg_date != ( select r_date from del )
  	</delete>
  	
 	<insert id="addMovieApiData" parameterType="java.util.List">	
@@ -59,10 +96,10 @@
 	
 	<insert id="addMovieApiMinusData">
 		INSERT INTO movie(title, open_date, movie_time, movie_cd_kobis, movie_cd_kmdb, poster_url)
-		SELECT DISTINCT a.title, a.open_date, a.movie_time, a.movie_cd_kobis, a.movie_cd_kmdb, a.poster_url
+		SELECT distinct a.title, a.open_date, a.movie_time, a.movie_cd_kobis, a.movie_cd_kmdb, a.poster_url
 		FROM movie_api a
 		WHERE a.movie_cd_kobis IS NOT NULL AND a.movie_cd_kmdb IS NOT NULL
-		AND (a.movie_cd_kobis, a.movie_cd_kmdb) NOT IN ( SELECT movie_cd_kobis, movie_cd_kmdb FROM movie )
+		AND NOT EXISTS (SELECT 1 FROM movie m WHERE a.movie_cd_kmdb=m.movie_cd_kmdb AND a.movie_cd_kobis = m.movie_cd_kobis )
 	</insert>
 	
 	

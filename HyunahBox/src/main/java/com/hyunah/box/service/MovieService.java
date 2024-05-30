@@ -17,7 +17,7 @@ public interface MovieService {
 
 	void delete(int movieCode);
 
-	List<Movie> list(String memId, String string);
+	List<Movie> list(String memId, String listType);
 
 	void addMoviApiKobis(List<MovieApi> movieApiList);
 
