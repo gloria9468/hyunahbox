@@ -114,7 +114,7 @@ $(function(){
 });
 
 
-	$(".clickBooking").click(function(){
+	$(document).on("click", ".clickBooking", function(){
 		const movieCode = parseInt($(this).parent().parent().siblings(".movieCode").data("moviecode"));
 		const movieName = $(this).parent().parent().siblings(".movieCode").text();
 

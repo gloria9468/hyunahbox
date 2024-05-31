@@ -186,131 +186,139 @@
 	.secNavi{height:35px !important; margin: -2px 0px;}
 	
 </style>
+
+
+</head>
+
+<jsp:include page="./include/header.jsp"/>
+
 <script>
 	var result = '${msg}';
 	if(result == "withdraw_success"){
 		alert("탈퇴되셨습니다!");
 	}
 	
-	$(function(){
-		var ajaxLoc = "/movie/"
+	var ajaxLoc = "/movie/";
+	$(document).ready(function(){
+			
+		$('.movie_navi').hide();
+		$(".movie").hover(function(){
+			$('.movie_navi').show();
+		});
+	});
+			
+	$(document).on("click", ".clickBooking", function(){
+		const movieCode = parseInt($(this).parent().parent().siblings(".movieCode").data("moviecode"));
+		const movieName = $(this).parent().parent().siblings(".movieCode").text();
+
+		sessionStorage.setItem("mCode", movieCode);
+		sessionStorage.setItem("mName", movieName);
 		
-			$('.movie_navi').hide();
-			$(".movie").hover(function(){
-				$('.movie_navi').show();
-			});
-			
-			$(".clickBooking").click(function(){
-				const movieCode = parseInt($(this).parent().parent().siblings(".movieCode").data("moviecode"));
-				const movieName = $(this).parent().parent().siblings(".movieCode").text();
+		location.href = "/booking/";
+		
+	});
+	
+	
+	$(document).on("click", ".clickHeart", function(){ // 클릭하면 계속 해서 바뀌기 때문에. (document).on 으로 가야함.
+		
+		const member = "${sessionScope.member}";
+		const memberId = "${sessionScope.member.getId()}";
+		const movieCode = parseInt($(this).parent().parent().siblings(".movieCode").data("moviecode"));
+		console.log(movieCode);
+		
+		const heartCnt = parseInt($(this).data("heartcnt"));
 
-				sessionStorage.setItem("mCode", movieCode);
-				sessionStorage.setItem("mName", movieName);
+		if(member == null || member == ""){
 				
-				location.href = "/booking/";
+				swal({
+					  icon: "warning",
+					  text: "하트는 로그인 후에 사용하실 수 있습니다.\n로그인 하시겠습니까?",
+					  closeOnClickOutside: false,
+					  closeOnEsc: false,
+					  buttons: ["취소", "확인"],
+				})
+				.then((willDelete) => {
+					  if (willDelete) {
+						  location.href = "/login";
+					  }
+				});
 				
-			});
-			
-			
-			$(document).on("click", ".clickHeart", function(){ // 클릭하면 계속 해서 바뀌기 때문에. (document).on 으로 가야함.
-				const member = "${sessionScope.member}";
-				const memberId = "${sessionScope.member.getId()}";
-				const movieCode = parseInt($(this).parent().parent().siblings(".movieCode").data("moviecode"));
-				console.log(movieCode);
-				
-				const heartCnt = parseInt($(this).data("heartcnt"));
+		}else{
+		
+			$.ajax({
+				type: "Post",
+				url: ajaxLoc + movieCode + "/" + memberId,
+				contentType: "application/json",
+				datatype: JSON,
+				data: JSON.stringify,
+				async: true,
 
-				if(member == null || member == ""){
-						
-						swal({
-							  icon: "warning",
-							  text: "하트는 로그인 후에 사용하실 수 있습니다.\n로그인 하시겠습니까?",
-							  closeOnClickOutside: false,
-							  closeOnEsc: false,
-							  buttons: ["취소", "확인"],
-						})
-						.then((willDelete) => {
-							  if (willDelete) {
-								  location.href = "/login";
-							  }
-						});
-						
-				}else{
-				
-					$.ajax({
-						type: "Post",
-						url: ajaxLoc + movieCode + "/" + memberId,
-						contentType: "application/json",
-						datatype: JSON,
-						data: JSON.stringify,
-						async: true,
-
-						success: function (data) {
-							if(data == "PLUS"){
-								plusHeartMovie(memberId, movieCode, heartCnt);
-													
-							}else if (data == "MINUS"){
-								minusHeartMovie(memberId, movieCode, heartCnt);
-														
-							}else {
-								alert("이상한 경우");
-							}
-							
-						}
-					});
+				success: function (data) {
+					if(data == "PLUS"){
+						plusHeartMovie(memberId, movieCode, heartCnt);
+											
+					}else if (data == "MINUS"){
+						minusHeartMovie(memberId, movieCode, heartCnt);
+												
+					}else {
+						alert("이상한 경우");
+					}
+					
 				}
 			});
-
-			
-			
-			function plusHeartMovie(memberId, movieCode, heartCnt){
-				$.ajax({
-					type: "Post",
-					url: ajaxLoc + "PLUS" + "/" + movieCode + "/" + "${sessionScope.member.getId()}",
-					contentType: "application/json",
-					datatype: JSON,
-					data: JSON.stringify,
-					async: true,
-					success: function (data) { 	// 색칠된 하트
-						const heartCode = "#heart"+movieCode;
-						const heartCntPlus = heartCnt + 1;
-						
-						let fullHeart = "<button type='button' data-heartcnt='";
-							fullHeart += heartCntPlus;
-							fullHeart += "' class='clickHeart btn btn-danger mx-2'> ♥ ";
-							fullHeart += heartCntPlus;
-							fullHeart += "</button>";
-						
-
-						$(heartCode).html( $(fullHeart) );
-					}
-				})
-			}
-			
-			function minusHeartMovie(memberId, movieCode, heartCnt){
-				$.ajax({
-					type: "Post",
-					url: ajaxLoc + "MINUS" + "/" + movieCode + "/" + "${sessionScope.member.getId()}",
-					contentType: "application/json",
-					datatype: JSON,
-					data: JSON.stringify,
-					async: true,
-					success: function (data) { 	// 빈 하트
-						const heartCode = "#heart"+movieCode;
-						const heartCntMinus = heartCnt - 1;
-					
-						let emptyHeart = "<button type='button' data-heartcnt='";
-							emptyHeart += heartCntMinus;
-							emptyHeart += "' class='clickHeart btn btn-outline-danger mx-2'> ♡ ";
-							emptyHeart += heartCntMinus;
-							emptyHeart += "</button>";
-							
-						$(heartCode).html( $(emptyHeart) );
-
-					}
-				})
-			}
+		}
 	});
+
+	
+	
+	function plusHeartMovie(memberId, movieCode, heartCnt){
+		$.ajax({
+			type: "Post",
+			url: ajaxLoc + "PLUS" + "/" + movieCode + "/" + "${sessionScope.member.getId()}",
+			contentType: "application/json",
+			datatype: JSON,
+			data: JSON.stringify,
+			async: true,
+			success: function (data) { 	// 색칠된 하트
+				const heartCode = "#heart"+movieCode;
+				const heartCntPlus = heartCnt + 1;
+				
+				let fullHeart = "<button type='button' data-heartcnt='";
+					fullHeart += heartCntPlus;
+					fullHeart += "' class='clickHeart btn btn-danger mx-2'> ♥ ";
+					fullHeart += heartCntPlus;
+					fullHeart += "</button>";
+				
+
+				$(heartCode).html( $(fullHeart) );
+			}
+		})
+	}
+	
+	function minusHeartMovie(memberId, movieCode, heartCnt){
+		$.ajax({
+			type: "Post",
+			url: ajaxLoc + "MINUS" + "/" + movieCode + "/" + "${sessionScope.member.getId()}",
+			contentType: "application/json",
+			datatype: JSON,
+			data: JSON.stringify,
+			async: true,
+			success: function (data) { 	// 빈 하트
+				const heartCode = "#heart"+movieCode;
+				const heartCntMinus = heartCnt - 1;
+			
+				let emptyHeart = "<button type='button' data-heartcnt='";
+					emptyHeart += heartCntMinus;
+					emptyHeart += "' class='clickHeart btn btn-outline-danger mx-2'> ♡ ";
+					emptyHeart += heartCntMinus;
+					emptyHeart += "</button>";
+					
+				$(heartCode).html( $(emptyHeart) );
+
+			}
+		})
+	}
+	
 	
 	
 	function searchMovie(){
@@ -329,10 +337,6 @@
 	}
 </script>
 
-
-</head>
-
-<jsp:include page="./include/header.jsp"/>
 
 <body>
 

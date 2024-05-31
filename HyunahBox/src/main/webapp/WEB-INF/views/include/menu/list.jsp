@@ -68,6 +68,9 @@ rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5
 		}
 	);
 	
+	function openMyResume(){
+		window.open("https://www.notion.so/b1a31ff39542421e81167f3ccadf7ad0?pvs=4");	
+	}
 	
 </script>
 <style>
@@ -92,7 +95,7 @@ rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5
 	<div class="topBlock">
 		<div class="member">
 			<div class="member1">
-				<a href="viplounge">소개말</a>
+				<a onclick="openMyResume();">소개말</a>
 			</div>
 			<div class="member2">
 				<c:if test="${sessionScope.member != null }">
