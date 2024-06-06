@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,8 +19,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
-import com.hyunah.box.comm.service.CommService;
+import com.hyunah.box.menu.service.CommService;
+import com.hyunah.box.model.Member;
+import com.hyunah.box.model.Menu;
 import com.hyunah.box.model.Movie;
 import com.hyunah.box.model.Schedule;
 import com.hyunah.box.model.ScreenInfo;
@@ -31,6 +35,7 @@ import com.hyunah.box.service.ScreenInfoService;
 import com.hyunah.box.service.SitsInfoServie;
 import com.hyunah.box.service.TheaterService;
 import com.hyunah.box.service.TimeTableService;
+import com.hyunah.box.util.UtilFunc;
 
 @Controller
 @RequestMapping("/admin")
@@ -47,7 +52,8 @@ public class AdminController {
 	private final String screenInfoPath = "admin/theater/screenInfo/";
 	private final String schedulePath = "admin/schedule/";
 	
-	
+	@Autowired
+	UtilFunc utilFunc;
 	
 	
 	@Autowired
@@ -82,7 +88,7 @@ public class AdminController {
         
         List<Map<String, String>> adminMiniNavList = new ArrayList<Map<String,String>> ();
         Map<String, String> map = new HashMap<String, String> ();
-        map.put("menuName", "관리자");
+        map.put("menuName", "관리자"); 
         map.put("menuSrc", adminPath);
         
         adminMiniNavList.add(map);
@@ -95,7 +101,9 @@ public class AdminController {
     
 	
 	@RequestMapping({"","/", "admin-main"})
-	public String adminMain(){
+	public String adminMain( @SessionAttribute(name = "member", required = false) Member member, Model model ){
+		List<Menu> adminMenuList = utilFunc.menuListByRole(member, "admin");
+		model.addAttribute("adminMenuList", adminMenuList);
 		
 		return adminPath + "admin-main";
 	}
@@ -240,7 +248,7 @@ public class AdminController {
 	
 	
 	//스케쥴
-	@RequestMapping({scheduleRM + "/", scheduleRM + "/list"})
+	@RequestMapping({scheduleRM, scheduleRM + "/", scheduleRM + "/list"})
 	public String list(Model model) {
 		List<Schedule> scheduleList = scheduleService.list(); 
 		model.addAttribute("scheduleList", scheduleList);

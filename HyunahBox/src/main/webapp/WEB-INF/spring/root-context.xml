@@ -35,24 +35,8 @@
 		<import resource="datasource.xml"/>
 		
 		
-		
-		<!-- 크론탭 설정에 -->
-		<task:scheduler id="jobScheduler" pool-size="10"/>
-		<task:annotation-driven scheduler="jobScheduler"/>		
-		
-		
 		<!-- Aspect 빈 등록 -->
-	    <bean id="logAspect" class="com.hyunah.box.aspect.LogAspect"/>
-	
-	    <!-- AOP 설정 -->
-	    <aop:config>
-	        <!-- 포인트컷 설정 -->
-	        <aop:aspect ref="logAspect">
-	            <aop:pointcut id="loggingPointcut" expression="execution(* com.hyunah.box..*(..))"/>
-	            
-	            <!-- Advice 설정 -->
-	            <aop:after method="logMethodCall" pointcut-ref="loggingPointcut"/>
-	        </aop:aspect>
-	    </aop:config>
+	    <bean id="logAspect" class="com.hyunah.box.aspect.LogAspect" />
+		
 </beans>
 

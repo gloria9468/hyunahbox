@@ -84,7 +84,7 @@ public class BookingController {
 	}
 	
 	@ResponseBody
-	@PostMapping("/payment")
+	@PostMapping("/payment/loginUser")
 	public void payment(@RequestBody Booking booking) {
 		
 		System.out.println("-------"+ booking.getId() +"-------"+ booking.getSitsCode() +"-------"+ booking.getSelectedSits());

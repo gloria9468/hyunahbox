@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c" %>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,23 +51,25 @@ $(function(){
 <body>
 	<div class="smBlock"></div>
 	<div class="cardP">
-		<div class="card" style="width: 18rem;">
-		 <a href="../movie/"><img src="/resources/images/movie.png" class="card-img-top" >
-			<div class="card-body">영화</div>
-		</a>
-		</div>
-		
-		<div class="card" style="width: 18rem;">
-		 
-		 <a href="../theater/"><img src="/resources/images/theater.png" class="card-img-top" >
-			<div class="card-body">극장</div>
-		</a>
-		</div>
-		<div class="card" style="width: 18rem;">
-		 <a href="../schedule/"><img src="/resources/images/schedule.png" class="card-img-top" >
-			<div class="card-body">예매(스케쥴)</div>
-		</a>
-		</div>
+		<c:set var="prevLvl" value="0"/>
+			<ul>
+		<c:forEach var="adminMenuList" items="${adminMenuList}" varStatus="status">
+			<c:set var="currentLvl" value="${adminMenuList.lvl}"/>
+			<c:if test="${prevLvl != 0 and prevLvl >= currentLvl}">
+				<c:forEach begin="0" end="${prevLvl-currentLvl}">
+					</ul>
+				</c:forEach>
+			<ul>
+			</c:if>
+			<c:if test="${prevLvl != 0 and prevLvl < currentLvl}">
+				</li>
+				<ul>
+			</c:if>
+				<li><a href="<c:url value='${adminMenuList.menuPath}'/>">${adminMenuList.menuName}</a>
+			
+			<c:set var="prevLvl" value="${currentLvl}"/>
+		</c:forEach> 
+			</ul>
 	</div>
 </body>
 </html>

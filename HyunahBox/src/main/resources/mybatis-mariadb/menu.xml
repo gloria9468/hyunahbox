@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="menu">
-	<select id="list" resultType="Menu">
+	<select id="list" parameterType="HashMap" resultType="Menu">
 		WITH RECURSIVE cte AS (
 		    SELECT menu_id, menu_name, role, status, par_menu_id, menu_path, order_num,
 		           CAST(CONCAT(order_num, '_', menu_id) as CHAR(40)) AS v_ord,
@@ -13,8 +13,8 @@
 		    WHERE par_menu_id IS NULL AND status = '1' 
 		    AND role = 
 		    <choose>
-			    <when test="memberId != null">
-					(select role from member_role where status = '1' and member_id = #{memberId})
+			    <when test="member != null and role != 'user'">
+					ifnull((select role from member_role where status = '1' and member_id = #{member.id}), 'user')
 			    </when>
 			    <otherwise>
 			        'user'

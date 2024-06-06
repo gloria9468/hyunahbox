@@ -810,7 +810,7 @@ $(document).on('click', '#nextStage', function(){
 		
 		$.ajax({
 			type:"POST",
-			url : "/booking/payment",
+			url : "/booking/payment/loginUser",
 			contentType: "application/json",
 			datatype : JSON,
 			data: JSON.stringify({

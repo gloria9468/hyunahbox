@@ -2,7 +2,7 @@ package com.hyunah.box.model;
 
 import java.util.List;
 
-public class Member {
+public class Member extends MemberRole{
 	private String id;
 	private String pw;
 	private String name;

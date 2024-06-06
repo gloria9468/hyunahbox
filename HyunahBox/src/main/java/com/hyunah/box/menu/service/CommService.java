@@ -1,4 +1,4 @@
-package com.hyunah.box.comm.service;
+package com.hyunah.box.menu.service;
 
 public interface CommService {
 	int getNextval(String seqName);

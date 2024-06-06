@@ -1,4 +1,4 @@
-package com.hyunah.box.comm.dao;
+package com.hyunah.box.menu.dao;
 
 public interface CommDao {
 

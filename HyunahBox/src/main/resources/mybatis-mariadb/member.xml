@@ -5,25 +5,32 @@
   
  
  <mapper namespace="member">
- 	
+ 	<resultMap type="Member" id="MemberMap">
+		<id column="id" property="id"/>
+		<result column="name" property="name"/>
+		<result column="phone" property="phone"/>
+		<result column="pw" property="pw"/>
+		<result column="role" property="role"/>
+		<result column="role_name" property="roleName"/>
+		
+		<collection column="id" property="grade" ofType="Grade" javaType="ArrayList">
+			<id column="id" property="id"/>
+			<result column="grade" property="grade" />
+			<result column="grade_per" property="gradePer" /> 		
+		</collection>
+	</resultMap>
+	
+	
  	<select id="login" resultMap="MemberMap">
- 		SELECT MEMBER.*, GRADE.* 
- 		FROM MEMBER
- 		LEFT JOIN GRADE ON GRADE.ID = MEMBER.ID
- 		WHERE MEMBER.ID=#{id}
+ 		SELECT M.ID, M.PW, M.NAME, M.EMAIL, M.PHONE 
+			   , G.GRADE, G.GRADE_PER
+		       , R.ROLE, R.ROLE_NAME
+		FROM MEMBER M
+		LEFT JOIN GRADE G ON G.ID = M.ID
+		LEFT JOIN MEMBER_ROLE R ON M.ID = R.MEMBER_ID
+		WHERE M.ID = #{id}
  	</select>
- 	 	<resultMap type="Member" id="MemberMap">
-	 		<id column="id" property="id"/>
-	 		<result column="name" property="name"/>
-	 		<result column="phone" property="phone"/>
-	 		<result column="pw" property="pw"/>
-	 		
-	 		<collection column="id" property="grade" ofType="Grade" javaType="ArrayList">
-	 			<id column="id" property="id"/>
-	 			<result column="grade" property="grade" />
-	 			<result column="grade_per" property="gradePer" /> 		
-	 		</collection>
- 		</resultMap>
+ 	 	
  		
  		
  		

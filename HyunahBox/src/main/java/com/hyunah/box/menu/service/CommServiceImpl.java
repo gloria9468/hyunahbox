@@ -1,9 +1,9 @@
-package com.hyunah.box.comm.service;
+package com.hyunah.box.menu.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.hyunah.box.comm.dao.CommDao;
+import com.hyunah.box.menu.dao.CommDao;
 
 @Service
 public class CommServiceImpl implements CommService {
