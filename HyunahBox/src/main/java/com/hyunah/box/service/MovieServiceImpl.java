@@ -30,8 +30,8 @@ public class MovieServiceImpl implements MovieService {
 
 
 	@Override
-	public void add(Movie item) {
-		dao.add(item);
+	public int add(Movie item) {
+		return dao.add(item);
 	}
 
 	@Override

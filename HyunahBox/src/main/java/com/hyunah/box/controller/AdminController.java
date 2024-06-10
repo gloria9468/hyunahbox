@@ -105,10 +105,16 @@ public class AdminController {
 		List<Menu> adminMenuList = utilFunc.menuListByRole(member, "admin");
 		model.addAttribute("adminMenuList", adminMenuList);
 		
-		return adminPath + "admin-main";
+		return adminPath + "admin-main.tiles";
 	}
 	
-	
+	@RequestMapping({"menu/list"})
+	public String adminMenu( @SessionAttribute(name = "member", required = false) Member member, Model model ){
+		List<Menu> adminMenuList = utilFunc.menuListByRole(member, "admin");
+		model.addAttribute("adminMenuList", adminMenuList);
+		
+		return adminPath + "menu/list";
+	}
 	
 	//영화
 	@RequestMapping({movieRM + "", movieRM + "/list"})
@@ -122,10 +128,15 @@ public class AdminController {
 	public String moveiAdd() {
 		return moviePath + "add";
 	}
+	@ResponseBody
 	@PostMapping(movieRM + "/add")
-	public String movieAdd(Movie item) {
-		movieService.add(item);
-		return "redirect:list";
+	public Map<String, String> movieAdd(Movie item) {
+		int addMovie = movieService.add(item);
+		String addMovieCode = String.valueOf(item.getMovieCode());
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("url", "/admin" + movieRM + "/update/"+ addMovieCode);
+		return map;
 	}
 	
 	@GetMapping(movieRM + "/update/{movieCode}")
@@ -134,17 +145,24 @@ public class AdminController {
 		model.addAttribute("item", item);
 		return moviePath + "update";
 	}
+	@ResponseBody
 	@PostMapping(movieRM + "/update/{movieCode}")
-	public String movieUpdate(@PathVariable int movieCode, Movie item) {
+	public Map<String, String> movieUpdate(@PathVariable int movieCode, Movie item) {
 		item.setMovieCode(movieCode);
 		movieService.update(item);
-		return "redirect:../list";
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("url", "/admin" + movieRM + "/update/" + movieCode);
+		map.put("msg", "변경되었습니다.");
+		return map;
 	}
 	
+	@ResponseBody
 	@RequestMapping(movieRM + "/delete/{movieCode}")
-	public String movieDelete(@PathVariable int movieCode) {
+	public Map<String, String> movieDelete(@PathVariable int movieCode) {
 		movieService.delete(movieCode);
-		return "redirect:../list";
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("url", "/admin" + movieRM + "/list");
+		return map;
 	}
 	
 	

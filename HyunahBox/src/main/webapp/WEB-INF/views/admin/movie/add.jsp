@@ -8,29 +8,11 @@
 <meta charset="UTF-8">
 <title>영화 등록 페이지</title>
 </head>
-<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
-<link href="/resources/css/form.css" rel="stylesheet">
-<script type="text/javascript">
-$(function(){
-	//miniNavi 부분 넣음.
-	const loc = location.href;
-	const adminLoc = "/admin/admin-main/";
-	let miniNavi = "<div>✔  >  <a href='";
-		miniNavi += adminLoc;
-		miniNavi += "'>관리자</a>  >  <a href='";
-		miniNavi += loc;
-		miniNavi += "'>영화등록</a></div>";
-	
-	$(document.getElementById("miniNavi")).append( $(miniNavi) );
-	
-});	
-</script>
-
 <body>
 <div class="container">
 		<div class="form-line">
 			<h3 class="title">관리자 영화 등록 페이지</h3>
-			<form method="post">
+			<form id="movieAddform" action="<c:url value='/admin/movie/add'/>" method="post">
 				<div class="d-grid gap-2 col-6 mx-auto">
 					<div class="form-group">
 						<div class="bigBlock"></div>
@@ -48,7 +30,7 @@ $(function(){
 
 							<div class="col-sm-10">
 								<c:set var="now" value="<%=new java.util.Date()%>" />
-								<input class="form-control" type="date" name="openDate" value="<fmt:formatDate value="${now}" pattern="yyyy-MM-dd"/>">
+								<input class="form-control" type="date" name="openDate" value="<fmt:formatDate value="${now}" pattern="yyyy-MM-dd"/>" /> 
 							</div>
 
 						</div>
@@ -62,7 +44,7 @@ $(function(){
 						</div>
 						<div class="smBlock"></div>
 						<div class="d-grid gap-2 col-6 mx-auto">
-							<button class="blank btn btn-success" type="submit">등록</button>
+							<button class="blank btn btn-success" type="button" onclick="postHtml('#movieAddform', '#adminContent');">등록</button>
 						</div>
 					</div>
 				</div>

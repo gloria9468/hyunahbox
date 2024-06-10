@@ -39,7 +39,7 @@ rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5
 	function setHtml(url_, setDiv){
         $.ajax({
             url : url_,
-            type : 'post',
+            type : 'get',
             success: function(data) {
                 $(setDiv).html(data);
             },
@@ -48,6 +48,8 @@ rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5
             }
         });
     }
+	
+	
 </script>
 
 <div id="menu_list"></div>

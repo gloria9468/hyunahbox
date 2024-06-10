@@ -8,36 +8,21 @@
 <meta charset="UTF-8">
 <title>전체 극장</title>
 </head>
-<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
-<link href="/resources/css/form.css" rel="stylesheet">
-<script type="text/javascript">
-$(function(){
-	//miniNavi 부분 넣음.
-	const loc = location.href;
-	const adminLoc = "/admin/admin-main/";
-	
-	let miniNavi = "<div>✔  >  <a href='";
-		miniNavi += adminLoc;
-		miniNavi += "'>관리자</a>  >  <a href='";
-		miniNavi += loc;
-		miniNavi += "'>극장 리스트</a></div>";
-	
-	$(document.getElementById("miniNavi")).append( $(miniNavi) );
-	
-});	
-</script>
 
-<style>
-
-</style>
 <body>
 	<div class="container">
-		<div>
-			<h3 class="title">극장 리스트</h3>
+		<div class="filter">
+			<div class="list_cnt_div">총 <c:out value="${list.size()}"/> 건</div>
+			<div class="search_filter_div">
+				<input type="text" name="theaterName" value="" placeholder="극장명 검색"/>
+				<p class="active" onclick="">검색</p>
+				<select name="cntperpage">
+					<option value="5">5</option>
+					<option value="10">10</option>
+					<option value="30">30</option>
+				</select>
+			</div>
 		</div>
-		<div class="smBlock"></div>
-		
-		
 		<table class="text-center table table-sm table-light table-secondary table-hover" border="1">
 			<thead>
 			

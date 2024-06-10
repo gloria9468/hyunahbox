@@ -57,7 +57,10 @@
 	</select>
 	
 	
-	<insert id="add">
+	<insert id="add" parameterType="Movie">
+		<selectKey keyProperty="movieCode" order="AFTER" resultType="int">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
 		INSERT INTO movie(title, open_date, movie_time) VALUES(#{title}, REGEXP_REPLACE(#{openDate}, '[^0-9]', ''), #{movieTime})
 	</insert>
 	

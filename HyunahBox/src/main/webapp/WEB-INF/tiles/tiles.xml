@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+  "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+  "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+
+	<!-- 일반 사용자 tiles 적용 -->
+	<definition name="userTilesLayout" template="/WEB-INF/views/layout/user/TilesLayout.jsp">
+		<put-attribute name="siteTop" value="/WEB-INF/views/layout/user/SiteTop.jsp" />
+		<put-attribute name="content" value="" />
+		<put-attribute name="siteBottom" value="/WEB-INF/views/layout/user/SiteBottom.jsp" />
+	</definition>
+ 
+	<definition name="user/*.tiles" extends="userTilesLayout">
+		<put-attribute name="content" value="/WEB-INF/views/user/{1}.jsp" />
+	</definition>
+	
+	<definition name="user/*/*.tiles" extends="userTilesLayout">
+		<put-attribute name="content" value="/WEB-INF/views/user/{1}/{2}.jsp" />
+	</definition>
+	
+	
+		
+	<!-- 관리자 tiles 적용 -->
+	<definition name="adminTilesLayout" template="/WEB-INF/views/layout/admin/adminTilesLayout.jsp">
+		<put-attribute name="adminTop" value="/WEB-INF/views/layout/admin/adminTop.jsp" />
+		<put-attribute name="adminContent" value="" />
+		<put-attribute name="adminBottom" value="/WEB-INF/views/layout/admin/adminBottom.jsp" />
+	</definition>
+ 
+	<definition name="admin/*.tiles" extends="adminTilesLayout">
+		<put-attribute name="adminContent" value="/WEB-INF/views/admin/{1}.jsp" />
+	</definition>
+	
+	<definition name="admin/*/*.tiles" extends="adminTilesLayout">
+		<put-attribute name="adminContent" value="/WEB-INF/views/admin/{1}/{2}.jsp" />
+	</definition>
+	
+</tiles-definitions>

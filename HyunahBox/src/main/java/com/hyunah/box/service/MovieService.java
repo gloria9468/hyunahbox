@@ -9,7 +9,7 @@ public interface MovieService {
 
 	List<Movie> list(String memId);
 
-	void add(Movie item);
+	int add(Movie item);
 
 	Movie getItem(int movieCode);
 

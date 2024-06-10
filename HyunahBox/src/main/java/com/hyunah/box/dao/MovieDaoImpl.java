@@ -30,8 +30,8 @@ public class MovieDaoImpl implements MovieDao {
 	}
 
 	@Override
-	public void add(Movie item) {
-		sql.insert("movie.add",item);
+	public int add(Movie item) {
+		return sql.insert("movie.add",item);
 	}
 
 	@Override

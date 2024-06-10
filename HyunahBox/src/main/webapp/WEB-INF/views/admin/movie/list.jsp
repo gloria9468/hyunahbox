@@ -8,30 +8,17 @@
 <meta charset="UTF-8">
 <title>전체 영화</title>
 </head>
-<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
-<link href="/resources/css/form.css" rel="stylesheet">
-
-<script type="text/javascript">
-$(function(){
-	//miniNavi 부분 넣음.
-	const loc = location.href;
-	const adminLoc = "/admin/admin-main/";
-	let miniNavi = "<div>✔  >  <a href='";
-		miniNavi += adminLoc;
-		miniNavi += "'>관리자</a>  >  <a href='";
-		miniNavi += loc;
-		miniNavi += "'>영화 리스트</a></div>";
+<style>
 	
-	$(document.getElementById("miniNavi")).append( $(miniNavi) );
-	
-});	
-</script>
+</style>
 <body>
 	<div class="container">
-		<div>
-			<h3 class="title">영화 리스트</h3>
+		<div class="filter">
+			<div class="list_cnt_div">총 <c:out value="${list.size()}"/> 건</div>
+			<div class="search_filter_div">
+				<p class="active">예매 가능작</p>
+			</div>
 		</div>
-		<div class="smBlock"></div>
 		<table class="text-center table table-sm table-light table-secondary table-hover" border="1">
 			<thead>
 			
@@ -62,19 +49,13 @@ $(function(){
 						</td>
 						<td>${item.movieTime} 분</td>
 						<td>♡ ${item.heartCnt} ♥</td>
-						<td><a href="update/${item.movieCode}" class="btn btn-sm btn-outline-secondary mx-1">변경</a>
-						<a href="delete/${item.movieCode}" class="btn btn-sm btn-outline-danger mx-1">삭제</a></td>
+						<td><a onclick="setHtml('<c:url value="/admin/movie/update/${item.movieCode}"/>', '#adminContent');" class="btn btn-sm btn-outline-secondary mx-1">변경</a>
+						<a onclick="setHtml('<c:url value="/admin/movie/delete/${item.movieCode}"/>', '#adminContent');" class="btn btn-sm btn-outline-danger mx-1">삭제</a></td>
 					</tr>
 				</c:forEach>
 				
 			</tbody>
 		</table>
-		
-		<div class="smBlock"></div>
-		<div class="d-grid gap-2 col-6 mx-auto">
-			<a href="add" class="btn btn-sm btn-outline-success">영화 등록</a>
-		</div>
-		
 	</div>
 </body>
 </html>
