@@ -56,6 +56,17 @@
 		            }
 		        });
 			}
+			
+			function clickSearch(formId){
+				var formAction = $(formId).attr("action");
+				var params = $(formId).serialize();
+				$("#adminContent").load(formAction + "?" + params);
+			}
+			
+			function setPageIndex(formId, pageIndex){
+				$(formId).find("input[name=pageindex]").val(pageIndex);
+				clickSearch(formId);
+			}
 		</script>
 	</head>
 	

@@ -3,7 +3,7 @@ package com.hyunah.box.model;
 import java.util.List;
 
 
-public class Theater {
+public class Theater extends SearchVO{
 	
 	private int theaterCode;
 	private String theater;

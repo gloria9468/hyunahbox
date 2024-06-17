@@ -8,13 +8,15 @@ public interface TheaterService {
 
 	List<Theater> list();
 
-	void add(Theater theater);
+	int add(Theater theater);
 
 	Theater getItem(int theaterCode);
 
 	void update(Theater theater);
 
 	void delete(int theaterCode);
+
+	int theaterTotalCnt(Theater theater);
 
 
 }

@@ -118,8 +118,23 @@ public class AdminController {
 	
 	//영화
 	@RequestMapping({movieRM + "", movieRM + "/list"})
-	public String movieList(Model model) {
-		List<Movie> list = movieService.list("noMem", "list");
+	public String movieList(@SessionAttribute(name = "member") Member member, @ModelAttribute Movie movie, Model model) {
+		movie.setListType("adminList");
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("member", member);
+		map.put("movie", movie);
+		
+		int movieTotalCnt = movieService.movieTotalCnt(map);
+		movie.setTotalCnt(movieTotalCnt);
+		/*
+		double pu = (double) movieTotalCnt / movie.getCntperpage();
+		int moviePageunit = (int) Math.ceil( pu );
+		movie.setPageunit(moviePageunit);
+		*/
+		
+		List<Movie> list = movieService.list(map);
+		model.addAttribute("movie", movie);
 		model.addAttribute("list", list);
 		return moviePath + "list";
 	}
@@ -168,9 +183,15 @@ public class AdminController {
 	
 	//극장
 	@RequestMapping({theaterRM + "",theaterRM + "/list"})
-	public String theaterList(Model model) {
-		List<Theater> list = theaterService.list();
+	public String theaterList(@ModelAttribute Theater theater, Model model) {
+		int theaterTotalCnt = theaterService.theaterTotalCnt(theater);
+		theater.setTotalCnt(theaterTotalCnt);
+		
+		List<Theater> list = theaterService.list(); // TODO :: theater 객체 넣어서 
+		model.addAttribute("item", theater);
 		model.addAttribute("list", list);
+		
+		System.out.println("theat-=----------");
 		
 		return theaterPath + "list";
 	}
@@ -181,10 +202,15 @@ public class AdminController {
 		return theaterPath + "add";
 	}
 	
+	@ResponseBody
 	@PostMapping(theaterRM + "/add")
-	public String theaterAdd(Theater theater) {
-		theaterService.add(theater);
-		return "redirect:list";
+	public Map<String, String> theaterAdd(Theater theater) {
+		int addTheater = theaterService.add(theater);
+		String addTheaterCode = String.valueOf(theater.getTheaterCode());
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("url", "/admin" + theaterRM + "/update/"+ addTheaterCode);
+		return map;
 	}
 	
 	@GetMapping(theaterRM + "/update/{theaterCode}")
@@ -194,18 +220,26 @@ public class AdminController {
 
 		return theaterPath + "update";
 	}
+	
+	@ResponseBody
 	@PostMapping(theaterRM + "/update/{theaterCode}")
-	public String theaterUpdate(@PathVariable int theaterCode, Theater theater) {
+	public Map<String, String> theaterUpdate(@PathVariable int theaterCode, Theater theater) {
 		theater.setTheaterCode(theaterCode);
 		theaterService.update(theater);
 		
-		return "redirect:../list";
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("url", "/admin" + theaterRM + "/update/" + theaterCode);
+		map.put("msg", "변경되었습니다.");
+		return map;
 	}
 	
+	@ResponseBody
 	@RequestMapping(theaterRM + "/delete/{theaterCode}")
-	public String theaterDelete(@PathVariable int theaterCode) {
+	public Map<String, String> theaterDelete(@PathVariable int theaterCode) {
 		theaterService.delete(theaterCode);
-		return "redirect:../list";
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("url", "/admin" + theaterRM + "/list");
+		return map;
 	}
 	
 	

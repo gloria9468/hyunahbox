@@ -71,6 +71,15 @@ public class MovieDaoImpl implements MovieDao {
 		int clearCnt = sql.delete("movie.clearMovieApi");
 		return clearCnt;
 	}
+	@Override
+	public List<Movie> list(HashMap<String, Object> map) {
+		return sql.selectList("movie.movieList", map);
+	}
+	@Override
+	public int movieTotalCnt(HashMap<String, Object> map) {
+		return sql.selectOne("movie.movieTotalCnt", map);
+	}
+	
 
 
 

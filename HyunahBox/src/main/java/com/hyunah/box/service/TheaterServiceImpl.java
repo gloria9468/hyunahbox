@@ -21,8 +21,8 @@ public class TheaterServiceImpl implements TheaterService{
 	}
 
 	@Override
-	public void add(Theater theater) {
-		tDao.add(theater);
+	public int add(Theater theater) {
+		return tDao.add(theater);
 	}
 
 	@Override
@@ -38,6 +38,11 @@ public class TheaterServiceImpl implements TheaterService{
 	@Override
 	public void delete(int theaterCode) {
 		tDao.delete(theaterCode);
+	}
+
+	@Override
+	public int theaterTotalCnt(Theater theater) {
+		return tDao.theaterTotalCnt(theater);
 	}
 
 

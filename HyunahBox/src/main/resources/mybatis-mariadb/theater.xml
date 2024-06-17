@@ -6,11 +6,19 @@
 <mapper namespace="theater">
 	
 	<select id="list" resultType="Theater">
-		SELECT * FROM theater
+		SELECT t.theater_code, t.theater FROM theater t
+		<!-- WHERE  LIMIT #{theater.startRowNum}, #{theater.cntperpage}  -->  
 	</select>
 	
-	<insert id="add">
-	INSERT INTO theater VALUES (NULL, #{theater} )
+	<select id="theaterTotCnt" resultType="int">
+		SELECT count(*) FROM theater
+	</select>
+	
+	<insert id="add" parameterType="Theater">
+		<selectKey keyProperty="theaterCode" order="AFTER" resultType="int">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		INSERT INTO theater(theater_code, theater) VALUES (NULL, #{theater})
 	</insert>
 
 	<select id="getItem" resultType="Theater">

@@ -21,8 +21,8 @@ public class TheaterDaoImpl implements TheaterDao{
 	}
 
 	@Override
-	public void add(Theater theater) {
-		sql.insert("theater.add", theater);
+	public int add(Theater theater) {
+		return sql.insert("theater.add", theater);
 	}
 
 	@Override
@@ -38,6 +38,11 @@ public class TheaterDaoImpl implements TheaterDao{
 	@Override
 	public void delete(int theaterCode) {
 		sql.delete("theater.delete", theaterCode);
+	}
+
+	@Override
+	public int theaterTotalCnt(Theater theater) {
+		return sql.selectOne("theater.theaterTotCnt", theater);
 	}
 
 }

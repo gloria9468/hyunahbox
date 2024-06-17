@@ -56,6 +56,73 @@
 		
 	</select>
 	
+	<select id="movieList" resultType="Movie" parameterType="HashMap">
+		WITH rank_data AS
+		(		
+			<if test="movie.listType == 'main'">
+				select aa.*
+			    from (
+				select api.movie_cd_kmdb, api.movie_cd_kobis
+						, ROW_NUMBER() OVER (ORDER BY CAST(api.today_rank AS UNSIGNED)) as t_rank
+				from movie_api api
+				WHERE api.reg_date = ( select max(reg_date) from movie_api )
+			    AND api.today_rank is not null
+			    ) aa
+			    where t_rank LIMIT 0,3
+		    </if>
+		    
+			<if test="movie.listType == 'list' or movie.listType == 'adminList' ">
+				select aa.* 
+				from ( select mv.movie_code
+							, mv.title
+			                , OPEN_DATE 
+							, MOVIE_TIME
+							, POSTER_URL
+							, ROW_NUMBER() OVER (ORDER BY ma.today_rank IS NULL ASC, CAST(ma.today_rank AS UNSIGNED), mv.open_date DESC) as t_rank 
+						from movie mv 
+			            left outer join ( select distinct api.movie_cd_kmdb	
+												, api.movie_cd_kobis
+			                                    , api.today_rank 
+										 from movie_api api 
+			                             where api.reg_date = ( select max(reg_date) from movie_api ) ) ma 
+						on ( mv.movie_cd_kmdb = ma.movie_cd_kmdb and mv.movie_cd_kobis = ma.movie_cd_kobis )
+						<if test="movie.keyword != null">
+						WHERE mv.title like CONCAT('%',#{movie.keyword},'%')
+						</if>
+				) aa
+			    WHERE aa.t_rank LIMIT #{movie.startRowNum}, #{movie.cntperpage}
+			</if>
+		)
+		
+		select r.*, h.heart_cnt
+		from rank_data r
+		left join (select count(hm.movie_code) as heart_cnt
+							, hm.movie_code 
+					from heartmovie hm
+		        	<if test= "member.id != null and movie.listType == 'list'">
+						where hm.id=#{memId}
+					</if>
+					
+					group by hm.movie_code
+				  ) h
+		on (h.movie_code = r.movie_code)
+		order by t_rank
+	</select>
+	
+	<select id="movieTotalCnt" resultType="int" parameterType="HashMap">
+		select count(*) as total_cnt
+		from movie mv 
+		left outer join (
+							select distinct api.movie_cd_kmdb, api.movie_cd_kobis, api.today_rank 
+ 							from movie_api api 
+ 							where api.reg_date = ( select max(reg_date) from movie_api )
+						) ma
+		on ( mv.movie_cd_kmdb = ma.movie_cd_kmdb and mv.movie_cd_kobis = ma.movie_cd_kobis )
+		<if test="movie.keyword != null">
+		WHERE mv.title like CONCAT('%',#{movie.keyword},'%')
+		</if>
+	</select>
+	
 	
 	<insert id="add" parameterType="Movie">
 		<selectKey keyProperty="movieCode" order="AFTER" resultType="int">

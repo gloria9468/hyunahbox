@@ -1,5 +1,6 @@
 package com.hyunah.box.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,6 +89,17 @@ public class MovieServiceImpl implements MovieService {
 	@Override
 	public int clearMovieApi() {
 		return dao.clearMovieApi();
+	}
+
+
+	@Override
+	public List<Movie> list(HashMap<String, Object> map) {
+		return dao.list(map);
+	}
+
+	@Override
+	public int movieTotalCnt(HashMap<String, Object> map) {
+		return dao.movieTotalCnt(map);
 	}
 
 

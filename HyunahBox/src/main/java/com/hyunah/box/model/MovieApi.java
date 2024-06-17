@@ -8,7 +8,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-public class MovieApi {
+public class MovieApi extends SearchVO{
 	private String title;			// 영화명
 	private String openDate;			// 개봉일
 	private String prdtYear;		// 제작연도

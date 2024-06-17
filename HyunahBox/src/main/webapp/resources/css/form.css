@@ -20,6 +20,6 @@
 .filter .list_cnt_div, .filter .search_filter_div{display: inline-block;}
 .filter .list_cnt_div{float:left;}
 .filter .search_filter_div{float:right;}
+.filter .search_filter_div * {display: inline-block;}
 .filter .search_filter_div p{padding:10px; border-radius: 10px;}
 .filter .search_filter_div p.active{background:#0080FF; color:white; font-weight: bold;}
-.filter .search_filter_div select{display: inline-block;}

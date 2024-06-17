@@ -1,5 +1,6 @@
 package com.hyunah.box.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.hyunah.box.model.Movie;
@@ -28,5 +29,9 @@ public interface MovieService {
 	int getApiData() throws Exception;
 	
 	int clearMovieApi();
+
+	List<Movie> list(HashMap<String, Object> map);
+
+	int movieTotalCnt(HashMap<String, Object> map);
 
 }
