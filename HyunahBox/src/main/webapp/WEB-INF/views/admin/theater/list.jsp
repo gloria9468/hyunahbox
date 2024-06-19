@@ -15,13 +15,13 @@
 			<div class="filter">
 				<div class="list_cnt_div">총 <c:out value="${item.totalCnt}"/> 건</div>
 				<div class="search_filter_div">
-					<input type="text" name="theaterName" value="" placeholder="극장명 검색"/>
-					<p class="active" onclick="">검색</p>
-					<select name="cntperpage">
-						<option value="3">3</option>
-						<option value="5">5</option>
-						<option value="10">10</option>
-						<option value="30">30</option>
+					<input type="text" name="keyword" value="${item.keyword}" placeholder="극장명 검색" onKeyPress="if(event.keyCode==13) { clickSearch('#adminTheaterList'); return false; }"/>
+					<p class="active" onclick="clickSearch('#adminTheaterList');">검색</p>
+					<select name="cntperpage"  onchange="clickSearch('#adminTheaterList');">
+						<option value="3" <c:if test ="${item.cntperpage eq 3}">selected="selected"</c:if>>3</option>
+						<option value="5" <c:if test ="${item.cntperpage eq 5}">selected="selected"</c:if>>5</option>
+						<option value="10" <c:if test ="${item.cntperpage eq 10}">selected="selected"</c:if>>10</option>
+						<option value="30" <c:if test ="${item.cntperpage eq 30}">selected="selected"</c:if>>30</option>
 					</select>
 				</div>
 			</div>

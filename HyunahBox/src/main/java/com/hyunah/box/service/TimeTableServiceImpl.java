@@ -25,6 +25,16 @@ public class TimeTableServiceImpl implements TimeTableService{
 		tDao.add(timeTableDate, screenCode,scheduleCode);
 	}
 
+	@Override
+	public int timeTableTotalCnt(TimeTable timeTable) {
+		return tDao.timeTableTotalCnt(timeTable);
+	}
+
+	@Override
+	public List<TimeTable> timeTableList(TimeTable timeTable) {
+		return tDao.timeTableList(timeTable);
+	}
+
 	
 
 }

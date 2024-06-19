@@ -18,13 +18,13 @@ public class ScreenInfoServiceImpl implements ScreenInfoService{
 	ScreenInfoDao dao;
 	
 	@Override
-	public List<ScreenInfo> list(int theaterCode) {
-		return dao.list(theaterCode);
+	public List<ScreenInfo> list(ScreenInfo screenInfo) {
+		return dao.list(screenInfo);
 	}
 	
 	@Override
-	public void add(ScreenInfo screen) {
-		dao.add(screen);
+	public int add(ScreenInfo screen) {
+		return dao.add(screen);
 	}
 
 
@@ -48,6 +48,11 @@ public class ScreenInfoServiceImpl implements ScreenInfoService{
 	@Override
 	public List<Schedule> screenList(int theaterCode) {
 		return dao.screenList(theaterCode);
+	}
+
+	@Override
+	public int screenInfoTotalCnt(ScreenInfo screenInfo) {
+		return dao.screenInfoTotalCnt(screenInfo);
 	}
 
 

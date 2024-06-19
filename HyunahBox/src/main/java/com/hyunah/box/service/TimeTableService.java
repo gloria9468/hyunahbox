@@ -12,4 +12,10 @@ public interface TimeTableService {
 
 	void add(Date timeTableDate, int screenCode, String scheduleCode);
 
+
+	int timeTableTotalCnt(TimeTable timeTable);
+
+
+	List<TimeTable> timeTableList(TimeTable timeTable);
+
 }

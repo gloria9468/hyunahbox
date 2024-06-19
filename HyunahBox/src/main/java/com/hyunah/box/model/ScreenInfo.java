@@ -2,7 +2,7 @@ package com.hyunah.box.model;
 
 import java.util.List;
 
-public class ScreenInfo {
+public class ScreenInfo extends SearchVO{
 	
 	private int screenCode;
 	private int theaterCode;

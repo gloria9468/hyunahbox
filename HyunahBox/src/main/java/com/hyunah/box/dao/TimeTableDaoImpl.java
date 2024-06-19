@@ -31,4 +31,14 @@ public class TimeTableDaoImpl implements TimeTableDao{
 		return sql.insert("timeTable.tAdd",map);
 	}
 
+	@Override
+	public int timeTableTotalCnt(TimeTable timeTable) {
+		return sql.selectOne("timeTable.timeTableTotalCnt", timeTable);
+	}
+
+	@Override
+	public List<TimeTable> timeTableList(TimeTable timeTable) {
+		return sql.selectList("timeTable.timeTableList", timeTable);
+	}
+
 }

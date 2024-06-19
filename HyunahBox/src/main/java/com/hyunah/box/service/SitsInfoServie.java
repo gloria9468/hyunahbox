@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.hyunah.box.model.Booking;
+import com.hyunah.box.model.ScreenInfo;
 import com.hyunah.box.model.SitsInfo;
 
 public interface SitsInfoServie {
@@ -16,6 +17,8 @@ public interface SitsInfoServie {
 
 
 	void payment(Booking booking);
+
+	int add(ScreenInfo screenInfo);
 
 
 }

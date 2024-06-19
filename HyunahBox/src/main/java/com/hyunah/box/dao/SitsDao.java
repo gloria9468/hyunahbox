@@ -8,6 +8,8 @@ import com.hyunah.box.model.SitsInfo;
 public interface SitsDao {
 
 	void add(SitsInfo item);
+	
+	int add(List<SitsInfo> sitsInfoList);
 
 	void delete(int screenCode);
 
@@ -15,5 +17,6 @@ public interface SitsDao {
 
 
 	void payment(Booking booking);
+
 
 }

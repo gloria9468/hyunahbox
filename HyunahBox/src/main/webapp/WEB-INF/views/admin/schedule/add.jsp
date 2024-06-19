@@ -20,24 +20,8 @@
 	
 </style>
 </head>
-<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
-<link href="/resources/css/form.css" rel="stylesheet">
 <script>
-$(function(){
-	//miniNavi 부분 넣음.
-	const adminLoc = "/admin/admin-main/";
-	const loc = location.href;
-	
-	
-	let miniNavi = "<div>✔  >  <a href='";
-		miniNavi += adminLoc;
-		miniNavi += "'>관리자</a>  >  <a href='";
-		miniNavi += loc;
-		miniNavi += "'>스케쥴 등록</a></div>";
-	
-	$(document.getElementById("miniNavi")).append( $(miniNavi) );
-	
-});	
+
 
 $(function(){
 	
@@ -85,9 +69,12 @@ $(function(){
 		document.getElementById("theaterCode").value = theaterCode;
 		console.log(theaterCode);
 		
+		var url_ = "/admin/schedule/add/" + theaterCode +"/screenList";
+		url_ = '<c:url value="' + url_ + '"/>';
+		
 		$.ajax({
 			type: "post",
-			url: location.href + "/" + theaterCode +"/screenList",
+			url:  url_, // "/admin/schedule/add/" + theaterCode +"/screenList",
 			contentType: "application/json",
 			datatype: JSON,
 			data: JSON.stringify({
@@ -154,10 +141,12 @@ $(function(){
 		var screenCode = $('#selectedScreen option:selected').val();
 		document.getElementById("screenCode").value = screenCode;
 		
-
+		var url_ = "/admin/schedule/add/" + screenCode +"/timeList";
+		url_ = '<c:url value="' + url_ + '"/>';
+		
 		$.ajax({
 			type: "POST",
-			url: location.href + "/" + screenCode + "/timeList",
+			url: url_, // location.href + "/" + screenCode + "/timeList",
 			
 			datatype: JSON,
 			contentType: "application/json",
@@ -219,90 +208,90 @@ $(function(){
 
 <body>
 <div class="container">
-		<div class="form-line">
-			<h3 class="title">스케쥴 등록 페이지</h3>
+	<div class="form-line">
+		<h3 class="title">스케쥴 등록 페이지</h3>
 
-	<form name="scheduleForm" method="post">
-		<div class="d-grid gap-2 col-6 mx-auto">
-		<div class="form-group">
-			<div class="bigBlock"></div>
-			
-		<!--  
-		<div class="row mb-3 mx-auto">
-			<label class="col-sm-3 col-form-label mx-auto">스케쥴 코드</label>
-			<div class="col-sm-8">
-				<input class="form-control" type="text" name="scheduleCode">
-			</div>
-		</div>
-		-->	
-		
-		<div class="row mb-3 mx-auto">
-			<label class="col-sm-3 col-form-label mx-auto">영화 명</label>
-			<div class="col-sm-8">
-			<input type="hidden" name="movieCode" id="movieCode">
-			<select class="form-control form-select col-sm-8" size="5" aria-label="size 3 select example" id="selectedMovie" onchange="selectMovie()">
-				<option selected="selected" disabled="disabled">영화를 선택해주세요</option>
-				<c:forEach var="movieList" items="${movieList}">
-					<option value="${movieList.movieCode}">${movieList.title}</option>
-				</c:forEach>
-			</select>
-			</div>
-		</div>
-
-		<div>
+		<form id="scheduleAddForm" action="<c:url value='/admin/schedule/add'/>" method="post">
+			<div class="d-grid gap-2 col-6 mx-auto">
+			<div class="form-group">
+				<div class="bigBlock"></div>
+				
+			<!--  
 			<div class="row mb-3 mx-auto">
-			<label class="col-sm-3 col-form-label mx-auto">극장 명</label>
-			<div class="col-sm-8">
-			<input type="hidden" name="theaterCode" id="theaterCode">
-			<select class="form-select" size="4" aria-label="size 3 select example" id="selectedTheater" onchange="selectTheater()">
-				<option selected="selected" disabled="disabled">극장을 선택해주세요</option>
-
-				<c:forEach var="theaterList" items="${theaterList}">
-					<option value="${theaterList.theaterCode}" id="theaterCode">${theaterList.theater}
-					</option>
-				</c:forEach>
-			</select>
+				<label class="col-sm-3 col-form-label mx-auto">스케쥴 코드</label>
+				<div class="col-sm-8">
+					<input class="form-control" type="text" name="scheduleCode">
+				</div>
 			</div>
-		</div>
-		</div>
-		
-		<div id="screenList">
-			<label class="col-sm-3 col-form-label mx-auto">상영관</label>
-			<div class="col-sm-8">
-			<input type="hidden" name="screenCode" id="screenCode">
-			<select class="form-select" size="4" aria-label="size 3 select example" id="selectedScreen" onchange="selectScreen()">
-				<option selected="selected" disabled="disabled">상영관을 선택해주세요</option>
-
-			</select>
-			</div>
-		</div>
-
-		<div>
-			<div class="row mb-3 mx-auto">
-			<label class="col-sm-3 col-form-label mx-auto">상영 시간</label>
-			<div class="col-sm-8">
-			<c:set var="now" value="<%=new java.util.Date()%>" />
-			<input type="hidden" name="timeTableDate" id="timeTableDate">
+			-->	
 			
-			<input type="date" id="date" value="<fmt:formatDate value="${now}" pattern="yyyy-MM-dd"/>" >
-			<input type="time" id="time" value="<fmt:formatDate value="${now}" pattern="HH:mm"/>" >
-		</div>
-		</div>
-		</div>
-		<div class="smBlock"></div>
-		<div class="timeBorder">
-			<table id="timeList">
-			</table>
-		</div>
-		<div class="smBlock"></div>
-		<div class="d-grid gap-2 col-6 mx-auto">
-			<button class="blank btn btn-success" type="submit">등록</button>
-		</div>
-		
-		</div>
-		</div>
-	</form>
-</div>
+			<div class="row mb-3 mx-auto">
+				<label class="col-sm-3 col-form-label mx-auto">영화 명</label>
+				<div class="col-sm-8">
+				<input type="hidden" name="movieCode" id="movieCode">
+				<select class="form-control form-select col-sm-8" size="5" aria-label="size 3 select example" id="selectedMovie" onchange="selectMovie()">
+					<option selected="selected" disabled="disabled">영화를 선택해주세요</option>
+					<c:forEach var="movieList" items="${movieList}">
+						<option value="${movieList.movieCode}">${movieList.title}</option>
+					</c:forEach>
+				</select>
+				</div>
+			</div>
+	
+			<div>
+				<div class="row mb-3 mx-auto">
+				<label class="col-sm-3 col-form-label mx-auto">극장 명</label>
+				<div class="col-sm-8">
+				<input type="hidden" name="theaterCode" id="theaterCode">
+				<select class="form-select" size="4" aria-label="size 3 select example" id="selectedTheater" onchange="selectTheater()">
+					<option selected="selected" disabled="disabled">극장을 선택해주세요</option>
+	
+					<c:forEach var="theaterList" items="${theaterList}">
+						<option value="${theaterList.theaterCode}" id="theaterCode">${theaterList.theater}
+						</option>
+					</c:forEach>
+				</select>
+				</div>
+			</div>
+			</div>
+			
+			<div id="screenList">
+				<label class="col-sm-3 col-form-label mx-auto">상영관</label>
+				<div class="col-sm-8">
+				<input type="hidden" name="screenCode" id="screenCode">
+				<select class="form-select" size="4" aria-label="size 3 select example" id="selectedScreen" onchange="selectScreen()">
+					<option selected="selected" disabled="disabled">상영관을 선택해주세요</option>
+	
+				</select>
+				</div>
+			</div>
+	
+			<div>
+				<div class="row mb-3 mx-auto">
+				<label class="col-sm-3 col-form-label mx-auto">상영 시간</label>
+				<div class="col-sm-8">
+				<c:set var="now" value="<%=new java.util.Date()%>" />
+				<input type="hidden" name="timeTableDate" id="timeTableDate">
+				
+				<input type="date" id="date" value="<fmt:formatDate value="${now}" pattern="yyyy-MM-dd"/>" >
+				<input type="time" id="time" value="<fmt:formatDate value="${now}" pattern="HH:mm"/>" >
+			</div>
+			</div>
+			</div>
+			<div class="smBlock"></div>
+			<div class="timeBorder">
+				<table id="timeList">
+				</table>
+			</div>
+			<div class="smBlock"></div>
+			<div class="d-grid gap-2 col-6 mx-auto">
+				<button class="blank btn btn-success" type="button" onclick="postHtml('#scheduleAddForm', '#adminContent');">등록</button>
+			</div>
+			
+			</div>
+			</div>
+		</form>
+	</div>
 </div>
 </body>
 

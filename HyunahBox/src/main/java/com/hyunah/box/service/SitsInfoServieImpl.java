@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.hyunah.box.dao.SitsDao;
 import com.hyunah.box.model.Booking;
+import com.hyunah.box.model.MovieApi;
+import com.hyunah.box.model.ScreenInfo;
 import com.hyunah.box.model.SitsInfo;
 
 @Service
@@ -29,14 +31,30 @@ public class SitsInfoServieImpl implements SitsInfoServie{
 		}
 		
 	}
+	
+	@Override
+	public int add(ScreenInfo screenInfo) {
+		int sitsTotal = screenInfo.getSitTotal();
+		int screenCode = screenInfo.getScreenCode();
+		List<SitsInfo> sitsInfoList = new ArrayList<SitsInfo>();
+		for(int i = 1; i <= sitsTotal; i++) {
+			SitsInfo item = new SitsInfo();
+			item.setScreenCode(screenCode);
+			item.setSitsCode(i);
+			sitsInfoList.add(item);
+		}
+		
+		return sitsDao.add(sitsInfoList);
+	}
+
 
 
 	@Override
 	public void delete(int screenCode) {
 		sitsDao.delete(screenCode);
 	}
+	
 
-	//TODO : 형변환 해야하는 이유 모르겠음
 	@Override
 	public List<SitsInfo> getSitsInfo(Map<String, Object> map) {
 		String scheduleCode = (String)map.get("SCHEDULE_CODE");
@@ -55,5 +73,7 @@ public class SitsInfoServieImpl implements SitsInfoServie{
 		}
 	}
 
+
+	
 	
 }

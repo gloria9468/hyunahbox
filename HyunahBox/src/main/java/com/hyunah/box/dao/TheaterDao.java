@@ -18,4 +18,6 @@ public interface TheaterDao{
 
 	int theaterTotalCnt(Theater theater);
 
+	List<Theater> list(Theater theater);
+
 }

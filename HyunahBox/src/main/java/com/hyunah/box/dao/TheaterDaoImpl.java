@@ -45,4 +45,9 @@ public class TheaterDaoImpl implements TheaterDao{
 		return sql.selectOne("theater.theaterTotCnt", theater);
 	}
 
+	@Override
+	public List<Theater> list(Theater theater) { 
+		return sql.selectList("theater.theaterList", theater);
+	}
+
 }

@@ -22,6 +22,13 @@ public class SitsDaoImpl implements SitsDao{
 	}
 
 	@Override
+	public int add(List<SitsInfo> sitsInfoList) {
+		return sql.insert("sitsInfo.addSitsInfo", sitsInfoList);
+	}
+	
+	
+	
+	@Override
 	public void delete(int screenCode) {
 		sql.delete("sitsInfo.delete", screenCode);
 	}
@@ -41,6 +48,7 @@ public class SitsDaoImpl implements SitsDao{
 		sql.insert("sitsInfo.payment", booking);
 		
 	}
+
 	
 	
 }

@@ -7,10 +7,16 @@
 
 	<select id="list" resultType="ScreenInfo">
 		SELECT * FROM screenInfo 
-		JOIN theater ON screenInfo.theater_code=theater.theater_code AND screenInfo.theater_code=#{theaterCode}
+		JOIN theater ON (screenInfo.theater_code=#{theaterCode} AND screenInfo.theater_code=theater.theater_code) 
+		WHERE screen_code LIMIT #{startRowNum}, #{cntperpage} 
 	</select>
 	
-	<insert id="add">
+	<select id="screenInfoTotalCnt" resultType="int">
+		SELECT count(*) FROM screenInfo 
+		JOIN theater ON (screenInfo.theater_code=#{theaterCode} AND screenInfo.theater_code=theater.theater_code) 
+	</select>
+	
+	<insert id="add" parameterType="ScreenInfo">
 		INSERT INTO screenInfo VALUES(NULL, #{theaterCode}, #{screenNum}, #{sitTotal})
 		
 		<selectKey keyColumn="screen_code" keyProperty="screenCode" order="AFTER" resultType="Integer">

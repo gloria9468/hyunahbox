@@ -18,5 +18,7 @@ public interface TheaterService {
 
 	int theaterTotalCnt(Theater theater);
 
+	List<Theater> list(Theater theater);
+
 
 }

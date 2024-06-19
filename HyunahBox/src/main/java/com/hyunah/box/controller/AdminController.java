@@ -186,12 +186,10 @@ public class AdminController {
 	public String theaterList(@ModelAttribute Theater theater, Model model) {
 		int theaterTotalCnt = theaterService.theaterTotalCnt(theater);
 		theater.setTotalCnt(theaterTotalCnt);
-		
-		List<Theater> list = theaterService.list(); // TODO :: theater 객체 넣어서 
+
+		List<Theater> list = theaterService.list(theater); 
 		model.addAttribute("item", theater);
 		model.addAttribute("list", list);
-		
-		System.out.println("theat-=----------");
 		
 		return theaterPath + "list";
 	}
@@ -245,25 +243,38 @@ public class AdminController {
 	
 	//상영관
 	@RequestMapping({screenInfoRM + "/", screenInfoRM + "/list"})
-	public String screenInfoList(@PathVariable int theaterCode, Model model) {
-		List<ScreenInfo> screenInfoList = screenInfoService.list(theaterCode);
+	public String screenInfoList(@PathVariable int theaterCode, @ModelAttribute ScreenInfo screenInfo, Model model) {
+		int screenInfoTotalCnt = screenInfoService.screenInfoTotalCnt(screenInfo);
+		screenInfo.setTotalCnt(screenInfoTotalCnt);
+		
+		List<ScreenInfo> screenInfoList = screenInfoService.list(screenInfo);
 		model.addAttribute("screenInfoList", screenInfoList);
+		model.addAttribute("item", screenInfo);
 
 		return screenInfoPath + "list";
 	}
 	@GetMapping(screenInfoRM + "/add")
-	public String screenInfoAdd() {
+	public String screenInfoAdd(@PathVariable int theaterCode, Model model) {
+		model.addAttribute("theaterCode", theaterCode);
 		return screenInfoPath + "add";
 	}
 	
+	@ResponseBody
 	@Transactional
 	@PostMapping(screenInfoRM + "/add")
-	public String screenInfoAdd(@PathVariable int theaterCode , ScreenInfo screen){
-		screen.setTheaterCode(theaterCode);
-		sService.add(screen);
-		sitsService.add(screen.getSitTotal(), screen.getScreenCode());
+	public Map<String, String> screenInfoAdd(@PathVariable int theaterCode , ScreenInfo screenInfo){
+		screenInfo.setTheaterCode(theaterCode);
+		// sService.add(screen);
+		// sitsService.add(screen.getSitTotal(), screen.getScreenCode());
 		
-		return "redirect:list";
+		int addScreen = sService.add(screenInfo);
+		int addSits = sitsService.add(screenInfo);
+		String addScreenCode = String.valueOf(screenInfo.getScreenCode());
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("url", "/admin/theater/" + theaterCode + "/screenInfo/update/"+ addScreenCode);
+		// /admin/theater/${item.theaterCode}/screenInfo/list
+		return map;
 	}
 	@GetMapping(screenInfoRM + "/update/{screenCode}")
 	public String screenInfoUpdate(@PathVariable int theaterCode, @PathVariable int screenCode, Model model) {
@@ -272,28 +283,46 @@ public class AdminController {
 		model.addAttribute("screen", screen);
 		return screenInfoPath + "update";
 	}
+	
+	@ResponseBody
 	@PostMapping(screenInfoRM + "/update/{screenCode}")
-	public String screenInfoUpdate(@PathVariable int theaterCode, @PathVariable int screenCode, ScreenInfo screen) {
+	public Map<String, String> screenInfoUpdate(@PathVariable int theaterCode, @PathVariable int screenCode, ScreenInfo screen) {
 		screen.setTheaterCode(theaterCode);
 		screenInfoService.update(screen);
-		return "redirect:../list";
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("url", "/admin/theater/" + theaterCode + "/screenInfo/update/" + screenCode);
+		map.put("msg", "변경되었습니다.");
+		return map;
 	}
 	
+	@ResponseBody
 	@Transactional
 	@RequestMapping(screenInfoRM + "/delete/{screenCode}")
-	public String screenInfoDelete(@PathVariable int theaterCode, @PathVariable int screenCode) {
+	public Map<String, String> screenInfoDelete(@PathVariable int theaterCode, @PathVariable int screenCode) {
 		sitsService.delete(screenCode);
 		screenInfoService.delete(theaterCode, screenCode);
 		
-		return "redirect:../list";
+		// TODO :: 예매 스케줄이 있으면 삭제 안되게,, 
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("url", "/admin/theater/" + theaterCode + "/screenInfo/list");
+		return map;
 	}
 	
 	
 	@GetMapping(screenInfoRM + "/{screenCode}/timeTable")
-	public String addTime(@PathVariable int screenCode, Model model) {
-		List<TimeTable> timeTable = timeTableService.timeList(screenCode);
-		model.addAttribute("timeTable", timeTable);
+	public String addTime(@PathVariable int theaterCode, @PathVariable int screenCode, TimeTable timeTable, Model model) {
+		timeTable.setTheaterCode(theaterCode);
+		timeTable.setScreenCode(screenCode);
 		
+		int timeTableTotalCnt = timeTableService.timeTableTotalCnt(timeTable);
+		timeTable.setTotalCnt(timeTableTotalCnt);
+		
+		
+		List<TimeTable> timeTableList = timeTableService.timeTableList(timeTable);
+		
+		model.addAttribute("timeTableList", timeTableList);
+		model.addAttribute("item", timeTable);
 
 		return screenInfoPath + "timeTable";
 	}
@@ -339,9 +368,10 @@ public class AdminController {
 	
 	
 	
+	@ResponseBody
 	@Transactional
 	@PostMapping(scheduleRM + "/add")
-	public String add(Schedule item) {
+	public Map<String, String> add(Schedule item) {
 		String scheduleCodeSeq = Integer.toString( commService.getNextval("schedule_code_seq") );
 		item.setScheduleCode( scheduleCodeSeq );
 		
@@ -349,8 +379,10 @@ public class AdminController {
 		timeTableService.add( item.getTimeTableDate() , item.getScreenCode(), item.getScheduleCode() );
 		System.out.println(item);
 		
-		
-		return "redirect:list";
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("url", "/admin/schedule/list");
+		map.put("msg", "저장하였습니다.");
+		return map;
 	}
 	
 	@RequestMapping(scheduleRM + "/delete/{scheduleCode}")
@@ -363,11 +395,7 @@ public class AdminController {
 	// TODO 스케쥴 업데이트 페이지 만들기
 	
 	
-	@GetMapping("/menu")
-	public String adminMenu() {
-		
-		return "";
-	}
+	
 	
 	// api 데이터 수동 실행
 	@GetMapping("/getMovieApiData")

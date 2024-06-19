@@ -6,7 +6,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-public class TimeTable {
+public class TimeTable extends SearchVO{
 	private int timeTableCode;
 
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm")
@@ -23,6 +23,8 @@ public class TimeTable {
 	private String scheduleCode;
 	
 	private String title;
+	
+	private int theaterCode;
 	
 	
 	
@@ -75,6 +77,16 @@ public class TimeTable {
 	public void setEndTime(Date endTime) {
 		this.endTime = endTime;
 	}
+
+	public int getTheaterCode() {
+		return theaterCode;
+	}
+
+	public void setTheaterCode(int theaterCode) {
+		this.theaterCode = theaterCode;
+	}
+
+	
 	
 	
 	

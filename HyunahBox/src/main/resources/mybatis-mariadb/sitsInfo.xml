@@ -9,6 +9,14 @@
  		INSERT INTO sitsInfo(screen_code, sits_code) VALUES (#{screenCode}, #{sitsCode})
 	</insert>
 	
+	<insert id="addSitsInfo" parameterType="java.util.List">	
+	    INSERT INTO sitsInfo(screen_code, sits_code) 
+	    VALUES
+	    <foreach collection="list" item="sitsInfo" separator=" , ">
+	     (#{sitsInfo.screenCode}, #{sitsInfo.sitsCode})
+	    </foreach>
+	</insert>
+	
 	<delete id="delete">
 		DELETE FROM sitsInfo WHERE screen_code = #{screenCode}
 	</delete>

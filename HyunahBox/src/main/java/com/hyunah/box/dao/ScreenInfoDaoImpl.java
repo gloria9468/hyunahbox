@@ -16,14 +16,14 @@ public class ScreenInfoDaoImpl implements ScreenInfoDao{
 	SqlSession sql;
 
 	@Override
-	public List<ScreenInfo> list(int theaterCode) {
-		return sql.selectList("screenInfo.list", theaterCode);
+	public List<ScreenInfo> list(ScreenInfo screenInfo) {
+		return sql.selectList("screenInfo.list", screenInfo);
 	}
 
 
 	@Override
-	public void add(ScreenInfo screen) {
-		sql.insert("screenInfo.add", screen);
+	public int add(ScreenInfo screen) {
+		return sql.insert("screenInfo.add", screen);
 	}
 	
 
@@ -59,6 +59,12 @@ public class ScreenInfoDaoImpl implements ScreenInfoDao{
 	@Override
 	public List<Schedule> screenList(int theaterCode) {
 		return sql.selectList("screenInfo.screenList", theaterCode);
+	}
+
+
+	@Override
+	public int screenInfoTotalCnt(ScreenInfo screenInfo) {
+		return sql.selectOne("screenInfo.screenInfoTotalCnt", screenInfo);
 	}
 
 

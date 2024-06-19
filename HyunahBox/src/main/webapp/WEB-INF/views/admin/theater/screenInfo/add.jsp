@@ -8,34 +8,14 @@
 <meta charset="UTF-8">
 <title>상영관 등록 페이지</title>
 </head>
-<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
-<link href="/resources/css/form.css" rel="stylesheet">
-<script type="text/javascript">
-$(function(){
-	//miniNavi 부분 넣음.
-	const adminLoc = "/admin/admin-main/";
-	const loc = location.href;
-	
-	
-	let miniNavi = "<div>✔  >  <a href='";
-		miniNavi += adminLoc;
-		miniNavi += "'>관리자</a>  >  <a href='";
-		miniNavi += loc;
-		miniNavi += "'>상영관 등록</a></div>";
-	
-	$(document.getElementById("miniNavi")).append( $(miniNavi) );
-	
-});	
-</script>
 <body>
 	<div class="container">
-		<div class="form-line">
-			<h3 class="title">상영관 등록 페이지</h3>
+		<form id="screenInfoAddForm" action="<c:url value='/admin/theater/${theaterCode}/screenInfo/add'/>" method="post">
+			<div class="form-line">
+				<h3 class="title">상영관 등록 페이지</h3>
 
-			<form method="post">
 				<div class="d-grid gap-2 col-6 mx-auto">
 					<div class="form-group">
-						<div class="bigBlock"></div>
 
 
 						<div class="row mb-3 mx-auto">
@@ -53,15 +33,13 @@ $(function(){
 							</div>
 						</div>
 						
-						<div class="smBlock"></div>
 						<div class="d-grid gap-2 col-6 mx-auto">
-							<button class="blank btn btn-success" type="submit">상영관
-								등록</button>
+							<button class="blank btn btn-success" type="button" onclick="postHtml('#screenInfoAddForm', '#adminContent');">상영관 등록</button>
 						</div>
 					</div>
 				</div>
-			</form>
-		</div>
+			</div>
+		</form>
 	</div>
 </body>
 </html>

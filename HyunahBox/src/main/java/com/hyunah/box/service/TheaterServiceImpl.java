@@ -45,5 +45,10 @@ public class TheaterServiceImpl implements TheaterService{
 		return tDao.theaterTotalCnt(theater);
 	}
 
+	@Override
+	public List<Theater> list(Theater theater) {
+		return tDao.list(theater);
+	}
+
 
 }

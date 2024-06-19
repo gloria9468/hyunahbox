@@ -7,9 +7,9 @@ import com.hyunah.box.model.ScreenInfo;
 
 public interface ScreenInfoDao {
 
-	List<ScreenInfo> list(int theaterCode);
+	List<ScreenInfo> list(ScreenInfo screenInfo);
 
-	void add(ScreenInfo screen);
+	int add(ScreenInfo screen);
 	
 	void delete(int theaterCode, int screenCode);
 
@@ -20,6 +20,8 @@ public interface ScreenInfoDao {
 	int getScreenInfo(String theaterCode);
 
 	List<Schedule> screenList(int theaterCode);
+
+	int screenInfoTotalCnt(ScreenInfo screenInfo);
 
 
 	

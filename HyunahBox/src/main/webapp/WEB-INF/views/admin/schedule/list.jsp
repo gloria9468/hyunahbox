@@ -8,26 +8,7 @@
 <meta charset="UTF-8">
 <title>스케쥴 리스트</title>
 </head>
-<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
-<link href="/resources/css/form.css" rel="stylesheet">
-<script>
-$(function(){
-	//miniNavi 부분 넣음.
-	const adminLoc = "/admin/admin-main/";
-	const loc = location.href;
-	
-	
-	let miniNavi = "<div>✔  >  <a href='";
-		miniNavi += adminLoc;
-		miniNavi += "'>관리자</a>  >  <a href='";
-		miniNavi += loc;
-		miniNavi += "'>스케쥴 리스트</a></div>";
-	
-	$(document.getElementById("miniNavi")).append( $(miniNavi) );
-	
-});	
-	
-</script>
+
 <body>
 <div class="container">
 		<div>
@@ -64,18 +45,15 @@ $(function(){
 						<td>${scheduleList.screenNum}  상영관</td>
 						<td><fmt:formatDate value="${scheduleList.timeTableDate}" pattern="yyyy년 MM월 dd일 HH:mm"/></td>
 					 	<td><fmt:formatDate value="${scheduleList.endTime}" pattern="yyyy년 MM월 dd일 HH:mm"/></td>							
-						<td><a href="./update/${scheduleList.scheduleCode}" class="btn btn-sm btn-outline-secondary mx-1">변경</a>
-							<a href="./delete/${scheduleList.scheduleCode}" class="btn btn-sm btn-outline-danger mx-1">삭제</a></td>
+						<td>
+							<%-- <a href="./update/${scheduleList.scheduleCode}" class="btn btn-sm btn-outline-secondary mx-1">변경</a> --%>
+							<a href="./delete/${scheduleList.scheduleCode}" class="btn btn-sm btn-outline-danger mx-1">삭제</a>
+						</td>
 					</tr>	
 				</c:forEach>
 				
 			</tbody>
 		</table>
-		<div class="smBlock"></div>
-		<div class="d-grid gap-2 col-6 mx-auto">
-			<a href="add" class="btn btn-sm btn-outline-success">스케쥴 등록</a>
-		</div>
-		
 		
 	</div>
 </body>

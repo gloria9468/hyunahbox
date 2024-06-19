@@ -7,11 +7,23 @@
 	
 	<select id="list" resultType="Theater">
 		SELECT t.theater_code, t.theater FROM theater t
-		<!-- WHERE  LIMIT #{theater.startRowNum}, #{theater.cntperpage}  -->  
 	</select>
 	
-	<select id="theaterTotCnt" resultType="int">
-		SELECT count(*) FROM theater
+	<select id="theaterList" resultType="Theater" parameterType="Theater">
+		SELECT t.theater_code, t.theater 
+		FROM theater t
+		WHERE 1=1   
+		<if test="keyword != null">
+		AND t.theater like CONCAT('%',#{keyword},'%')
+		</if>
+		AND theater_code LIMIT #{startRowNum}, #{cntperpage}
+	</select>
+	
+	<select id="theaterTotCnt" resultType="int" parameterType="Theater">
+		SELECT count(*) FROM theater t
+		<if test="keyword != null">
+		WHERE t.theater like CONCAT('%',#{keyword},'%')
+		</if>
 	</select>
 	
 	<insert id="add" parameterType="Theater">
